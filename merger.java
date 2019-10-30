@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import views.*;
-import controls.*;
-=======
 import javax.swing.JMenu;
->>>>>>> e05d828212068b1648cbafccc14b764329424580
 
 import views.*;
 import views.MyMenubar;
