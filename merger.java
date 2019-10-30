@@ -1,4 +1,5 @@
 import views.*;
+import controls.*;
 
 
 public class merger{
