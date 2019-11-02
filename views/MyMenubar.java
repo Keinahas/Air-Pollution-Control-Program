@@ -9,10 +9,10 @@ public class MyMenubar extends JMenuBar {
     private static final long serialVersionUID = 1L;
 
     public MyMenubar() {
-        JMenu m1 = new JMenu("sangos");
+        JMenu m1 = new JMenu("");
         //   m1.setText("sangos");
         this.add(m1);
-        JMenuItem mi1 = new JMenuItem("killer Jo");
+        JMenuItem mi1 = new JMenuItem("");
         m1.add(mi1);
     }
 
