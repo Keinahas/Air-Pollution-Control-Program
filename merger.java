@@ -14,7 +14,7 @@ import views.MyMenubar;
 import views.MyToolBar;
 import views.MainFrame;
 
-import controls.db.*;
+// import controls.db.*;
 
 
 public class Merger{
