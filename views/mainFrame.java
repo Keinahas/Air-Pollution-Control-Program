@@ -3,8 +3,6 @@ package views;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
 
 public class MainFrame extends JFrame{
 
@@ -14,7 +12,6 @@ public class MainFrame extends JFrame{
         setSize(x, y);
         // this.setVisible(true); 
         // Watch out for placing setVisible().
-        
     }
 
 	public void addMenuBar(MyMenubar bar) {
