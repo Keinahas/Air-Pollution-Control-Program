@@ -32,11 +32,11 @@ public class Merger{
         mb.add(m1);
         mb.add(m2);
         
-        tb.addTool(new JButton("¹Ú¼ö¿ø"));
-        tb.addTool(new JButton("Á¶¼º¿ø"));
-        tb.addTool(new JButton("ÀÓ½ÂÁø"));
-        tb.addTool(new JButton("Çö½ÂÈ¯"));
-        tb.addTool(new JTextField("³ë¹«Çö"));
+        tb.addTool(new JButton("ë°•ìˆ˜ì›"));
+        tb.addTool(new JButton("ì¡°ì„±ì›"));
+        tb.addTool(new JButton("ì„ìŠ¹ì§„"));
+        tb.addTool(new JButton("í˜„ìŠ¹í™˜"));
+        tb.addTool(new JTextField("ë…¸ë¬´í˜„"));
         
         f.addMenuBar(mb);
         f.addToolBar(tb);
