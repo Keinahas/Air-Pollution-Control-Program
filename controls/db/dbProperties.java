@@ -5,7 +5,7 @@ import java.util.Properties;
 public class dbProperties extends Properties{
     private String userName = "root";
     private String password = "toor";
-    // private String serverName = "localhost";
+    private String serverName = "localhost";
     private String dbName = "aoop";
     private int portNumber = 3306;
 
@@ -15,6 +15,6 @@ public class dbProperties extends Properties{
     }
 
     public String getServerInfo(){
-        return "jdbc:mysql://localhost:" + this.portNumber + "/" + this.dbName+"?characterEncoding=UTF-8&serverTimezone=UTC";
+        return "jdbc:mysql://"+this.serverName + this.portNumber + "/" + this.dbName+"?characterEncoding=UTF-8&serverTimezone=UTC";
     }
 }

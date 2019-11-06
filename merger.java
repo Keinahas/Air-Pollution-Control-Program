@@ -1,20 +1,13 @@
-// import java.awt.BorderLayout;
-// import java.awt.GridLayout;
-
-import java.sql.Connection;
-
 import javax.swing.JButton;
 import javax.swing.JMenu;
-// import javax.swing.JPanel;
+import javax.swing.JMenuItem;
 import javax.swing.JTextField;
-// import javax.swing.JToolBar;
 
-// import views.*;
 import views.MyMenubar;
 import views.MyToolBar;
 import views.MainFrame;
 
-// import controls.db.*;
+import controls.db.dbActions;
 
 
 public class Merger{
@@ -31,12 +24,18 @@ public class Merger{
         JMenu m2 = new JMenu("Edit");  
         mb.add(m1);
         mb.add(m2);
+        m1.add(new JMenuItem("New"));
+        m1.add(new JMenuItem("Open File"));
+        m1.add(new JMenuItem("Save"));
+        m1.add(new JMenuItem("Save As..."));
+        m1.add(new JMenuItem("Restart"));
+        m1.add(new JMenuItem("Exit"));
         
-        tb.addTool(new JButton("박수원"));
-        tb.addTool(new JButton("조성원"));
-        tb.addTool(new JButton("임승진"));
-        tb.addTool(new JButton("현승환"));
-        tb.addTool(new JTextField("노무현"));
+        tb.addTool(new JButton("A"));
+        tb.addTool(new JButton("B"));
+        tb.addTool(new JButton("C"));
+        tb.addTool(new JButton("D"));
+        tb.addTool(new JTextField("E"));
         
         f.addMenuBar(mb);
         f.addToolBar(tb);
@@ -44,7 +43,6 @@ public class Merger{
     }
  
     public static void main(String[] args) {
-        // Merger m = new Merger();
-        new Merger();
+        Merger m = new Merger();
     }
 }
