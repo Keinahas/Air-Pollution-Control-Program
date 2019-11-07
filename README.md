@@ -3,10 +3,17 @@
 contributer chosy0406 joined
 contributer hseunghwan joined
 
-JMenu File
-    - open file
+controls.db
+    - connection established
+    - needs parser
 
+csvio // failed
+    - csv file read n write
 
+merger // need more comps
+    - below...
+
+actionListener // needed
 
 
 
@@ -22,6 +29,18 @@ https://yenaworldblog.wordpress.com/2018/01/24/java-mysql-%EC%97%B0%EB%8F%99%EC%
 
 // Must add
 
-csv file open
-csv file save
+File
+    open
+    save
+    save as image
+
+selections
+    select
+
+csv file open //파일 열기
+csv file save //파일 저장
+image file save //이미지로 저장
+selections // 조건 설정
+
+
 
