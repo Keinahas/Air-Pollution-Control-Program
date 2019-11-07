@@ -1,11 +1,9 @@
 package views;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JMenu;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
