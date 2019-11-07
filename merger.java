@@ -8,6 +8,7 @@ import views.MyToolBar;
 import views.MainFrame;
 
 import controls.db.dbActions;
+import controls.csvio.CSVI;
 
 
 public class Merger{
@@ -18,7 +19,7 @@ public class Merger{
     public Merger() {
         f = new MainFrame(1000, 500);
         mb = new MyMenubar();
-        tb =new MyToolBar();
+        tb = new MyToolBar();
         
         JMenu m1 = new JMenu("File");
         JMenu m2 = new JMenu("Edit");  
