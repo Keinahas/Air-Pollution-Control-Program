@@ -31,7 +31,6 @@ public class CSVI {
                 inputList.add(tmpList);
             }
             
-        //검사 및 예의상황용
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }catch(IOException e){
@@ -46,9 +45,4 @@ public class CSVI {
         }
         return inputList;
     }
-
-    // public static void main(String[] args) {
-    //     CSVI csv = new CSVI();
-    //     System.out.println(csv.CSVOpen("일별평균대기오염도_2018.CSV"));
-    // }
 }
