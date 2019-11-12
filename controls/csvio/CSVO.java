@@ -15,7 +15,7 @@ public class CSVO {
         BufferedWriter bufWriter = null;
         
         try{
-            bufWriter = Files.newBufferedWriter(Paths.get("C:\\Users\\admin\\Downloads\\???3.csv"),Charset.forName("UTF-8"));
+            bufWriter = Files.newBufferedWriter(Paths.get("out.CSV"),Charset.forName("UTF-8"));
             for(List<String> newLine : read)
             {
                 List<String> list = newLine;

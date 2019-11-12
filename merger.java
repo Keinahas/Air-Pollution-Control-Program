@@ -22,21 +22,44 @@ public class Merger{
         tb = new MyToolBar();
         
         JMenu m1 = new JMenu("File");
-        JMenu m2 = new JMenu("Edit");  
+        JMenu m2 = new JMenu("Edit");
+        JMenu m3 = new JMenu("View");
+        JMenu m4 = new JMenu("Option");
+        JMenu m5 = new JMenu("Help");
+
         mb.add(m1);
         mb.add(m2);
+        mb.add(m3);
+        mb.add(m4);
+        mb.add(m5);
+
         m1.add(new JMenuItem("New"));
-        m1.add(new JMenuItem("Open File"));
-        m1.add(new JMenuItem("Save"));
+        m1.add(new JMenuItem("Open CSV File"));
+        m1.add(new JMenuItem("Save CSV File"));
         m1.add(new JMenuItem("Save As..."));
-        m1.add(new JMenuItem("Restart"));
+        m1.add(new JMenuItem("Save Graph As..."));
         m1.add(new JMenuItem("Exit"));
+
+        //
         
-        tb.addTool(new JButton("A"));
-        tb.addTool(new JButton("B"));
-        tb.addTool(new JButton("C"));
-        tb.addTool(new JButton("D"));
-        tb.addTool(new JTextField("E"));
+        m3.add(new JMenuItem("Draw Graph As "));
+        m3.add(new JMenuItem("Draw Graph As "));
+        m3.add(new JMenuItem("Draw Graph As "));
+        m3.add(new JMenuItem("Draw Graph As "));
+        m3.add(new JMenuItem("Draw Graph As "));
+        m3.add(new JMenuItem("Show Concentration"));
+
+        //
+
+        m5.add(new JMenuItem("Welcome"));
+        m5.add(new JMenuItem("View License"));
+        m5.add(new JMenuItem("About"));
+
+        tb.addTool(new JButton("a"));
+        tb.addTool(new JButton("b"));
+        tb.addTool(new JButton("c"));
+        tb.addTool(new JButton("d"));
+        tb.addTool(new JTextField("e"));
         
         f.addMenuBar(mb);
         f.addToolBar(tb);
