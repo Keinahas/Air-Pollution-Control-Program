@@ -9,6 +9,7 @@ import views.MainFrame;
 
 import controls.db.dbActions;
 import controls.csvio.CSVI;
+import controls.triggers.csvOpen;
 
 
 public class Merger{
@@ -54,6 +55,8 @@ public class Merger{
         m5.add(new JMenuItem("Welcome"));
         m5.add(new JMenuItem("View License"));
         m5.add(new JMenuItem("About"));
+
+        m1.addActionListener(new csvOpen());
 
         tb.addTool(new JButton("a"));
         tb.addTool(new JButton("b"));
