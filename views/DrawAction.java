@@ -1,20 +1,19 @@
-package sample;
+package views;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class DrawAction implements ActionListener {
-
+	private DrawingPanel drawPanel;
 	JTextField txt1, txt2, txt3, txt4;
-	DrawingPanel drawpanel;
 
-	DrawAction(JTextField txt1, JTextField txt2, JTextField txt3, JTextField txt4, DrawingPanel drawpanel) {
+	DrawAction(JTextField txt1, JTextField txt2, JTextField txt3, JTextField txt4, DrawingPanel drawPanel) {
 		this.txt1 = txt1;
 		this.txt2 = txt2;
 		this.txt3 = txt3;
 		this.txt4 = txt4;
-		this.drawpanel = drawpanel;
+		this.drawPanel = drawPanel;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -24,10 +23,11 @@ public class DrawAction implements ActionListener {
 			int var3 = Integer.parseInt(txt3.getText());
 			int var4 = Integer.parseInt(txt4.getText());
 
-			drawpanel.setScore(var1, var2, var3, var4);
+			drawPanel.setScore(var1, var2, var3, var4);
 
 			// 그래프를 그리는 패널의 paint()를 간접적으로 호출
-			drawpanel.repaint();
+			drawPanel.setGraphType(1);
+			drawPanel.repaint();
 
 		} catch (NumberFormatException n) {
 			System.out.println("잘못된 숫자 포멧입니다.");
