@@ -13,6 +13,13 @@ public class Graph1 {
 		// 컨테이너란 말 그대로 다른 컴포넌트를 포함할 수 있는 컴포넌트를 말한다.
 		Container contentPane = frame.getContentPane();
 
+		String[] type = { "막대", "선형" };
+
+		contentPane.add(toppanel, BorderLayout.NORTH);
+		JComboBox<String> typecb = new JComboBox<>(type);
+		toppanel.add(typecb);
+
+
 		// 그래프를 그릴 패널을 만든다.
 		DrawingPanel drawpanel = new DrawingPanel();
 
@@ -45,7 +52,7 @@ public class Graph1 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// 버튼에 이벤트 등록
-		btn.addActionListener(new DrawAction(txt1, txt2, txt3, txt4, drawpanel));
+		btn.addActionListener(new DrawAction(txt1, txt2, txt3, txt4, drawpanel, typecb.getSelectedIndex()));
 
 		frame.setVisible(true);
 	}
