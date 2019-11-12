@@ -23,31 +23,27 @@ public class dbActions{
     public static void main(String[] args) {
         dbActions db = new dbActions();
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-
             Connection conn = db.getConnection();
 
-            Statement statement = null;
-            ResultSet rs = null;
+            // Statement statement = null;
+            // ResultSet rs = null;
             
-            statement = conn.createStatement();
-            if (statement.execute("SHOW DATABASES")) {
-				rs = statement.getResultSet();
-            }
+            // statement = conn.createStatement();
+            // if (statement.execute("SHOW DATABASES")) {
+			// 	rs = statement.getResultSet();
+            // }
             
-            while (rs.next()) {
+            // while (rs.next()) {
 
-				String str = rs.getNString(1);
+			// 	String str = rs.getNString(1);
 
-				System.out.println(str);
+			// 	System.out.println(str);
 
-            }
-        } catch (ClassNotFoundException classNotFoundException){
-            System.out.println(classNotFoundException.getLocalizedMessage());
-        } catch (SQLException sqex) {
-			System.out.println("SQLException: " + sqex.getMessage());
-			System.out.println("SQLState: " + sqex.getSQLState());
-
-		}
+            // }
+            System.out.println(conn.toString());
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

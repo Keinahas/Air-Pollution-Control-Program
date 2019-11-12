@@ -1,0 +1,2 @@
+javac -cp ../mysql-connector-java-8.0.18.jar:. controls/db/dbActions.java
+java -classpath ../mysql-connector-java-8.0.18.jar:. controls/db/dbActions

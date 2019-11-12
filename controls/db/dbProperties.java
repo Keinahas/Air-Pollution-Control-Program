@@ -15,6 +15,6 @@ public class dbProperties extends Properties{
     }
 
     public String getServerInfo(){
-        return "jdbc:mysql://"+this.serverName + this.portNumber + "/" + this.dbName+"?characterEncoding=UTF-8&serverTimezone=UTC";
+        return "jdbc:mysql://"+this.serverName +":"+ this.portNumber + "/" + this.dbName+"?characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false";
     }
 }
