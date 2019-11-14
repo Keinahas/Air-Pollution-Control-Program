@@ -8,41 +8,67 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class dbActions{
-    private Connection conn = null;
-    dbProperties connectionProps = null;
+    private Connection conn;
+    dbProperties connectionProps;
 
     public dbActions(){
+        conn = null;
         connectionProps = new dbProperties();
     }
 
-    public Connection getConnection() throws SQLException {
-        conn = DriverManager.getConnection(connectionProps.getServerInfo() ,connectionProps);
-        return conn;
+    private void getConnection() throws SQLException {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(connectionProps.getServerInfo() ,connectionProps);
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return;
+    }
+
+    //true: connected, false: not connected
+    public boolean connect() throws SQLException{
+        try{
+            getConnection();
+            if(conn != null)
+                return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Statement createStatement() throws SQLException{
+        Statement st = null;
+        st = conn.createStatement();
+        return st;
     }
 
     public static void main(String[] args) {
         dbActions db = new dbActions();
+
         try{
-            Connection conn = db.getConnection();
-
-            // Statement statement = null;
-            // ResultSet rs = null;
+            db.connect();
+            Statement statement = null;
+            ResultSet rs = null;
             
-            // statement = conn.createStatement();
-            // if (statement.execute("SHOW DATABASES")) {
-			// 	rs = statement.getResultSet();
-            // }
+            statement = db.createStatement();
+            if (statement.execute("SHOW DATABASES")) {
+            	rs = statement.getResultSet();
+            }
+
+            // executeUpdate 함수는 뷰를 업데이트 한다.
+            // if(statement.executeUpdate("SHOW DATABASES"));
             
-            // while (rs.next()) {
+            while (rs.next()) {
+            	String str = rs.getNString(1);
+                System.out.println(str);
+            }
 
-			// 	String str = rs.getNString(1);
-
-			// 	System.out.println(str);
-
-            // }
-            System.out.println(conn.toString());
-            conn.close();
-        } catch (SQLException e) {
+            System.out.println(db.conn.getClientInfo());
+            System.out.println(db.conn.toString());
+            db.conn.close();
+        }catch(SQLException e){
             e.printStackTrace();
         }
     }
