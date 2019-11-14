@@ -1,8 +1,11 @@
 package controls.csvio;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,8 +20,9 @@ public class CSVI {
         BufferedReader br = null;
         
         try{
-            br = Files.newBufferedReader(Paths.get(path));
-            Charset.forName("UTF-8");
+            
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))));
+            // Charset.forName("UTF-8");
             String line = "";
             
             while((line = br.readLine()) != null)
