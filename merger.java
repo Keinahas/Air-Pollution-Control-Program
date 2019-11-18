@@ -8,7 +8,6 @@ import views.MainFrame;
 import views.MyMenuItem;
 
 import controls.db.dbActions;
-import controls.csvio.CSVI;
 import controls.triggers.csvOpen;
 import controls.triggers.csvSave;
 
@@ -17,6 +16,7 @@ public class Merger{
     private MainFrame f;
     private MyMenubar mb;
     private MyToolBar tb;
+
     
     public Merger() {
         f = new MainFrame(1000, 500);
