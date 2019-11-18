@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2019-11-18T14:23:08.224Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36" etag="T3bKD9RAirFNhrrNrR7o" version="12.2.6" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-11-18T14:23:21.794Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36" etag="RRC2ldYPSy-c7hVuhtcn" version="12.2.6" type="github" pages="1">
   <diagram id="zsnYO887Zmh9USHRb_7p" name="Page-1">
     <mxGraphModel dx="1424" dy="1334" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="10000" pageHeight="10000" math="0" shadow="0">
       <root>
@@ -195,9 +195,6 @@
             <mxPoint x="577" y="-129" as="sourcePoint"/>
             <mxPoint x="627" y="-179" as="targetPoint"/>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="NqttyMvSBQegaKHFTA9h-29" value="Text" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;" parent="1" vertex="1">
-          <mxGeometry x="119" y="-494" width="32" height="14" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
