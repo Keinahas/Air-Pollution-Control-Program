@@ -26,11 +26,11 @@ public class Merger{
         tb = new MyToolBar();
         p = new OptionPanel();
 
-        OptsAddable m1 = new MyMenu("File");
-        OptsAddable m2 = new MyMenu("Edit");
-        OptsAddable m3 = new MyMenu("View");
-        OptsAddable m4 = new MyMenu("Option");
-        OptsAddable m5 = new MyMenu("Help");
+        OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
+        OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
+        OptsAddable m3 = new MyMenu("View", KeyEvent.VK_V);
+        OptsAddable m4 = new MyMenu("Option", KeyEvent.VK_O);
+        OptsAddable m5 = new MyMenu("Help", KeyEvent.VK_H);
 
         mb.add((MyMenu)m1);
         mb.add((MyMenu)m2);
@@ -38,9 +38,9 @@ public class Merger{
         mb.add((MyMenu)m4);
         mb.add((MyMenu)m5);
 
-        m1.addOption("New");
-        m1.addOption("Open CSV File", trigger.csvOpen);
-        m1.addOption("Save CSV File", trigger.csvSave);
+        m1.addOption("New", KeyEvent.VK_N);
+        m1.addOption("Open CSV File", KeyEvent.VK_O, trigger.csvOpen);
+        m1.addOption("Save CSV File", KeyEvent.VK_S, trigger.csvSave);
         m1.addOption("Save As...");
         m1.addOption("Save Graph As...");
         m1.addOption("Exit", e->{f.dispose();System.exit(0);});
