@@ -146,8 +146,10 @@ public class dbActions{
         }
     }
 
+    // SELECT args FROM TABLE name
     public List<List<String>> SelectFromTable(String name, String[] args) throws SQLException{
         PreparedStatement pstmt = null;
+        List<List<String>> br = null;
         int n = args.length;
         ResultSet rs = null;
         String query = "SELECT ";
@@ -165,6 +167,24 @@ public class dbActions{
         // 	String str = rs.getNString(1);
             // System.out.println(str);
         // }
+        return null;
+    }
+
+    // SELECT * FROM TABLE name
+    public List<List<String>> SelectAllFromTable(String name) throws SQLException{
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM " + name + ";";
+        System.out.println(query);
+        pstmt = preparedStatement(query);
+        if (pstmt.execute(query)) {
+            rs = pstmt.getResultSet();
+        }
+
+        while (rs.next()) {
+        	String str = rs.getNString(1);
+            // System.out.println(str);
+        }
         return null;
     }
 
