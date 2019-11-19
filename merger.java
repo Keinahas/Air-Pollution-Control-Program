@@ -1,6 +1,7 @@
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 
 import views.MyMenubar;
 import views.MyToolBar;
@@ -57,12 +58,13 @@ public class Merger{
         m5.add(new MyMenuItem("View License"));
         m5.add(new MyMenuItem("About"));
 
-        tb.addTool(new JButton("a"));
-        tb.addTool(new JButton("b"));
-        tb.addTool(new JButton("c"));
-        tb.addTool(new JButton("d"));
-        tb.addTool(new JTextField("e"));
+        tb.addTool(new JButton(new ImageIcon("./views/resource/save.png")));
+        tb.addTool(new JButton(new ImageIcon("./views/resource/open.png")));
+        //tb.addTool(new JButton("c"));
+        //tb.addTool(new JButton("d"));
+        //tb.addTool(new JTextField("e"));
         
+        f.setLocation(260,450);
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.setVisible(true);
