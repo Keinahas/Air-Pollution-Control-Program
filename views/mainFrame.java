@@ -1,6 +1,6 @@
 package views;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.JFrame;
 
@@ -19,6 +19,11 @@ public class MainFrame extends JFrame{
         this.setJMenuBar(bar);
     }
 	public void addToolBar(MyToolBar bar) {
+    
         this.add(bar,BorderLayout.NORTH);
+    }
+    public void addOptionPanel(MyPanel pan) {
+    
+        this.add(pan,BorderLayout.EAST);
     }
 }

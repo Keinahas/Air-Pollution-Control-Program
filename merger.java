@@ -1,12 +1,11 @@
-import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
+import java.awt.*;
 import views.MyMenubar;
 import views.MyToolBar;
 import views.MainFrame;
 import views.MyMenuItem;
+import views.MyPanel;
 
 import controls.db.dbActions;
 import controls.triggers.csvOpen;
@@ -17,13 +16,16 @@ public class Merger{
     private MainFrame f;
     private MyMenubar mb;
     private MyToolBar tb;
-
+    private MyPanel p;
     
     public Merger() {
         f = new MainFrame(1000, 500);
         mb = new MyMenubar();
         tb = new MyToolBar();
-        
+        p = new MyPanel();
+
+        p.addOption("사과");
+
         JMenu m1 = new JMenu("File");
         JMenu m2 = new JMenu("Edit");
         JMenu m3 = new JMenu("View");
@@ -67,6 +69,7 @@ public class Merger{
         f.setLocation(260,450);
         f.addMenuBar(mb);
         f.addToolBar(tb);
+        f.addOptionPanel(p);
         f.setVisible(true);
     }
  
