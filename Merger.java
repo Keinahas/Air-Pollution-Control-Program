@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,6 +12,8 @@ import views.OptsAddable;
 import views.NormGraph;
 import views.MyButton;
 import views.MyMenu;
+import views.Graph1;
+
 // import controls.db.dbActions;
 import controls.triggers.trigger;
 
@@ -19,12 +23,19 @@ public class Merger{
     private MyToolBar tb;
     private OptsAddable p;
     private NormGraph g;
+    private Graph1 graph;
     
     public Merger() {
         f = new MainFrame(1000, 500);
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
+        JPanel pp=new JPanel();
+
+        pp.setLayout(new BorderLayout());
+        pp.setBorder(new TitledBorder(new LineBorder(Color.DARK_GRAY,50)));
+
+        pp.add(new JTextField("asdf"),BorderLayout.CENTER);
 
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
@@ -32,11 +43,11 @@ public class Merger{
         OptsAddable m4 = new MyMenu("Option", KeyEvent.VK_O);
         OptsAddable m5 = new MyMenu("Help", KeyEvent.VK_H);
 
-        mb.add((MyMenu)m1);
-        mb.add((MyMenu)m2);
-        mb.add((MyMenu)m3);
-        mb.add((MyMenu)m4);
-        mb.add((MyMenu)m5);
+        mb.add((MyMenu) m1);
+        mb.add((MyMenu) m2);
+        mb.add((MyMenu) m3);
+        mb.add((MyMenu) m4);
+        mb.add((MyMenu) m5);
 
         m1.addOption("New", KeyEvent.VK_N);
         m1.addOption("Open CSV File", KeyEvent.VK_O, trigger.csvOpen);
@@ -75,7 +86,8 @@ public class Merger{
         f.setLocation(260,450);
         f.addMenuBar(mb);
         f.addToolBar(tb);
-        f.addOptionPanel((OptionPanel)p);
+        //f.addOptionPanel(p);
+        f.add(pp);
         f.setVisible(true);
     }
 
