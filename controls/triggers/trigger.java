@@ -1,6 +1,8 @@
 package controls.triggers;
 
+import java.awt.event.ActionListener;
+
 public final class trigger{
-    public static csvSave saveActionListener = new csvSave();
-    public static csvOpen openActionListener = new csvOpen();
+	public static final ActionListener csvOpen = new csvOpen();
+	public static final ActionListener csvSave = new csvSave();
 }

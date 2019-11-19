@@ -7,9 +7,9 @@ import views.MainFrame;
 import views.MyMenuItem;
 import views.MyPanel;
 import views.NormGraph;
+import views.MyButton;
+
 import controls.db.dbActions;
-import controls.triggers.csvOpen;
-import controls.triggers.csvSave;
 import controls.triggers.trigger;
 
 
@@ -67,8 +67,8 @@ public class Merger{
         m5.add(new MyMenuItem("View License"));
         m5.add(new MyMenuItem("About"));
 
-        tb.addTool(new JButton(new ImageIcon("./views/resource/save.png")));
-        tb.addTool(new JButton(new ImageIcon("./views/resource/open.png")));
+        tb.addTool(new MyButton(new ImageIcon("./views/resource/open.png"), trigger.csvOpen));
+        tb.addTool(new MyButton(new ImageIcon("./views/resource/save.png"), trigger.csvSave));
         //tb.addTool(new JButton("c"));
         //tb.addTool(new JButton("d"));
         //tb.addTool(new JTextField("e"));

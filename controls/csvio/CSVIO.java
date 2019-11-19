@@ -99,9 +99,8 @@ public class CSVIO {
                     bufWriter.write(data);
                     bufWriter.write(",");
                 }
-                bufWriter.newLine();                
+                bufWriter.newLine();
             }
-            
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }catch(IOException e){

@@ -25,16 +25,17 @@ public class csvSave implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        CSV.chooseOpen();
+        CSV.chooseSave();
         File file = CSV.Open();
         if(file == null){
             System.out.println("CSV.Choose() Error!");
             return;
         }
-        br = CSV.Read();
         try{
             if(db.connect()){
                 // db.createTable(file.getName().substring(0, file.getName().lastIndexOf(".")), br.get(0).size());
+                // br = db.SelectAllFromTable(name);
+                System.out.println("csvSave Clicked!");
             }else{
                 System.out.println("Failed");
             }
@@ -42,6 +43,6 @@ public class csvSave implements ActionListener{
         catch(SQLException exception){
             exception.printStackTrace();
         }
-        CSV.Write(br);
+        // CSV.Write(br);
     }
 }
