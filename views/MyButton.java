@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 
 public class MyButton extends JButton{
-    MyButton(Icon icon, ActionListener actionListener){
+    public MyButton(Icon icon, ActionListener actionListener){
         super(icon);
         this.addActionListener(actionListener);
     }
