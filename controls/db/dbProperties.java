@@ -9,9 +9,13 @@ public class dbProperties extends Properties{
     private String dbName = "aoop";
     private int portNumber = 3306;
 
-    dbProperties(){
+    public dbProperties(){
         this.put("user", this.userName);
         this.put("password", this.password);
+    }
+
+    public String getDBName(){
+        return dbName;
     }
 
     public String getServerInfo(){
