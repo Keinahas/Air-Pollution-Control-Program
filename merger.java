@@ -8,6 +8,7 @@ import views.MyMenuItem;
 import views.OptionPanel;
 import views.NormGraph;
 import views.MyButton;
+import views.Graph1;
 
 import controls.db.dbActions;
 import controls.triggers.trigger;
@@ -19,12 +20,16 @@ public class Merger{
     private MyToolBar tb;
     private OptionPanel p;
     private NormGraph g;
+    private Graph1 graph;
+
+
     
     public Merger() {
         f = new MainFrame(1000, 500);
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
+        graph = new Graph1();
 
         p.addOption("사과");
         p.addOption("사과");
@@ -83,6 +88,7 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.addOptionPanel(p);
+        f.addGraph(graph);
         f.setVisible(true);
     }
  
