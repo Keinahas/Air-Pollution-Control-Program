@@ -5,13 +5,12 @@ import java.awt.event.*;
 import views.MyMenubar;
 import views.MyToolBar;
 import views.MainFrame;
-import views.MyMenuItem;
 import views.OptionPanel;
 import views.OptsAddable;
 import views.NormGraph;
 import views.MyButton;
 import views.MyMenu;
-import controls.db.dbActions;
+// import controls.db.dbActions;
 import controls.triggers.trigger;
 
 public class Merger{
