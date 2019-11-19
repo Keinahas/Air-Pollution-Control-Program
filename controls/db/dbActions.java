@@ -19,6 +19,20 @@ public class dbActions{
         connectionProps = new dbProperties();
     }
 
+    //parser
+    private String parseUTF16(String in){
+        String out = "";
+        for(int i=0;i<in.length();i++){
+            String t = Integer.toHexString(in.charAt(i));
+            if(t.length() < 4){
+                out += "00"+t;
+            }else{
+                out += t;
+            }
+        }
+        return out;
+    }
+
     // 커낵션 생성
     private void getConnection() throws SQLException {
         try{
@@ -83,9 +97,9 @@ public class dbActions{
             statement = createStatement();
             String query = "CREATE TABLE " + name + " (\n";
             for(int i = 0;i < size-1;i++){
-                query += "args"+i+" VARCHAR(10),\n";
+                query += "args"+i+" VARCHAR(20),\n";
             }
-            query +=  "args"+(size-1)+" VARCHAR(10)\n";
+            query +=  "args"+(size-1)+" VARCHAR(20)\n";
             query += ");";
             // System.out.println(query);
             if (statement.executeUpdate(query) >= 0) {
@@ -98,35 +112,51 @@ public class dbActions{
         }
     }
 
-    public void insertIntoTable(String name, String[] args) throws SQLException{
+    public void insertIntoTable(String name, String[] args, int size) throws SQLException{
         int n = args.length;
         PreparedStatement pstmt = null;
 
         // System.out.println(query);
         if(isTable(name)){
-            // String query = "INSERT INTO ? (";
-            // for(int i = 0; i < n-1; i++){
-            //     query += "?, ";
-            // }
-            // query += "?);";
-            // pstmt = preparedStatement(query);
-            // pstmt.setString(1, name);
-            // for(int i = 2; i < n; i++){
-            //     pstmt.setString(i, args[i-2]);
-            // }            
-            String query = "INSERT INTO "+name+" (";
-            for(int i = 0; i < n-1; i++){
-                query += args[i]+", ";
+            String query = "INSERT INTO "+name+" VALUES('";
+            for(int i = 0; i < size-1; i++){
+                if(n <= i){
+                    query += "','";
+                }else{
+                    query += args[i]+"', '";
+                }
             }
-            query += args[n-1]+");";
+            if(n <= size-1){
+                query += "');";
+            }else{
+                query += args[size-1]+"');";
+            }
+            // System.out.println(query);
             pstmt = preparedStatement(query);
             if (pstmt.executeUpdate(query) >= 0) {
-                System.out.println("INSERTED");
+                // System.out.println("INSERTED");
+            }else{
+                // System.out.println("ERROR");
+                throw new SQLException("insertIntoTable::ERROR");
+            }
+        }else{
+            System.out.println("insertIntoTable::Table does not exist");
+        }
+    }
+
+    public void DropTable(String name) throws SQLException{
+        Statement statement = null;
+        if(isTable(name)){
+            statement = createStatement();
+            String query = "DROP TABLE " + name;
+            // System.out.println(query);
+            if (statement.executeUpdate(query) >= 0) {
+                System.out.println("DROP");
             }else{
                 System.out.println("ERROR");
             }
         }else{
-            System.out.println("Table does not exist");
+            System.out.println("DropTable::table does not exists");
         }
     }
 
