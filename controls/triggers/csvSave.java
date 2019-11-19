@@ -1,28 +1,47 @@
 package controls.triggers;
 
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.sql.SQLException;
 import java.util.List;
 
-import controls.csvio.CSVI;
-import controls.csvio.CSVO;
+import controls.csvio.CSVIO;
+import controls.db.dbActions;
 
 import java.awt.event.ActionEvent;
 
 public class csvSave implements ActionListener{
-    private CSVI opener;
+    private CSVIO CSV;
+    private dbActions db;
     private List<List<String>> br;
-    private CSVO writer;
 
     public csvSave(){
         super();
-        opener = new CSVI();
-        writer = new CSVO();
+        br = null;
+        CSV = new CSVIO();
+        db = new dbActions();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        br = opener.CSVOpen("일별평균대기오염도_2018.CSV");
-        writer.CSVOut(br);
+        CSV.chooseOpen();
+        File file = CSV.Open();
+        if(file == null){
+            System.out.println("CSV.Choose() Error!");
+            return;
+        }
+        br = CSV.Read();
+        try{
+            if(db.connect()){
+                // db.createTable(file.getName().substring(0, file.getName().lastIndexOf(".")), br.get(0).size());
+            }else{
+                System.out.println("Failed");
+            }
+        }
+        catch(SQLException exception){
+            exception.printStackTrace();
+        }
+        CSV.Write(br);
     }
 }
