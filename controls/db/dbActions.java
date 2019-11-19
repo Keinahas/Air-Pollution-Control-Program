@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class dbActions{
     private Connection conn;
@@ -70,7 +71,7 @@ public class dbActions{
         return pstmt;
     }
 
-    //
+    // 테이블이 존재하는 지
     public boolean isTable(String name) throws SQLException{
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -112,6 +113,7 @@ public class dbActions{
         }
     }
 
+    // Insert 
     public void insertIntoTable(String name, String[] args, int size) throws SQLException{
         int n = args.length;
         PreparedStatement pstmt = null;
@@ -144,6 +146,29 @@ public class dbActions{
         }
     }
 
+    public List<List<String>> SelectFromTable(String name, String[] args) throws SQLException{
+        PreparedStatement pstmt = null;
+        int n = args.length;
+        ResultSet rs = null;
+        String query = "SELECT ";
+        for(int i = 0; i < n-1; i++){
+            query += args[i] + ", ";
+        }
+        query += args[n-1] + " FROM " + name + ";";
+        System.out.println(query);
+        // pstmt = preparedStatement(query);
+        // if (pstmt.execute(query)) {
+        //     rs = pstmt.getResultSet();
+        // }
+
+        // while (rs.next()) {
+        // 	String str = rs.getNString(1);
+            // System.out.println(str);
+        // }
+        return null;
+    }
+
+    // Drops Table
     public void DropTable(String name) throws SQLException{
         Statement statement = null;
         if(isTable(name)){
@@ -153,43 +178,44 @@ public class dbActions{
             if (statement.executeUpdate(query) >= 0) {
                 System.out.println("DROP");
             }else{
-                System.out.println("ERROR");
+                // System.out.println("ERROR");
+                throw new SQLException("DropTable::ERROR");
             }
         }else{
             System.out.println("DropTable::table does not exists");
         }
     }
 
-    public static void main(String[] args) {
-        dbActions db = new dbActions();
+    // public static void main(String[] args) {
+    //     dbActions db = new dbActions();
 
-        try{
-            db.connect();
-            Statement statement = null;
-            ResultSet rs = null;
+    //     try{
+    //         db.connect();
+    //         Statement statement = null;
+    //         ResultSet rs = null;
             
-            // statement = db.createStatement();
-            // if (statement.execute("SHOW TABLES;")) {
-            // 	rs = statement.getResultSet();
-            // }
+    //         // statement = db.createStatement();
+    //         // if (statement.execute("SHOW TABLES;")) {
+    //         // 	rs = statement.getResultSet();
+    //         // }
 
-            // executeUpdate 함수는 뷰를 업데이트 한다. (= DDL)
-            // if(statement.executeUpdate("SHOW DATABASES"));
+    //         // executeUpdate 함수는 뷰를 업데이트 한다. (= DDL)
+    //         // if(statement.executeUpdate("SHOW DATABASES"));
             
-            // while (rs.next()) {
-            // 	String str = rs.getNString(1);
-            //     System.out.println(str);
-            // }
+    //         // while (rs.next()) {
+    //         // 	String str = rs.getNString(1);
+    //         //     System.out.println(str);
+    //         // }
 
-            // if (statement.executeUpdate("") >= 0) {
-            // 	rs = statement.getResultSet();
-            // }
-            // db.createTable("일별평균대기오염도_2018","측정일시,측정소명,이산화질소농도,오존농도,이산화탄소농도,아황산가스,미세먼지,초미세먼지".split(","));
+    //         // if (statement.executeUpdate("") >= 0) {
+    //         // 	rs = statement.getResultSet();
+    //         // }
+    //         // db.createTable("일별평균대기오염도_2018","측정일시,측정소명,이산화질소농도,오존농도,이산화탄소농도,아황산가스,미세먼지,초미세먼지".split(","));
 
-            // System.out.println(db.conn.toString());
-            db.conn.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
+    //         // System.out.println(db.conn.toString());
+    //         db.conn.close();
+    //     }catch(SQLException e){
+    //         e.printStackTrace();
+    //     }
+    // }
 }
