@@ -43,7 +43,7 @@ public class Merger{
         m1.add(new MyMenuItem("Save CSV File", trigger.csvSave));
         m1.add(new MyMenuItem("Save As..."));
         m1.add(new MyMenuItem("Save Graph As..."));
-        m1.add(new MyMenuItem("Exit"));
+        m1.add(new MyMenuItem("Exit", e->));
 
         //
         
