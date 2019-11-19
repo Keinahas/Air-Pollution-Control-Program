@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.*;
 import views.MyMenubar;
 import views.MyToolBar;
 import views.MainFrame;
@@ -11,7 +12,6 @@ import views.MyButton;
 
 import controls.db.dbActions;
 import controls.triggers.trigger;
-
 
 public class Merger{
     private MainFrame f;
@@ -50,7 +50,7 @@ public class Merger{
         m1.add(new MyMenuItem("Save CSV File", trigger.csvSave));
         m1.add(new MyMenuItem("Save As..."));
         m1.add(new MyMenuItem("Save Graph As..."));
-        m1.add(new MyMenuItem("Exit", e->));
+        m1.add(new MyMenuItem("Exit", e->{f.dispose();System.exit(0);}));
 
         //
         
@@ -73,8 +73,8 @@ public class Merger{
         m5.add(new MyMenuItem("View License"));
         m5.add(new MyMenuItem("About"));
 
-        tb.addTool(new MyButton(new ImageIcon("./views/resource/open.png"), trigger.csvOpen));
-        tb.addTool(new MyButton(new ImageIcon("./views/resource/save.png"), trigger.csvSave));
+        tb.addTool(new MyButton(new ImageIcon("./views/resource/open.png"), KeyEvent.VK_O, trigger.csvOpen));
+        tb.addTool(new MyButton(new ImageIcon("./views/resource/save.png"), KeyEvent.VK_S, trigger.csvSave));
         //tb.addTool(new JButton("c"));
         //tb.addTool(new JButton("d"));
         //tb.addTool(new JTextField("e"));
