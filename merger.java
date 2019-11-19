@@ -5,7 +5,7 @@ import views.MyMenubar;
 import views.MyToolBar;
 import views.MainFrame;
 import views.MyMenuItem;
-import views.MyPanel;
+import views.OptionPanel;
 import views.NormGraph;
 import views.MyButton;
 
@@ -17,14 +17,14 @@ public class Merger{
     private MainFrame f;
     private MyMenubar mb;
     private MyToolBar tb;
-    private MyPanel p;
+    private OptionPanel p;
     private NormGraph g;
     
     public Merger() {
         f = new MainFrame(1000, 500);
         mb = new MyMenubar();
         tb = new MyToolBar();
-        p = new MyPanel();
+        p = new OptionPanel();
 
         p.addOption("사과");
         p.addOption("사과");
@@ -62,6 +62,12 @@ public class Merger{
         m3.add(new MyMenuItem("Show Concentration"));
 
         //
+        m4.add(new MyMenuItem("사과"));
+        m4.add(new MyMenuItem("사과"));
+        m4.add(new MyMenuItem("사과"));
+        m4.add(new MyMenuItem("사과"));
+        m4.add(new MyMenuItem("사과"));
+        m4.add(new MyMenuItem("사과"));
 
         m5.add(new MyMenuItem("Welcome"));
         m5.add(new MyMenuItem("View License"));
