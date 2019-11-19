@@ -10,6 +10,7 @@ import views.MyPanel;
 import controls.db.dbActions;
 import controls.triggers.csvOpen;
 import controls.triggers.csvSave;
+import controls.triggers.trigger;
 
 
 public class Merger{
@@ -39,8 +40,8 @@ public class Merger{
         mb.add(m5);
 
         m1.add(new MyMenuItem("New"));
-        m1.add(new MyMenuItem("Open CSV File", new csvOpen()));
-        m1.add(new MyMenuItem("Save CSV File", new csvSave()));
+        m1.add(new MyMenuItem("Open CSV File", trigger.csvOpen));
+        m1.add(new MyMenuItem("Save CSV File", trigger.csvSave));
         m1.add(new MyMenuItem("Save As..."));
         m1.add(new MyMenuItem("Save Graph As..."));
         m1.add(new MyMenuItem("Exit"));
