@@ -7,9 +7,10 @@ import views.MyToolBar;
 import views.MainFrame;
 import views.MyMenuItem;
 import views.OptionPanel;
+import views.OptsAddable;
 import views.NormGraph;
 import views.MyButton;
-
+import views.MyMenu;
 import controls.db.dbActions;
 import controls.triggers.trigger;
 
@@ -17,7 +18,7 @@ public class Merger{
     private MainFrame f;
     private MyMenubar mb;
     private MyToolBar tb;
-    private OptionPanel p;
+    private OptsAddable p;
     private NormGraph g;
     
     public Merger() {
@@ -26,52 +27,45 @@ public class Merger{
         tb = new MyToolBar();
         p = new OptionPanel();
 
-        p.addOption("사과");
-        p.addOption("사과");
-        p.addOption("사과");
-        p.addOption("사과");
-        p.addOption("사과");
-        p.addOption("사과");
+        OptsAddable m1 = new MyMenu("File");
+        OptsAddable m2 = new MyMenu("Edit");
+        OptsAddable m3 = new MyMenu("View");
+        OptsAddable m4 = new MyMenu("Option");
+        OptsAddable m5 = new MyMenu("Help");
 
-        JMenu m1 = new JMenu("File");
-        JMenu m2 = new JMenu("Edit");
-        JMenu m3 = new JMenu("View");
-        JMenu m4 = new JMenu("Option");
-        JMenu m5 = new JMenu("Help");
+        mb.add((MyMenu)m1);
+        mb.add((MyMenu)m2);
+        mb.add((MyMenu)m3);
+        mb.add((MyMenu)m4);
+        mb.add((MyMenu)m5);
 
-        mb.add(m1);
-        mb.add(m2);
-        mb.add(m3);
-        mb.add(m4);
-        mb.add(m5);
-
-        m1.add(new MyMenuItem("New"));
-        m1.add(new MyMenuItem("Open CSV File", trigger.csvOpen));
-        m1.add(new MyMenuItem("Save CSV File", trigger.csvSave));
-        m1.add(new MyMenuItem("Save As..."));
-        m1.add(new MyMenuItem("Save Graph As..."));
-        m1.add(new MyMenuItem("Exit", e->{f.dispose();System.exit(0);}));
+        m1.addOption("New");
+        m1.addOption("Open CSV File", trigger.csvOpen);
+        m1.addOption("Save CSV File", trigger.csvSave);
+        m1.addOption("Save As...");
+        m1.addOption("Save Graph As...");
+        m1.addOption("Exit", e->{f.dispose();System.exit(0);});
 
         //
         
-        m3.add(new MyMenuItem("Draw Graph As "));
-        m3.add(new MyMenuItem("Draw Graph As "));
-        m3.add(new MyMenuItem("Draw Graph As "));
-        m3.add(new MyMenuItem("Draw Graph As "));
-        m3.add(new MyMenuItem("Draw Graph As "));
-        m3.add(new MyMenuItem("Show Concentration"));
+        m3.addOption("Draw Graph As ");
+        m3.addOption("Draw Graph As ");
+        m3.addOption("Draw Graph As ");
+        m3.addOption("Draw Graph As ");
+        m3.addOption("Draw Graph As ");
+        m3.addOption("Show Concentration");
 
-        //
-        m4.add(new MyMenuItem("사과"));
-        m4.add(new MyMenuItem("사과"));
-        m4.add(new MyMenuItem("사과"));
-        m4.add(new MyMenuItem("사과"));
-        m4.add(new MyMenuItem("사과"));
-        m4.add(new MyMenuItem("사과"));
+        // https://sleepyeyes.tistory.com/29
+        addOption("사과", (ActionListener)null, p, m4);
+        addOption("사과", (ActionListener)null, p, m4);
+        addOption("사과", (ActionListener)null, p, m4);
+        addOption("사과", (ActionListener)null, p, m4);
+        addOption("사과", (ActionListener)null, p, m4);
+        addOption("사과", (ActionListener)null, p, m4);
 
-        m5.add(new MyMenuItem("Welcome"));
-        m5.add(new MyMenuItem("View License"));
-        m5.add(new MyMenuItem("About"));
+        m5.addOption("Welcome");
+        m5.addOption("View License");
+        m5.addOption("About");
 
         tb.addTool(new MyButton(new ImageIcon("./views/resource/open.png"), KeyEvent.VK_O, trigger.csvOpen));
         tb.addTool(new MyButton(new ImageIcon("./views/resource/save.png"), KeyEvent.VK_S, trigger.csvSave));
@@ -82,8 +76,14 @@ public class Merger{
         f.setLocation(260,450);
         f.addMenuBar(mb);
         f.addToolBar(tb);
-        f.addOptionPanel(p);
+        f.addOptionPanel((OptionPanel)p);
         f.setVisible(true);
+    }
+
+    private void addOption(String str, ActionListener l, OptsAddable...objs){
+        for(OptsAddable obj: objs){
+            obj.addOption(str, l);
+        }
     }
  
     public static void main(String[] args) {
