@@ -22,8 +22,7 @@ public class MainFrame extends JFrame{
     
         this.add(bar,BorderLayout.NORTH);
     }
-    public void addOptionPanel(MyPanel pan) {
-    
+    public void addOptionPanel(OptionPanel pan) {
         this.add(pan,BorderLayout.EAST);
     }
 }

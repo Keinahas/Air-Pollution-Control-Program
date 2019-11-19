@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 import views.MyMenubar;
@@ -25,6 +27,12 @@ public class Merger{
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
+        JPanel pp=new JPanel();
+
+        pp.setLayout(new BorderLayout());
+        pp.setBorder(new TitledBorder(new LineBorder(Color.DARK_GRAY,50)));
+
+        pp.add(new JTextField("asdf"),BorderLayout.CENTER);
 
         p.addOption("사과");
         p.addOption("사과");
@@ -83,6 +91,7 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.addOptionPanel(p);
+        f.add(pp);
         f.setVisible(true);
     }
  
