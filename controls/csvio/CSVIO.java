@@ -101,7 +101,6 @@ public class CSVIO {
                 }
                 bufWriter.newLine();                
             }
-            
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }catch(IOException e){
