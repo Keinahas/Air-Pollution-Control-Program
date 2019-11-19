@@ -1,17 +1,54 @@
 package views;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import java.awt.*;
-public class OptionPanel extends JPanel{
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
+public class OptionPanel extends JPanel implements OptsAddable{
     public OptionPanel(){
         setBorder(new TitledBorder(new LineBorder(Color.gray,10),"옵션"));
         setLayout(new GridLayout(0,2));
     }
-    public void addOption(String a){
-        this.add(new JCheckBox());//액션리스너 만들고 수정
-        this.add(new JLabel("\t"+a+"\t"));
+
+    @Override
+    public void addOption(String str) {
+        // TODO Auto-generated method stub
+        this.add(new JCheckBox());
+        this.add(new JLabel("\t" + str + "\t"));
     }
+
+    @Override
+    public void addOption(String str, ActionListener l){
+        JCheckBox checkBox = new JCheckBox();
+        checkBox.addActionListener(l);
+        this.add(checkBox);
+        this.add(new JLabel("\t" + str + "\t"));
+    }
+
+	@Override
+	public void addOption(String str, int mnemonic) {
+		// TODO Auto-generated method stub
+        JCheckBox checkBox = new JCheckBox();
+        checkBox.setMnemonic(mnemonic);
+        this.add(checkBox);
+        this.add(new JLabel("\t" + str + "\t"));
+	}
+
+	@Override
+	public void addOption(String str, int mnemonic, ActionListener l) {
+		// TODO Auto-generated method stub
+        JCheckBox checkBox = new JCheckBox();
+        checkBox.setMnemonic(mnemonic);
+        checkBox.addActionListener(l);
+        this.add(checkBox);
+        this.add(new JLabel("\t" + str + "\t"));
+	}
+
+
 }

@@ -3,19 +3,12 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 
-public class Graph1 {
-	public static void main(String arg[]) {
-		JFrame frame = new JFrame("누가누가 쥬지가 길까?");
-		frame.setLocation(500, 300);
-		// frame.setPreferredSize(new Dimension(400,300));
-		frame.setSize(500, 400);
-
-		// 컨테이너란 말 그대로 다른 컴포넌트를 포함할 수 있는 컴포넌트를 말한다.
-		Container contentPane = frame.getContentPane();
-
+public class Graph1 extends JPanel {
+	public Graph1() {
+		setLayout(new BorderLayout());
 		String[] type = { "막대", "선형" };
-
-		contentPane.add(toppanel, BorderLayout.NORTH);
+		JPanel toppanel = new JPanel();
+		add(toppanel, BorderLayout.NORTH);
 		JComboBox<String> typecb = new JComboBox<>(type);
 		toppanel.add(typecb);
 
@@ -24,7 +17,7 @@ public class Graph1 {
 		DrawingPanel drawpanel = new DrawingPanel();
 
 		// 막대 그래프를 표현할 그래프의 위치를 중앙에..
-		contentPane.add(drawpanel, BorderLayout.CENTER);
+		this.add(drawpanel, BorderLayout.CENTER);
 
 		// 패널생성
 		JPanel panel = new JPanel();
@@ -47,13 +40,11 @@ public class Graph1 {
 		panel.add(txt4);
 		panel.add(btn);
 
-		contentPane.add(panel, BorderLayout.SOUTH);
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.add(panel, BorderLayout.SOUTH);
 
 		// 버튼에 이벤트 등록
 		btn.addActionListener(new DrawAction(txt1, txt2, txt3, txt4, drawpanel, typecb.getSelectedIndex()));
 
-		frame.setVisible(true);
+		this.setVisible(true);
 	}
 }
