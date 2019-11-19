@@ -6,7 +6,7 @@ import views.MyToolBar;
 import views.MainFrame;
 import views.MyMenuItem;
 import views.MyPanel;
-
+import views.NormGraph;
 import controls.db.dbActions;
 import controls.triggers.csvOpen;
 import controls.triggers.csvSave;
@@ -18,6 +18,7 @@ public class Merger{
     private MyMenubar mb;
     private MyToolBar tb;
     private MyPanel p;
+    private NormGraph g;
     
     public Merger() {
         f = new MainFrame(1000, 500);
@@ -25,6 +26,11 @@ public class Merger{
         tb = new MyToolBar();
         p = new MyPanel();
 
+        p.addOption("사과");
+        p.addOption("사과");
+        p.addOption("사과");
+        p.addOption("사과");
+        p.addOption("사과");
         p.addOption("사과");
 
         JMenu m1 = new JMenu("File");
