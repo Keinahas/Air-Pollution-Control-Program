@@ -31,5 +31,24 @@ public class OptionPanel extends JPanel implements OptsAddable{
         this.add(new JLabel("\t" + str + "\t"));
     }
 
+	@Override
+	public void addOption(String str, int mnemonic) {
+		// TODO Auto-generated method stub
+        JCheckBox checkBox = new JCheckBox();
+        checkBox.setMnemonic(mnemonic);
+        this.add(checkBox);
+        this.add(new JLabel("\t" + str + "\t"));
+	}
+
+	@Override
+	public void addOption(String str, int mnemonic, ActionListener l) {
+		// TODO Auto-generated method stub
+        JCheckBox checkBox = new JCheckBox();
+        checkBox.setMnemonic(mnemonic);
+        checkBox.addActionListener(l);
+        this.add(checkBox);
+        this.add(new JLabel("\t" + str + "\t"));
+	}
+
 
 }
