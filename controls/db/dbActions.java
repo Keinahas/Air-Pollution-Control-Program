@@ -219,6 +219,7 @@ public class dbActions{
     //         // 	rs = statement.getResultSet();
     //         // }
 
+    
     //         // executeUpdate 함수는 뷰를 업데이트 한다. (= DDL)
     //         // if(statement.executeUpdate("SHOW DATABASES"));
             
