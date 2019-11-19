@@ -2,7 +2,7 @@ package views;
 
 import java.awt.*;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class MainFrame extends JFrame{
 
@@ -22,7 +22,13 @@ public class MainFrame extends JFrame{
     
         this.add(bar,BorderLayout.NORTH);
     }
-    public void addOptionPanel(MyPanel pan) {
+
+    public void addGraph(Graph1 bar){
+        this.add(bar,BorderLayout.CENTER);
+    }
+
+    
+    public void addOptionPanel(OptionPanel pan) {
     
         this.add(pan,BorderLayout.EAST);
     }
