@@ -33,7 +33,8 @@ public class Merger{
         JPanel pp=new JPanel();
 
         pp.setLayout(new BorderLayout());
-        pp.setBorder(new TitledBorder(new LineBorder(Color.DARK_GRAY,50)));
+        pp.setPreferredSize(new Dimension(12,12));
+        pp.setBorder(new TitledBorder(new LineBorder(Color.DARK_GRAY,5)));
 
         pp.add(new JTextField("asdf"),BorderLayout.CENTER);
 
@@ -64,6 +65,13 @@ public class Merger{
         m3.addOption("Draw Graph As ");
         m3.addOption("Draw Graph As ");
         m3.addOption("Show Concentration");
+
+        m2.addOption("Undo");
+        m2.addOption("Redo");
+        m2.addOption("Cut");
+        m2.addOption("Copy");
+        m2.addOption("Paste");
+        m2.addOption("Find");
 
         // https://sleepyeyes.tistory.com/29
         addOption("사과", (ActionListener)null, p, m4);
