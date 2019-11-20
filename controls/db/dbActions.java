@@ -22,7 +22,7 @@ public class dbActions{
         connectionProps = new dbProperties();
     }
 
-    //parser
+    //parser String to utf16
     private String parseUTF16(String in){
         String out = "";
         for(int i=0;i<in.length();i++){

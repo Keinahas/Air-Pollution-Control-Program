@@ -17,6 +17,7 @@ import views.Graph1;
 // import controls.db.dbActions;
 import controls.triggers.trigger;
 
+// Main
 public class Merger{
     private MainFrame f;
     private MyMenubar mb;
@@ -24,6 +25,7 @@ public class Merger{
     private OptsAddable p;
     private Graph1 g;
     
+    // constructor
     public Merger() {
         f = new MainFrame(1000, 500);
         mb = new MyMenubar();
@@ -54,12 +56,12 @@ public class Merger{
 
         //
         
-        m3.addOption("Draw Graph As ");
-        m3.addOption("Draw Graph As ");
-        m3.addOption("Draw Graph As ");
-        m3.addOption("Draw Graph As ");
-        m3.addOption("Draw Graph As ");
-        m3.addOption("Show Concentration");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Show Concentration");
 
         
 
@@ -114,6 +116,7 @@ public class Merger{
         
     }
 
+    // call addoptions for objs
     private void addOption(String str, ActionListener l, OptsAddable...objs){
         for(OptsAddable obj: objs){
             obj.addOption(str, l);

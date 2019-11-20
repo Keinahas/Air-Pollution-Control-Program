@@ -14,12 +14,14 @@ import controls.db.dbActions;
 
 import java.awt.event.ActionEvent;
 
+// class for opening csv file || yet coding
 public class csvOpen implements ActionListener{
     private CSVIO CSV;
     private List<List<String>> br;
     private dbActions db;
 
 
+    // constructor
     public csvOpen(){
         super();
         br = null;

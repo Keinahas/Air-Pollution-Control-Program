@@ -30,13 +30,13 @@ public class Graph1 extends JPanel {
 		JButton btn = new JButton("그래프그리기");
 
 		// 패널 추가
-		panel.add(new JLabel("수원"));
+		panel.add(new JLabel("a"));
 		panel.add(txt1);
-		panel.add(new JLabel("승진"));
+		panel.add(new JLabel("b"));
 		panel.add(txt2);
-		panel.add(new JLabel("성원"));
+		panel.add(new JLabel("c"));
 		panel.add(txt3);
-		panel.add(new JLabel("승환"));
+		panel.add(new JLabel("d"));
 		panel.add(txt4);
 		panel.add(btn);
 
