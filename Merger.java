@@ -30,14 +30,8 @@ public class Merger{
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
-        graph = new Graph1();
-        JPanel pp=new JPanel();
-/*
-        pp.setLayout(new BorderLayout());
-        pp.setBorder(new TitledBorder(new LineBorder(Color.DARK_GRAY,50)));
+        g =new NormGraph();
 
-        pp.add(new JTextField("asdf"),BorderLayout.CENTER);
-*/
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
         OptsAddable m3 = new MyMenu("View", KeyEvent.VK_V);
@@ -66,6 +60,13 @@ public class Merger{
         m3.addOption("Draw Graph As ");
         m3.addOption("Show Concentration");
 
+        m2.addOption("Undo");
+        m2.addOption("Redo");
+        m2.addOption("Cut");
+        m2.addOption("Copy");
+        m2.addOption("Paste");
+        m2.addOption("Find");
+
         // https://sleepyeyes.tistory.com/29
         addOption("사과", (ActionListener)null, p, m4);
         addOption("사과", (ActionListener)null, p, m4);
@@ -88,8 +89,6 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         //f.addOptionPanel(p);
-        f.addGraph(graph);
-      //  f.add(pp);
         f.setVisible(true);
     }
 
