@@ -3,7 +3,10 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 
+// 그래프 그리는 패널
 public class Graph1 extends JPanel {
+
+	// 생성자
 	public Graph1() {
 		setLayout(new BorderLayout());
 		String[] type = { "막대", "선형" };
