@@ -3,7 +3,7 @@ package views;
 import javax.swing.JMenuItem;
 // import java.awt.event.ActionListener;
 
-public class MyMenuItem extends JMenuItem{
+public class MyMenuItem extends JMenuItem{//메뉴아이템을 넣어준다.
 
     public MyMenuItem(String str){
         super(str);
