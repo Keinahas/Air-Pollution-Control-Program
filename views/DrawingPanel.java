@@ -3,10 +3,12 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 
+//그래프를 그리는 클래스
 public class DrawingPanel extends JPanel {
 	protected int var1, var2, var3, var4;
 	private int graphType;
 
+	//처음 배경 그리는 메소드
 	public void initPaint(Graphics g){
 		// 패널 전체를 하얀색으로 표현
 		g.clearRect(0, 0, getWidth(), getHeight());
@@ -21,6 +23,7 @@ public class DrawingPanel extends JPanel {
 		}
 	}
 
+	//막대그래프 그리는 메소드
 	public void NormPaint(Graphics g){
 		g.drawString("수원", 100, 270);
 		g.drawString("승진", 200, 270);
@@ -44,6 +47,7 @@ public class DrawingPanel extends JPanel {
 		}
 	}
 
+	//꺽은선 그래프 그리는 메소드
 	public void paintLinear(Graphics g){
 		g.drawString("수원", 100, 270);
 		g.drawString("승진", 200, 270);
@@ -63,9 +67,9 @@ public class DrawingPanel extends JPanel {
 		}
 	}
 
+	
 	public void paint(Graphics g) {// 페인트는 그래픽스 객체를 가지고 있는 메소드
 		initPaint(g);
-			System.out.println(graphType);
 			switch(graphType){
 			case 0:
 				NormPaint(g);

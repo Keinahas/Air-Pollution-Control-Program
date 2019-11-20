@@ -4,12 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+//그래프를 그리는 버튼 ActionListener
 public class DrawAction implements ActionListener {
 	private DrawingPanel drawPanel;
 	JTextField txt1, txt2, txt3, txt4;
 	JComboBox type;
 
-	DrawAction(JTextField txt1, JTextField txt2, JTextField txt3, JTextField txt4, DrawingPanel drawPanel, JComboBox type) {
+	
+	DrawAction(JTextField txt1, JTextField txt2, JTextField txt3, JTextField txt4, DrawingPanel drawPanel, JComboBox type) { 
 		this.txt1 = txt1;
 		this.txt2 = txt2;
 		this.txt3 = txt3;
@@ -19,7 +21,6 @@ public class DrawAction implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("event called");
 		try {
 			int var1 = Integer.parseInt(txt1.getText().trim());
 			int var2 = Integer.parseInt(txt2.getText().trim());

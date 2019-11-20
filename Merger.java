@@ -61,6 +61,8 @@ public class Merger{
         m3.addOption("Draw Graph As ");
         m3.addOption("Show Concentration");
 
+        
+
         m2.addOption("Undo");
         m2.addOption("Redo");
         m2.addOption("Cut");
@@ -69,24 +71,28 @@ public class Merger{
         m2.addOption("Find");
 
         // https://sleepyeyes.tistory.com/29
-        addOption("사과", (ActionListener)null, p, m4);
+        addOption("측정일시", (ActionListener)null, p, m4);
         panel.add(new JCheckBox());
-        panel.add(new JLabel("사과"));
-        addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JLabel("측정일시"));
+        addOption("측정소명", (ActionListener)null, p, m4);
         panel.add(new JCheckBox());
-        panel.add(new JLabel("사과"));
-        addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JLabel("측정소명"));
+        addOption("이산화질소농도(ppm)", (ActionListener)null, p, m4);
         panel.add(new JCheckBox());
-        panel.add(new JLabel("사과"));
-        addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JLabel("이산화질소농도(ppm)"));
+        addOption("오존농도(ppm)", (ActionListener)null, p, m4);
         panel.add(new JCheckBox());
-        panel.add(new JLabel("사과"));
-        addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JLabel("오존농도(ppm)"));
+        addOption("이산화탄소농도(ppm)", (ActionListener)null, p, m4);
         panel.add(new JCheckBox());
-        panel.add(new JLabel("사과"));
-        addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JLabel("이산화탄소농도(ppm)"));
+        addOption("아황산가스(ppm)", (ActionListener)null, p, m4);
         panel.add(new JCheckBox());
-        panel.add(new JLabel("사과"));
+        panel.add(new JLabel("아황산가스(ppm)"));
+
+        addOption("미세먼지(㎍/㎥)", (ActionListener)null, p, m4);
+        panel.add(new JCheckBox());
+        panel.add(new JLabel("미세먼지(㎍/㎥)"));
 
         m5.addOption("Welcome");
         m5.addOption("View License");
@@ -104,6 +110,8 @@ public class Merger{
         f.addGraph(g);
         f.add(panel,BorderLayout.EAST);
         f.setVisible(true);
+
+        
     }
 
     private void addOption(String str, ActionListener l, OptsAddable...objs){
