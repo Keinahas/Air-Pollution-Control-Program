@@ -30,7 +30,8 @@ public class Merger{
         tb = new MyToolBar();
         p = new OptionPanel();
         g = new Graph1();
-
+        JPanel panel = new JPanel(new GridLayout(0,2));
+        panel.setBorder(new TitledBorder(new LineBorder(Color.gray,5)));
 
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
@@ -69,11 +70,23 @@ public class Merger{
 
         // https://sleepyeyes.tistory.com/29
         addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JCheckBox());
+        panel.add(new JLabel("사과"));
         addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JCheckBox());
+        panel.add(new JLabel("사과"));
         addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JCheckBox());
+        panel.add(new JLabel("사과"));
         addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JCheckBox());
+        panel.add(new JLabel("사과"));
         addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JCheckBox());
+        panel.add(new JLabel("사과"));
         addOption("사과", (ActionListener)null, p, m4);
+        panel.add(new JCheckBox());
+        panel.add(new JLabel("사과"));
 
         m5.addOption("Welcome");
         m5.addOption("View License");
@@ -89,7 +102,7 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.addGraph(g);
-        //f.addOptionPanel(p);
+        f.add(panel,BorderLayout.EAST);
         f.setVisible(true);
     }
 
