@@ -2,6 +2,7 @@ package views;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
+import views.MyMenuItem;
 
 public class MyMenu extends JMenu implements OptsAddable{//메뉴를 메뉴바에 넣기위한 클래스
 
@@ -15,7 +16,7 @@ public class MyMenu extends JMenu implements OptsAddable{//메뉴를 메뉴바�
     }
 
     @Override
-    public void addOption(String str){//옵션을 추가한다. 여러가지 파라메터를 줄 수 있다.
+    public void addOption(String str){// 메뉴 아이템을 추가한다. 여러가지 파라메터를 줄 수 있다.
         MyMenuItem mItem = new MyMenuItem(str);
         this.add(mItem);
     }

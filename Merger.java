@@ -9,7 +9,6 @@ import views.MyToolBar;
 import views.MainFrame;
 import views.OptionPanel;
 import views.OptsAddable;
-import views.NormGraph;
 import views.MyButton;
 import views.MyMenu;
 import views.Graph1;

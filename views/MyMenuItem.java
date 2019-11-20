@@ -5,6 +5,7 @@ import javax.swing.JMenuItem;
 
 public class MyMenuItem extends JMenuItem{//메뉴아이템을 넣어준다.
 
+    // 생성자
     public MyMenuItem(String str){
         super(str);
     }

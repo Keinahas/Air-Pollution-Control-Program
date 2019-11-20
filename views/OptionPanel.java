@@ -16,6 +16,8 @@ public class OptionPanel extends JPanel implements OptsAddable{
         setLayout(new GridLayout(0,2));
     }
 
+
+    // 체크박스와 레이블을 추가한다. 여러가지 파라메터를 줄 수 있다.
     @Override
     public void addOption(String str) {
         // TODO Auto-generated method stub
