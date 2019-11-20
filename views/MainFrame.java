@@ -19,8 +19,11 @@ public class MainFrame extends JFrame{
         this.setJMenuBar(bar);
     }
 	public void addToolBar(MyToolBar bar) {
-    
         this.add(bar,BorderLayout.NORTH);
+    }
+
+    public void addGraph(Graph1 bar){
+        this.add(bar,BorderLayout.CENTER);
     }
     public void addOptionPanel(OptionPanel pan) {
         this.add(pan,BorderLayout.EAST);
