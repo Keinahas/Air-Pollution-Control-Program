@@ -43,7 +43,7 @@ public class Graph1 extends JPanel {
 		this.add(panel, BorderLayout.SOUTH);
 
 		// 버튼에 이벤트 등록
-		btn.addActionListener(new DrawAction(txt1, txt2, txt3, txt4, drawpanel, typecb.getSelectedIndex()));
+		btn.addActionListener(new DrawAction(txt1, txt2, txt3, txt4, drawpanel, typecb));
 
 		this.setVisible(true);
 	}

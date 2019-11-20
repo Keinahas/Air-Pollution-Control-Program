@@ -50,7 +50,7 @@ public class DrawingPanel extends JPanel {
 		g.drawString("성원", 300, 270);
 		g.drawString("승환", 400, 270);
 
-		if (var1 > 0 && var1 > 0) {
+		if (var1 > 0 && var2 > 0) {
 			g.drawLine(115, 250 - var1 * 2, 215, 250 - var2 * 2);
 		}
 
@@ -65,14 +65,13 @@ public class DrawingPanel extends JPanel {
 
 	public void paint(Graphics g) {// 페인트는 그래픽스 객체를 가지고 있는 메소드
 		initPaint(g);
-		switch(graphType){
+			System.out.println(graphType);
+			switch(graphType){
 			case 0:
-				paintLinear(g);
-				//NormPaint(g);
+				NormPaint(g);
 				break;
 			case 1:
 				paintLinear(g);
-				//NormPaint(g);
 				break;
 			default:
 				break;
@@ -87,7 +86,7 @@ public class DrawingPanel extends JPanel {
 	}
 
 	void setGraphType(int n){
-		graphType = n;
+		this.graphType = n;
 	}
 
 }
