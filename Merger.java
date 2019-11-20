@@ -30,14 +30,15 @@ public class Merger{
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
+        graph = new Graph1();
         JPanel pp=new JPanel();
-
+/*
         pp.setLayout(new BorderLayout());
         pp.setPreferredSize(new Dimension(12,12));
         pp.setBorder(new TitledBorder(new LineBorder(Color.DARK_GRAY,5)));
 
         pp.add(new JTextField("asdf"),BorderLayout.CENTER);
-
+*/
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
         OptsAddable m3 = new MyMenu("View", KeyEvent.VK_V);
@@ -95,7 +96,8 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         //f.addOptionPanel(p);
-        f.add(pp);
+        f.addGraph(graph);
+      //  f.add(pp);
         f.setVisible(true);
     }
 
