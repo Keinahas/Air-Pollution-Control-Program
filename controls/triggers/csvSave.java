@@ -35,6 +35,7 @@ public class csvSave implements ActionListener{
             if(db.connect()){
                 // db.createTable(file.getName().substring(0, file.getName().lastIndexOf(".")), br.get(0).size());
                 // br = db.SelectAllFromTable(name);
+                db.getNStringFromTable(file.getName().substring(0, file.getName().lastIndexOf(".")), 1);
                 System.out.println("csvSave Clicked!");
             }else{
                 System.out.println("Failed");

@@ -21,6 +21,7 @@ public class CSVIO {
     private JFileChooser jfc;
     private FileNameExtensionFilter filter;
 
+    // constructor
     public CSVIO(){
         file = null;
         jfc = new JFileChooser(".");
