@@ -22,15 +22,15 @@ public class Merger{
     private MyMenubar mb;
     private MyToolBar tb;
     private OptsAddable p;
-    private NormGraph g;
-    private Graph1 graph;
+    private Graph1 g;
     
     public Merger() {
         f = new MainFrame(1000, 500);
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
-        g =new NormGraph();
+        g = new Graph1();
+
 
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
@@ -88,6 +88,7 @@ public class Merger{
         f.setLocation(260,450);
         f.addMenuBar(mb);
         f.addToolBar(tb);
+        f.addGraph(g);
         //f.addOptionPanel(p);
         f.setVisible(true);
     }
