@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class dbActions{
@@ -204,6 +206,43 @@ public class dbActions{
         }else{
             System.out.println("DropTable::table does not exists");
         }
+    }
+
+    //returns List of n row of database
+    public List<List<String>> getNStringFromTable(String name, int n) throws SQLException{
+        Statement statement = null;
+        List<List<String>> sList = null;
+
+        if(isTable(name)){
+            ResultSet rs = null;
+            statement = createStatement();
+            sList = new ArrayList<List<String>>();
+            String query = "SELECT * FROM " + name + " LIMIT " + n + " ;";
+            // System.out.println(query);
+            if (statement.execute(query)) {
+                rs = statement.getResultSet();
+            }
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while(rs.next()){
+                String arr = "";
+                List<String> tmpList = new ArrayList<String>();
+                for(int i=1;i<columnCount;i++){
+                    String str = rs.getString(i);
+                    System.out.println(str);
+                    if( i == 1 ){
+                        arr += str;
+                    }else{
+                        arr += "," + str;
+                    }
+                }
+                tmpList = Arrays.asList(arr.split(","));
+                sList.add(tmpList);
+            }
+        }else{
+            System.out.println("getNStringFromTable::table does not exists");
+        }
+        return sList;
     }
 
     // public static void main(String[] args) {
