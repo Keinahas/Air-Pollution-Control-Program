@@ -67,10 +67,12 @@ public class DrawingPanel extends JPanel {
 		initPaint(g);
 		switch(graphType){
 			case 0:
-				NormPaint(g);
+				paintLinear(g);
+				//NormPaint(g);
 				break;
 			case 1:
 				paintLinear(g);
+				//NormPaint(g);
 				break;
 			default:
 				break;
