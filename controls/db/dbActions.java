@@ -36,24 +36,14 @@ public class dbActions{
         return out;
     }
 
-    // 커낵션 생성
-    private void getConnection() throws SQLException {
+    // 연결하는 함수 true: connected, false: not connected
+    public boolean connect() throws SQLException{
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(connectionProps.getServerInfo() ,connectionProps);
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }
-        return;
-    }
-
-    // true: connected, false: not connected
-    public boolean connect() throws SQLException{
-        try{
-            getConnection();
             if(conn != null)
                 return true;
-        }catch(SQLException e){
+        }catch(ClassNotFoundException e){
             e.printStackTrace();
         }
         return false;
