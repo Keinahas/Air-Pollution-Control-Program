@@ -199,7 +199,7 @@ public class dbActions{
     }
 
     //returns List of n row of database
-    public List<List<String>> getNStringFromTable(String name, int n) throws SQLException{
+    public List<List<String>> getNRowFromTable(String name, int n) throws SQLException{
         Statement statement = null;
         List<List<String>> sList = null;
 
