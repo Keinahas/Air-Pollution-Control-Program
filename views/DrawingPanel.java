@@ -3,7 +3,7 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 
-//그래프를 그리는 클래스
+//그래프가 그려지는 panel클래스
 public class DrawingPanel extends JPanel {
 	protected int var1, var2, var3, var4;
 	private int graphType;

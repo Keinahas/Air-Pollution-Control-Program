@@ -2,7 +2,10 @@ package views;
 
 import java.awt.*;
 import javax.swing.*;
+import views.DrawingPanel;
+import views.DrawAction;
 
+//그래프를 그릴 fame을 만들고 DrawingPanel을 불러오는 클래스
 public class Graph1 extends JPanel {
 	public Graph1() {
 		setLayout(new BorderLayout());

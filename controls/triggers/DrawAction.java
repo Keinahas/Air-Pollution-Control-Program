@@ -7,8 +7,8 @@ import javax.swing.*;
 //그래프를 그리는 버튼 ActionListener
 public class DrawAction implements ActionListener {
 	private DrawingPanel drawPanel;
-	JTextField txt1, txt2, txt3, txt4;
-	JComboBox type;
+	private JTextField txt1, txt2, txt3, txt4;
+	private JComboBox type;
 
 	
 	DrawAction(JTextField txt1, JTextField txt2, JTextField txt3, JTextField txt4, DrawingPanel drawPanel, JComboBox type) { 
