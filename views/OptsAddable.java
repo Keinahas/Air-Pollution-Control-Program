@@ -2,6 +2,7 @@ package views;
 
 import java.awt.event.ActionListener;
 
+// interface
 public interface OptsAddable{
     public void addOption(String str);
     public void addOption(String str, int mnemonic);

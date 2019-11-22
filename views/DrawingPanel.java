@@ -25,10 +25,10 @@ public class DrawingPanel extends JPanel {
 
 	//막대그래프 그리는 메소드
 	public void NormPaint(Graphics g){
-		g.drawString("수원", 100, 270);
-		g.drawString("승진", 200, 270);
-		g.drawString("성원", 300, 270);
-		g.drawString("승환", 400, 270);
+		g.drawString("a", 100, 270);
+		g.drawString("b", 200, 270);
+		g.drawString("c", 300, 270);
+		g.drawString("d", 400, 270);
 
 		if (var1 > 0) {
 			g.fillRect(110, 250 - var1 * 2, 10, var1 * 2);
@@ -49,10 +49,10 @@ public class DrawingPanel extends JPanel {
 
 	//꺽은선 그래프 그리는 메소드
 	public void paintLinear(Graphics g){
-		g.drawString("수원", 100, 270);
-		g.drawString("승진", 200, 270);
-		g.drawString("성원", 300, 270);
-		g.drawString("승환", 400, 270);
+		g.drawString("a", 100, 270);
+		g.drawString("b", 200, 270);
+		g.drawString("c", 300, 270);
+		g.drawString("d", 400, 270);
 
 		if (var1 > 0 && var2 > 0) {
 			g.drawLine(115, 250 - var1 * 2, 215, 250 - var2 * 2);
@@ -67,8 +67,8 @@ public class DrawingPanel extends JPanel {
 		}
 	}
 
-	
-	public void paint(Graphics g) {// 페인트는 그래픽스 객체를 가지고 있는 메소드
+	// 페인트는 그래픽스 객체를 가지고 있는 메소드
+	public void paint(Graphics g) {
 		initPaint(g);
 			switch(graphType){
 			case 0:
@@ -82,6 +82,7 @@ public class DrawingPanel extends JPanel {
 		}
 	}
 
+	// 데이터 대입
 	void setScore(int var1, int var2, int var3, int var4) {
 		this.var1 = var1;
 		this.var2 = var2;
@@ -89,6 +90,7 @@ public class DrawingPanel extends JPanel {
 		this.var4 = var4;
 	}
 
+	// 그래프 선택
 	void setGraphType(int n){
 		this.graphType = n;
 	}

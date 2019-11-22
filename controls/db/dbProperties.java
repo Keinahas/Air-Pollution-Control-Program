@@ -2,6 +2,7 @@ package controls.db;
 
 import java.util.Properties;
 
+// DB에 연결하기 위한 정보 담고 있는 클래스
 public class dbProperties extends Properties{
     private String userName = "root";           // username
     private String password = "toor";           // password
