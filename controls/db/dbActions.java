@@ -1,5 +1,6 @@
 package controls.db;
 
+import controls.CTRL;
 import controls.db.dbProperties;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,10 +24,10 @@ public class dbActions{
     }
 
     //parser String to utf16
-    private String parseUTF16(String in){
+    private String parseUTF16(String str){
         String out = "";
-        for(int i=0;i<in.length();i++){
-            String t = Integer.toHexString(in.charAt(i));
+        for(int i=0;i<str.length();i++){
+            String t = Integer.toHexString(str.charAt(i));
             if(t.length() < 4){
                 out += "00"+t;
             }else{
@@ -34,6 +35,48 @@ public class dbActions{
             }
         }
         return out;
+    }
+
+    public String parse(String str){
+        String brackets = "()<>{}[]";
+        String specials =  "`~!@#$%^&*-=+ :;'.,/|\\";
+
+        for (int i = 0; i < specials.length(); i++) {
+            int n = -1;
+            char c = specials.charAt(i);
+            while((n = str.indexOf(c)) != -1){
+                str = str.replace(c, '_');
+            }
+        }
+
+        for (int i = 0; i < brackets.length()-1; i+=2) {
+            int t1 = -1, t2 = -1;
+            char c1 = brackets.charAt(i), c2 = brackets.charAt(i+1);
+            // System.out.println(c1+" "+c2+" | "+str);
+            while(((t1 = str.indexOf(c1)) != -1) && ((t2 = str.indexOf(c2)) != -1)){
+                str = str.substring(0, t1) + str.substring(t2+1);
+            }
+        }
+
+        return str;
+    }
+
+    // parse n add to info
+    public List<info> parseNadd(String str){
+        String tStr = parse(str);
+        List<info> list = new ArrayList<info>();
+        list.add(new info(str, tStr));
+        return list;
+    }
+
+    // parse All n add to info
+    private List<List<info>> parseNaddAll(String name, List<String> list){
+        List<List<info>> lists = new ArrayList<List<info>>();
+        lists.add(parseNadd(name));
+        for (String str : list) {
+            lists.add(parseNadd(str));
+        }
+        return lists;
     }
 
     // 연결하는 함수 true: connected, false: not connected
@@ -84,15 +127,18 @@ public class dbActions{
     }
 
     // db Create Table
-    public void createTable(String name, int size) throws SQLException{
-        Statement statement = null;
+    public void createTable(String name, List<String> header) throws SQLException{
         if(!isTable(name)){
+            int length = header.size()-1;
+            String query = null;
+            Statement statement = null;
+            parseNaddAll(name, header);
             statement = createStatement();
-            String query = "CREATE TABLE " + name + " (\n";
-            for(int i = 0;i < size-1;i++){
-                query += "args"+i+" VARCHAR(20),\n";
+            query = "CREATE TABLE " + name + " (\n";
+            for (int i = 0; i < length; i++) {
+                query += parse(header.get(i))+" VARCHAR(20),\n";
             }
-            query +=  "args"+(size-1)+" VARCHAR(20)\n";
+            query +=  parse(header.get(length))+" VARCHAR(20)\n";
             query += ");";
             // System.out.println(query);
             if (statement.executeUpdate(query) >= 0) {
@@ -106,32 +152,35 @@ public class dbActions{
     }
 
     // Insert 
-    public void insertIntoTable(String name, String[] args, int size) throws SQLException{
-        int n = args.length;
+    public void insertIntoTable(String name, List<List<String>> contents, int size) throws SQLException{
         PreparedStatement pstmt = null;
 
         // System.out.println(query);
         if(isTable(name)){
-            String query = "INSERT INTO "+name+" VALUES('";
-            for(int i = 0; i < size-1; i++){
-                if(n <= i){
-                    query += "','";
-                }else{
-                    query += args[i]+"', '";
+            for (List<String> list : contents) {
+                String query = "INSERT INTO "+name+" VALUES ( '";
+
+                for (int i = 0; i < size-1; i++) {
+                    if(i >= list.size()){
+                        query += "', '";
+                    }else{
+                        query += list.get(i)+"', '";
+                    }
                 }
-            }
-            if(n <= size-1){
-                query += "');";
-            }else{
-                query += args[size-1]+"');";
-            }
-            // System.out.println(query);
-            pstmt = preparedStatement(query);
-            if (pstmt.executeUpdate(query) >= 0) {
-                // System.out.println("INSERTED");
-            }else{
-                // System.out.println("ERROR");
-                throw new SQLException("insertIntoTable::ERROR");
+                if(size-1 >= list.size()){
+                    query += "');";
+                }else{
+                    query += list.get(size-1)+"');";
+                }
+
+                // System.out.println(query);
+                pstmt = preparedStatement(query);
+                if (pstmt.executeUpdate(query) >= 0) {
+                    // System.out.println("INSERTED");
+                }else{
+                    // System.out.println("ERROR");
+                    throw new SQLException("insertIntoTable::ERROR");
+                }
             }
         }else{
             System.out.println("insertIntoTable::Table does not exist");
@@ -141,61 +190,79 @@ public class dbActions{
     // SELECT args FROM TABLE name
     public List<List<String>> SelectFromTable(String name, String[] args) throws SQLException{
         PreparedStatement pstmt = null;
-        List<List<String>> br = null;
+        List<List<String>> sList = null;
         int n = args.length;
-        ResultSet rs = null;
         String query = "SELECT ";
         for(int i = 0; i < n-1; i++){
             query += args[i] + ", ";
         }
         query += args[n-1] + " FROM " + name + ";";
         System.out.println(query);
-        // pstmt = preparedStatement(query);
-        // if (pstmt.execute(query)) {
-        //     rs = pstmt.getResultSet();
-        // }
-
-        // while (rs.next()) {
-        // 	String str = rs.getNString(1);
-            // System.out.println(str);
-        // }
-        return null;
+        if(isTable(name)){
+            ResultSet rs = null;
+            pstmt = preparedStatement(query);
+            sList = new ArrayList<List<String>>();
+            // System.out.println(query);
+            if (pstmt.execute(query)) {
+                rs = pstmt.getResultSet();
+            }
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while(rs.next()){
+                String arr = "";
+                List<String> tmpList = new ArrayList<String>();
+                for(int i=1;i<columnCount;i++){
+                    String str = rs.getString(i);
+                    System.out.println(str);
+                    if( i == 1 ){
+                        arr += str;
+                    }else{
+                        arr += "," + str;
+                    }
+                }
+                tmpList = Arrays.asList(arr.split(","));
+                sList.add(tmpList);
+            }
+        }else{
+            System.out.println("SelectAllFromTable::table does not exists");
+        }return null;
     }
 
     // SELECT * FROM TABLE name
     public List<List<String>> SelectAllFromTable(String name) throws SQLException{
         PreparedStatement pstmt = null;
-        ResultSet rs = null;
+        List<List<String>> sList = null;
         String query = "SELECT * FROM " + name + ";";
         System.out.println(query);
-        pstmt = preparedStatement(query);
-        if (pstmt.execute(query)) {
-            rs = pstmt.getResultSet();
-        }
-
-        while (rs.next()) {
-        	String str = rs.getNString(1);
-            // System.out.println(str);
-        }
-        return null;
-    }
-
-    // Drops Table
-    public void DropTable(String name) throws SQLException{
-        Statement statement = null;
         if(isTable(name)){
-            statement = createStatement();
-            String query = "DROP TABLE " + name;
+            ResultSet rs = null;
+            pstmt = preparedStatement(query);
+            sList = new ArrayList<List<String>>();
             // System.out.println(query);
-            if (statement.executeUpdate(query) >= 0) {
-                System.out.println("DROP");
-            }else{
-                // System.out.println("ERROR");
-                throw new SQLException("DropTable::ERROR");
+            if (pstmt.execute(query)) {
+                rs = pstmt.getResultSet();
+            }
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while(rs.next()){
+                String arr = "";
+                List<String> tmpList = new ArrayList<String>();
+                for(int i=1;i<columnCount;i++){
+                    String str = rs.getString(i);
+                    System.out.println(str);
+                    if( i == 1 ){
+                        arr += str;
+                    }else{
+                        arr += "," + str;
+                    }
+                }
+                tmpList = Arrays.asList(arr.split(","));
+                sList.add(tmpList);
             }
         }else{
-            System.out.println("DropTable::table does not exists");
+            System.out.println("SelectAllFromTable::table does not exists");
         }
+        return sList;
     }
 
     //returns List of n row of database
@@ -235,6 +302,23 @@ public class dbActions{
         return sList;
     }
 
+    // Drops Table
+    public void DropTable(String name) throws SQLException{
+        Statement statement = null;
+        if(isTable(name)){
+            statement = createStatement();
+            String query = "DROP TABLE " + name;
+            // System.out.println(query);
+            if (statement.executeUpdate(query) >= 0) {
+                System.out.println("DROP");
+            }else{
+                // System.out.println("ERROR");
+                throw new SQLException("DropTable::ERROR");
+            }
+        }else{
+            System.out.println("DropTable::table does not exists");
+        }
+    }
     // public static void main(String[] args) {
     //     dbActions db = new dbActions();
 
@@ -268,4 +352,44 @@ public class dbActions{
     //         e.printStackTrace();
     //     }
     // }
+
+    public static void main(String[] args) {
+        dbActions db = new dbActions();
+        List<String> header = new ArrayList<>();
+        header.add("측정일시");
+        header.add("측정소명");
+        header.add("이산화질소농도(ppm)");
+        header.add("오존농도(ppm)");
+        header.add("이산화탄소농도(ppm)");
+        header.add("아황산가스(ppm)");
+        header.add("미세먼지(㎍/㎥)");
+        header.add("초미세먼지(㎍/㎥)");
+        System.out.println(header);
+
+        try{
+            if(db.connect()){
+                // db.DropTable("일별평균대기오염도_2018");
+                db.createTable("일별평균대기오염도_2018", header);
+                db.insertIntoTable(CTRL.getFileName(), CTRL.getContents(), CTRL.getHeader().size());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    class info{
+        String origin;
+        String parsed;
+
+        info(String origin, String parsed){
+            this.origin = origin;
+            this.parsed = parsed;
+        }
+
+        @Override
+        public String toString() {
+            // TODO Auto-generated method stub
+            return "org:" + origin + " par:" + parsed;
+        }
+    }
 }
