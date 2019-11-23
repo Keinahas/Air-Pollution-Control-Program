@@ -9,6 +9,7 @@ import controls.db.dbActions;
 import controls.triggers.DrawAction;
 import controls.triggers.csvOpen;
 import controls.triggers.csvSave;
+import controls.triggers.dbUpload;
 
 public class CTRL{
     
@@ -24,7 +25,7 @@ public class CTRL{
 	public static ActionListener CSV_Save = new csvSave(CSV_IO);
     public static ActionListener CSV_Open = new csvOpen(CSV_IO);
 	public static ActionListener DRAW = new DrawAction();
-    public static ActionListener DB_Insert;
+    public static ActionListener DB_Insert = new dbUpload(DB);
     public static ActionListener DB_Show;
     public static ActionListener DB_Drop;
     public static ActionListener DB_;
