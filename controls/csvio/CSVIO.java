@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class CSVIO {
@@ -26,14 +27,15 @@ public class CSVIO {
         file = null;
         jfc = new JFileChooser(".");
         filter = new FileNameExtensionFilter("CSV Files", "CSV","csv");
+        jfc.setSelectedFile(null);
+        jfc.setFileFilter(filter);
+        jfc.setMultiSelectionEnabled(false);
     }
 
     public void chooseOpen(){
-        jfc.setFileFilter(filter);
-        jfc.setMultiSelectionEnabled(false);
         int returnVal = jfc.showOpenDialog(null);
 
-        if(returnVal == 0) {
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
             file = jfc.getSelectedFile();
         }else{
             file = null;
@@ -42,12 +44,22 @@ public class CSVIO {
     }
 
     public void chooseSave(){
-        jfc.setFileFilter(filter);
-        jfc.setMultiSelectionEnabled(false);
+        String fileName = null;
         int returnVal = jfc.showSaveDialog(null);
 
-        if(returnVal == 0) {
-            file = jfc.getSelectedFile();
+
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            fileName = jfc.getSelectedFile().getName();
+            if(!fileName.endsWith(".csv") && !fileName.endsWith(".CSV")){
+                fileName += ".CSV";
+            }
+            file = new File(fileName);
+            if(file.exists()){
+                int r = JOptionPane.showConfirmDialog(null, file.getName() + "이(가) 이미 있습니다. 바꾸시겠습니까?", "다른 이름으로 저장 확인", JOptionPane.YES_NO_OPTION);
+                if(r == JOptionPane.NO_OPTION){
+                    chooseSave();
+                }
+            }
         }else{
             file = null;
             System.out.println("파일 저장을 취소하였습니다.");
@@ -60,12 +72,12 @@ public class CSVIO {
     }
 
     public List<List<String>> Read(){
-        BufferedReader br = null;
+        BufferedReader sList = null;
         List<List<String>> inputList = new ArrayList<List<String>>();
         try{
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            sList = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
             String line = "";
-            while((line = br.readLine()) != null)
+            while((line = sList.readLine()) != null)
             {
                 List<String> tmpList = new ArrayList<String>();
                 String array[] = line.split(",");
@@ -78,8 +90,8 @@ public class CSVIO {
             e.printStackTrace();
         }finally{
             try{
-                if(br != null)
-                    br.close();
+                if(sList != null)
+                    sList.close();
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -87,12 +99,12 @@ public class CSVIO {
         return inputList;
     }
 
-    public void Write(List<List<String>> read){
+    public void Write(List<List<String>> sList){
         BufferedWriter bufWriter = null;
         
         try{
             bufWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-            for(List<String> newLine : read)
+            for(List<String> newLine : sList)
             {
                 List<String> list = newLine;
                 for(String data : list)
