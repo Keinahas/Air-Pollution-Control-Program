@@ -13,8 +13,7 @@ import views.MyButton;
 import views.MyMenu;
 import views.Graph1;
 
-// import controls.db.dbActions;
-import controls.triggers.trigger;
+import controls.CTRL;
 
 // Main
 public class Merger{
@@ -47,22 +46,11 @@ public class Merger{
         mb.add((MyMenu) m5);
 
         m1.addOption("New", KeyEvent.VK_N);
-        m1.addOption("Open CSV File", KeyEvent.VK_O, trigger.csvOpen);
-        m1.addOption("Save CSV File", KeyEvent.VK_S, trigger.csvSave);
-        m1.addOption("Save As...");
+        m1.addOption("Open CSV File", KeyEvent.VK_O, CTRL.CSV_Open);
+        m1.addOption("Upload Data", CTRL.DB_Insert);
+        m1.addOption("Save CSV File", KeyEvent.VK_S, CTRL.CSV_Save);
         m1.addOption("Save Graph As...");
         m1.addOption("Exit", e->{f.dispose();System.exit(0);});
-
-        //
-        
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Show Concentration");
-
-        
 
         m2.addOption("Undo");
         m2.addOption("Redo");
@@ -70,6 +58,13 @@ public class Merger{
         m2.addOption("Copy");
         m2.addOption("Paste");
         m2.addOption("Find");
+
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Draw Graph As ");
+        // m3.addOption("Show Concentration");
 
         // https://sleepyeyes.tistory.com/29
         addOption("측정일시", (ActionListener)null, p, m4);
@@ -99,8 +94,8 @@ public class Merger{
         m5.addOption("View License");
         m5.addOption("About");
 
-        tb.addTool(new MyButton(new ImageIcon("./views/resource/open.png"), KeyEvent.VK_O, trigger.csvOpen));
-        tb.addTool(new MyButton(new ImageIcon("./views/resource/save.png"), KeyEvent.VK_S, trigger.csvSave));
+        tb.addTool(new MyButton(new ImageIcon("./views/resource/open.png"), KeyEvent.VK_O, CTRL.CSV_Open));
+        tb.addTool(new MyButton(new ImageIcon("./views/resource/save.png"), KeyEvent.VK_S, CTRL.CSV_Save));
         //tb.addTool(new JButton("c"));
         //tb.addTool(new JButton("d"));
         //tb.addTool(new JTextField("e"));
