@@ -1,10 +1,12 @@
 package views;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 //그래프가 그려지는 panel클래스
 public class DrawingPanel extends JPanel {
+	protected int vars[];
 	protected int var1, var2, var3, var4;
 	private int graphType;
 
@@ -69,12 +71,13 @@ public class DrawingPanel extends JPanel {
 
 	// 페인트는 그래픽스 객체를 가지고 있는 메소드
 	public void paint(Graphics g) {
-		initPaint(g);
 			switch(graphType){
 			case 0:
+				initPaint(g);
 				NormPaint(g);
 				break;
 			case 1:
+				initPaint(g);
 				paintLinear(g);
 				break;
 			default:
@@ -83,15 +86,12 @@ public class DrawingPanel extends JPanel {
 	}
 
 	// 데이터 대입
-	void setScore(int var1, int var2, int var3, int var4) {
-		this.var1 = var1;
-		this.var2 = var2;
-		this.var3 = var3;
-		this.var4 = var4;
+	public void setScore(int...datas) {
+		vars = datas;
 	}
 
 	// 그래프 선택
-	void setGraphType(int n){
+	public void setGraphType(int n){
 		this.graphType = n;
 	}
 
