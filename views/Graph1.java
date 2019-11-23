@@ -3,7 +3,8 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 import views.DrawingPanel;
-import views.DrawAction;
+import controls.triggers.*;
+// import controls.triggers.trigger;
 
 //그래프를 그릴 fame을 만들고 DrawingPanel을 불러오는 클래스
 public class Graph1 extends JPanel {
@@ -48,7 +49,8 @@ public class Graph1 extends JPanel {
 		this.add(panel, BorderLayout.SOUTH);
 
 		// 버튼에 이벤트 등록
-		btn.addActionListener(new DrawAction(txt1, txt2, txt3, txt4, drawpanel, typecb));
+		// btn.addActionListener(trigger.drawAction);
+		btn.addActionListener(new DrawAction(typecb,txt1, txt2, txt3, txt4));
 
 		this.setVisible(true);
 	}
