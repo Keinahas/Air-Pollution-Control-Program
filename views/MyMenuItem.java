@@ -1,7 +1,7 @@
 package views;
 
 import javax.swing.JMenuItem;
-// import java.awt.event.ActionListener;
+import java.awt.event.ActionListener;
 
 public class MyMenuItem extends JMenuItem{//메뉴아이템을 넣어준다.
 
@@ -10,8 +10,8 @@ public class MyMenuItem extends JMenuItem{//메뉴아이템을 넣어준다.
         super(str);
     }
     
-    // public MyMenuItem(String str, ActionListener l){
-    //     super(str);
-    //     this.addActionListener(l);
-    // }
+    public MyMenuItem(String str, ActionListener l){
+        super(str);
+        this.addActionListener(l);
+    }
 }
