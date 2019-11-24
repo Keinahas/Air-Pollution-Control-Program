@@ -29,6 +29,10 @@ public class CTRL{
     public static ActionListener DB_Show;
     public static ActionListener DB_Drop;
     public static ActionListener DB_;
+
+    public static ActionListener BTN_When = ;
+    public static ActionListener BTB_Where = ;
+
     
     ///-------------------------------------------- METHODS
 

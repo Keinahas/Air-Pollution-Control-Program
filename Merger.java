@@ -104,7 +104,7 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.addGraph(g);
-        f.add(panel,BorderLayout.EAST);
+        f.add(panel,BorderLayout.WEST);
         f.setVisible(true);
 
         
