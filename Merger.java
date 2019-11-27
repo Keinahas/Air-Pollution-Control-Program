@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -9,6 +10,7 @@ import views.MyToolBar;
 import views.MainFrame;
 import views.OptionPanel;
 import views.OptsAddable;
+import views.SideBar;
 import views.MyButton;
 import views.MyMenu;
 import views.Graph1;
@@ -30,8 +32,8 @@ public class Merger{
         tb = new MyToolBar();
         p = new OptionPanel();
         g = new Graph1();
-        JPanel panel = new JPanel(new GridLayout(0,2));
-        panel.setBorder(new TitledBorder(new LineBorder(Color.gray,5)));
+        JPanel panel = new JPanel();
+        panel.setBorder(new TitledBorder(new LineBorder(Color.gray,2)));
 
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
@@ -67,28 +69,42 @@ public class Merger{
         // m3.addOption("Show Concentration");
 
         // https://sleepyeyes.tistory.com/29
-        addOption("측정일시", (ActionListener)null, p, m4);
-        panel.add(new JCheckBox());
-        panel.add(new JLabel("측정일시"));
-        addOption("측정소명", (ActionListener)null, p, m4);
-        panel.add(new JCheckBox());
-        panel.add(new JLabel("측정소명"));
-        addOption("이산화질소농도(ppm)", (ActionListener)null, p, m4);
-        panel.add(new JCheckBox());
-        panel.add(new JLabel("이산화질소농도(ppm)"));
-        addOption("오존농도(ppm)", (ActionListener)null, p, m4);
-        panel.add(new JCheckBox());
-        panel.add(new JLabel("오존농도(ppm)"));
-        addOption("이산화탄소농도(ppm)", (ActionListener)null, p, m4);
-        panel.add(new JCheckBox());
-        panel.add(new JLabel("이산화탄소농도(ppm)"));
-        addOption("아황산가스(ppm)", (ActionListener)null, p, m4);
-        panel.add(new JCheckBox());
-        panel.add(new JLabel("아황산가스(ppm)"));
-
-        addOption("미세먼지(㎍/㎥)", (ActionListener)null, p, m4);
-        panel.add(new JCheckBox());
-        panel.add(new JLabel("미세먼지(㎍/㎥)"));
+        SideBar sbp=new SideBar();
+        OptionPanel p1=new OptionPanel();
+        OptionPanel p2=new OptionPanel();
+        OptionPanel p3=new OptionPanel();
+        OptionPanel p4=new OptionPanel();
+        OptionPanel p5=new OptionPanel();
+        //addOption("측정일시", (ActionListener)null, p, m4);
+        panel.add(new JButton("측정일시"));
+        //addOption("측정소명", (ActionListener)null, p, m4);
+        panel.add(new JButton("측정소명"));
+        p1.addOption("이산화질소농도(ppm)",(ActionListener)null);
+        p2.addOption("오존농도(ppm)",(ActionListener)null);
+        p3.addOption("이산화탄소농도(ppm)",(ActionListener)null);
+        p4.addOption("아황산가스(ppm)",(ActionListener)null);
+        p5.addOption("미세먼지(㎍/㎥)",(ActionListener)null);
+        sbp.add(panel);
+        sbp.add(p1);
+        sbp.add(p2);
+        sbp.add(p3);
+        sbp.add(p4);
+        sbp.add(p5);
+        //addOption("이산화질소농도(ppm)", (ActionListener)null, p, m4);
+        //panel.add(new JCheckBox());
+        //panel.add(new JLabel("이산화질소농도(ppm)"));
+        //addOption("오존농도(ppm)", (ActionListener)null, p, m4);
+        //panel.add(new JCheckBox());
+        //panel.add(new JLabel("오존농도(ppm)"));
+        //addOption("이산화탄소농도(ppm)", (ActionListener)null, p, m4);
+        //panel.add(new JCheckBox());
+        //panel.add(new JLabel("이산화탄소농도(ppm)"));
+        //addOption("아황산가스(ppm)", (ActionListener)null, p, m4);
+        //panel.add(new JCheckBox());
+        //panel.add(new JLabel("아황산가스(ppm)"));
+        //addOption("미세먼지(㎍/㎥)", (ActionListener)null, p, m4);
+        //panel.add(new JCheckBox());
+        //panel.add(new JLabel("미세먼지(㎍/㎥)"));
 
         m5.addOption("Welcome");
         m5.addOption("View License");
@@ -104,7 +120,7 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.addGraph(g);
-        f.add(panel,BorderLayout.WEST);
+        f.add(sbp, BorderLayout.WEST);
         f.setVisible(true);
 
         
