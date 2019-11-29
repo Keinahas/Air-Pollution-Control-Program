@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 public class OptionPanel extends JPanel implements OptsAddable{//옵션을 하나하나 보여주는 패널을 특정해서 클래스로 만들어줍니다.
     public OptionPanel(){//생성자 패널 테두리 설정, 그리드레이아웃으로 만듬
-        setBorder(new TitledBorder(new LineBorder(Color.gray,10),"옵션"));
+        setBorder(new TitledBorder(new LineBorder(Color.gray,5)));
         setLayout(new GridLayout(0,2));
     }
 
