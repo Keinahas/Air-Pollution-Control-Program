@@ -24,6 +24,7 @@ public class Merger{
     private MyToolBar tb;
     private OptsAddable p;
     private Graph1 g;
+    private SideBar sb;
     
     // constructor
     public Merger() {
@@ -32,9 +33,8 @@ public class Merger{
         tb = new MyToolBar();
         p = new OptionPanel();
         g = new Graph1();
-        JPanel panel = new JPanel();
-        panel.setBorder(new TitledBorder(new LineBorder(Color.gray,2)));
-
+        sb = new SideBar();
+      
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
         OptsAddable m3 = new MyMenu("View", KeyEvent.VK_V);
@@ -61,15 +61,9 @@ public class Merger{
         m2.addOption("Paste");
         m2.addOption("Find");
 
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Draw Graph As ");
-        // m3.addOption("Show Concentration");
-
         // https://sleepyeyes.tistory.com/29
-        SideBar sbp=new SideBar();
+        /*
+        SideBar sbp = new SideBar();
         OptionPanel p1=new OptionPanel();
         OptionPanel p2=new OptionPanel();
         OptionPanel p3=new OptionPanel();
@@ -89,23 +83,8 @@ public class Merger{
         sbp.add(p2);
         sbp.add(p3);
         sbp.add(p4);
-        sbp.add(p5);
-        //addOption("이산화질소농도(ppm)", (ActionListener)null, p, m4);
-        //panel.add(new JCheckBox());
-        //panel.add(new JLabel("이산화질소농도(ppm)"));
-        //addOption("오존농도(ppm)", (ActionListener)null, p, m4);
-        //panel.add(new JCheckBox());
-        //panel.add(new JLabel("오존농도(ppm)"));
-        //addOption("이산화탄소농도(ppm)", (ActionListener)null, p, m4);
-        //panel.add(new JCheckBox());
-        //panel.add(new JLabel("이산화탄소농도(ppm)"));
-        //addOption("아황산가스(ppm)", (ActionListener)null, p, m4);
-        //panel.add(new JCheckBox());
-        //panel.add(new JLabel("아황산가스(ppm)"));
-        //addOption("미세먼지(㎍/㎥)", (ActionListener)null, p, m4);
-        //panel.add(new JCheckBox());
-        //panel.add(new JLabel("미세먼지(㎍/㎥)"));
-
+        sbp.add(p5);*/
+      
         m5.addOption("Welcome");
         m5.addOption("View License");
         m5.addOption("About");
@@ -120,7 +99,7 @@ public class Merger{
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.addGraph(g);
-        f.add(sbp, BorderLayout.WEST);
+        f.addSideBar(sb);
         f.setVisible(true);
 
         
