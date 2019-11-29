@@ -7,8 +7,12 @@ import javax.swing.*;
 //그래프가 그려지는 panel클래스
 public class DrawingPanel extends JPanel {
 	protected int vars[];
-	protected int var1, var2, var3, var4;
 	private int graphType;
+
+	public DrawingPanel(){
+		//
+		this.graphType = -1;
+	}
 
 	//처음 배경 그리는 메소드
 	public void initPaint(Graphics g){
@@ -32,20 +36,10 @@ public class DrawingPanel extends JPanel {
 		g.drawString("c", 300, 270);
 		g.drawString("d", 400, 270);
 
-		if (var1 > 0) {
-			g.fillRect(110, 250 - var1 * 2, 10, var1 * 2);
-		}
-
-		if (var2 > 0) {
-			g.fillRect(210, 250 - var2 * 2, 10, var2 * 2);
-		}
-
-		if (var3 > 0) {
-			g.fillRect(310, 250 - var3 * 2, 10, var3 * 2);
-		}
-
-		if (var4 > 0) {
-			g.fillRect(410, 250 - var4 * 2, 10, var4 * 2);
+		for(int i=0;i<vars.length;i++){
+			if(vars[i] > 0){
+				g.fillRect(110+100*i, 250 - vars[i] * 2, 10, vars[i]*2);
+			}
 		}
 	}
 
@@ -56,16 +50,10 @@ public class DrawingPanel extends JPanel {
 		g.drawString("c", 300, 270);
 		g.drawString("d", 400, 270);
 
-		if (var1 > 0 && var2 > 0) {
-			g.drawLine(115, 250 - var1 * 2, 215, 250 - var2 * 2);
-		}
-
-		if (var2 > 0 && var3 > 0) {
-			g.drawLine(215, 250 - var2 * 2, 315, 250 - var3 * 2);
-		}
-
-		if (var3 > 0 && var4 > 0) {
-			g.drawLine(315, 250 - var3 * 2, 415, 250 - var4 * 2);
+		for(int i=0;i<vars.length-1;i++){
+			if(vars[i] > 0 && vars[i+1]>0){
+				g.fillRect(115+100*i, 250 - vars[i] * 2, 215, 250 - vars[i+1] * 2);
+			}
 		}
 	}
 
