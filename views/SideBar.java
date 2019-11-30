@@ -8,13 +8,13 @@ import views.MyButton;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.event.ActionListener;
 
 
 import java.awt.Component;
 import java.awt.EventQueue;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -34,11 +34,9 @@ public class SideBar extends JPanel {
         tree.setCellRenderer(new StateRenderer());
         tree.setCellEditor(new StateEditor());
         tree.setEditable(true);
+        JScrollPane scrollPane = new JScrollPane(tree);
+        this.add(scrollPane);
 
-        
-        this.add(new JScrollPane(tree));
-
-        this.setVisible(true);
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -112,6 +110,11 @@ public class SideBar extends JPanel {
         public StateEditor() {
             checkBox = new JCheckBox();
             checkBox.setOpaque(false);
+            checkBox.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    System.out.println(e.getActionCommand());
+                }
+            });
         }
 
         @Override
