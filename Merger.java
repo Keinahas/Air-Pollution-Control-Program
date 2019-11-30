@@ -28,7 +28,7 @@ public class Merger{
     
     // constructor
     public Merger() {
-        f = new MainFrame(1000, 500);
+        f = new MainFrame(1500, 800);
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
@@ -95,7 +95,7 @@ public class Merger{
         //tb.addTool(new JButton("d"));
         //tb.addTool(new JTextField("e"));
         
-        f.setLocation(260,450);
+        f.setLocation(100,100);
         f.addMenuBar(mb);
         f.addToolBar(tb);
         f.addGraph(g);
