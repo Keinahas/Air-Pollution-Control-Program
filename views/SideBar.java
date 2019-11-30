@@ -28,7 +28,7 @@ import javax.swing.tree.TreeCellRenderer;
 public class SideBar extends JPanel {
 
     public SideBar() {
-
+        //setSize(300,400);
         JTree tree = createTree();
         tree.setToggleClickCount(0);
         tree.setCellRenderer(new StateRenderer());
@@ -54,24 +54,22 @@ public class SideBar extends JPanel {
     }
 
     private JTree createTree() {
-        int children = 6;
-        int grandChildren = 2;
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new State("Films", false));
+        int children = 3;
+        int grandChildren = 12;
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new State("옵션", false));
         DefaultMutableTreeNode node;
 
-        String[] cat = {"Sci-Fi", "Fantasy", "Action", "Comedy","a","b"};
-        String[][] films = {
-            {"Star Wars", "Star Trek"},
-            {"Lord of the Rings", "Conan"},
-            {"Terminator", "Transformers"},
-            {"Cheaper by the Doze", "Father of the Bride"}
-            ,{"",""},{"",""}
+        String[] cat = {"측정 일시","측정 장소","대기 상태"};
+        String[][] 옵션 = {
+            {"1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"},
+            {"중량구", "강남구","","","","","","","","","",""},
+            {"이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","문세먼지(㎍/㎥)","","","","","",""}
         };
         for (int j = 0; j < children; j++) {
             node = new DefaultMutableTreeNode(new State(cat[j], false));
             root.add(node);
             for (int k = 0; k < grandChildren; k++) {
-                node.add(new DefaultMutableTreeNode(new State(films[j][k], false)));
+                node.add(new DefaultMutableTreeNode(new State(옵션[j][k], false)));
             }
         }
         DefaultTreeModel model = new DefaultTreeModel(root);

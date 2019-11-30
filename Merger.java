@@ -28,7 +28,7 @@ public class Merger{
     
     // constructor
     public Merger() {
-        f = new MainFrame(1000, 500);
+        f = new MainFrame(1500, 800);
         mb = new MyMenubar();
         tb = new MyToolBar();
         p = new OptionPanel();
