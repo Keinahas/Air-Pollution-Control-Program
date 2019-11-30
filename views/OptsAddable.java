@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 
 // interface
 public interface OptsAddable{
-    public void addOption(String str);
-    public void addOption(String str, int mnemonic);
-    public void addOption(String str, ActionListener l);
-    public void addOption(String str, int mnemonic, ActionListener l);
+    public abstract void addOption(String str);
+    public abstract void addOption(String str, int mnemonic);
+    public abstract void addOption(String str, ActionListener l);
+    public abstract void addOption(String str, int mnemonic, ActionListener l);
 }
