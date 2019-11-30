@@ -8,7 +8,6 @@ import java.awt.event.*;
 import views.MyMenubar;
 import views.MyToolBar;
 import views.MainFrame;
-import views.OptionPanel;
 import views.OptsAddable;
 import views.SideBar;
 import views.MyButton;
@@ -31,7 +30,6 @@ public class Merger{
         f = new MainFrame(1500, 800);
         mb = new MyMenubar();
         tb = new MyToolBar();
-        p = new OptionPanel();
         g = new Graph1();
         sb = new SideBar();
       
