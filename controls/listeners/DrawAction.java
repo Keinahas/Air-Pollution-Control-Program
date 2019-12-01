@@ -1,4 +1,4 @@
-package controls.triggers;
+package controls.listeners;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
