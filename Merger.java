@@ -27,12 +27,13 @@ public class Merger{
     
     // constructor
     public Merger() {
-        f = new MainFrame(1500, 800);
+        // f = new MainFrame(1500, 800);
+        f = CTRL.getFrame();
         mb = new MyMenubar();
         tb = new MyToolBar();
         g = new Graph1();
         sb = new SideBar();
-      
+    
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
         OptsAddable m3 = new MyMenu("View", KeyEvent.VK_V);
@@ -52,12 +53,8 @@ public class Merger{
         m1.addOption("Save Graph As...");
         m1.addOption("Exit", e->{f.dispose();System.exit(0);});
 
-        m2.addOption("Undo");
-        m2.addOption("Redo");
-        m2.addOption("Cut");
-        m2.addOption("Copy");
-        m2.addOption("Paste");
-        m2.addOption("Find");
+        m2.addOption("Show New DataTable",CTRL.T_New_Show);
+        m2.addOption("Show DataTable Below", CTRL.T_Blw_Show);
 
         // https://sleepyeyes.tistory.com/29
         /*
@@ -82,7 +79,7 @@ public class Merger{
         sbp.add(p3);
         sbp.add(p4);
         sbp.add(p5);*/
-      
+    
         m5.addOption("Welcome");
         m5.addOption("View License");
         m5.addOption("About");
@@ -99,8 +96,6 @@ public class Merger{
         f.addGraph(g);
         f.addSideBar(sb);
         f.setVisible(true);
-
-        
     }
 
     // call addoptions for objs
@@ -111,6 +106,7 @@ public class Merger{
     }
  
     public static void main(String[] args) {
+        CTRL.setFrame(new MainFrame(1500 , 800));
         Merger m = new Merger();
     }
 }
