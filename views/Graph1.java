@@ -3,8 +3,7 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 import views.DrawingPanel;
-import controls.triggers.DrawAction;
-// import controls.triggers.trigger;
+import controls.listeners.DrawAction;
 
 //그래프를 그릴 fame을 만들고 DrawingPanel을 불러오는 클래스
 public class Graph1 extends JPanel {
