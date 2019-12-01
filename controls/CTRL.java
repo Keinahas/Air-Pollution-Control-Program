@@ -4,16 +4,22 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import controls.csvio.CSVIO;
 import controls.db.dbActions;
-import controls.triggers.DrawAction;
-import controls.triggers.csvOpen;
-import controls.triggers.csvSave;
-import controls.triggers.dbUpload;
+import controls.listeners.DrawAction;
+import controls.listeners.csvOpen;
+import controls.listeners.csvSave;
+import controls.listeners.dbUpload;
+import controls.listeners.tableBelow;
+import controls.listeners.tableNew;
+import views.MainFrame;
 
 public class CTRL{
     
     ///-------------------------------------------- PRIVATE
+    private static MainFrame frame;
     private static CSVIO CSV_IO = new CSVIO();
     private static dbActions DB = new dbActions();
     // private static List<String> fileNameList = new ArrayList<>();
@@ -29,6 +35,8 @@ public class CTRL{
     public static ActionListener DB_Show;
     public static ActionListener DB_Drop;
     public static ActionListener DB_;
+    public static ActionListener T_New_Show = new tableNew();
+    public static ActionListener T_Blw_Show = new tableBelow();
 
     //public static ActionListener BTN_When = ;
     //public static ActionListener BTB_Where = ;
@@ -74,6 +82,14 @@ public class CTRL{
 
     public static void setFileName(String str){
         fileName = str;
+    }
+
+    public static MainFrame getFrame(){
+        return frame;
+    }
+
+    public static void setFrame(MainFrame f){
+        frame = f;
     }
 
 }
