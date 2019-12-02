@@ -172,12 +172,13 @@ public class dbActions{
         for(int i = 0; i < lenCol-1; i++){
             query += cols[i] + ", ";
         }
-        if(rows[0].length == 0 && rows[1].length == 0)
-            return null; 
+        if(rows[0].length == 0 && rows[1].length == 0){
+            return null;
+        }
 
         query += cols[lenCol-1] + " FROM " + name;
         if(rows[0].length == 1){
-            query += " WHERE 측정일시 LIKE '" + rows[0][0] + "'";
+            query += " WHERE 측정일시 LIKE '" + rows[0][0] + "%'";
         }else if(rows[0].length > 1){
             query += " WHERE 측정일시 REGEXP('";
             for(int j = 0; j < rows[0].length-1; j++){
@@ -201,7 +202,7 @@ public class dbActions{
             query += rows[1][rows[1].length-1] + "')";
         }
         
-        System.out.println(query);
+        // System.out.println(query);
         if(isTable(name)){
             ResultSet rs = null;
             pstmt = preparedStatement(query);
@@ -217,7 +218,7 @@ public class dbActions{
                 List<String> tmpList = new ArrayList<String>();
                 for(int i=1;i<columnCount;i++){
                     String str = rs.getString(i);
-                    System.out.println(str);
+                    // System.out.println(str);
                     if( i == 1 ){
                         arr += str;
                     }else{
@@ -227,9 +228,11 @@ public class dbActions{
                 tmpList = Arrays.asList(arr.split(","));
                 sList.add(tmpList);
             }
+            return sList;
         }else{
             System.out.println("SelectAllFromTable::table does not exists");
-        }return null;
+        }
+        return null;
     }
 
     // SELECT args FROM TABLE name
