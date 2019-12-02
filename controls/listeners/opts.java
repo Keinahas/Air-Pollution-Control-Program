@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
+import javax.swing.JCheckBox;
 
 import controls.CTRL;
 import controls.db.dbActions;
@@ -32,21 +32,45 @@ public class opts implements ActionListener{
 
         String str = e.getActionCommand();
         if(str.endsWith("월")){
-            dates.add("2018"+str.replace('월', '*'));
+            int pos = str.lastIndexOf("월");
+            int num = Integer.parseInt(str.substring(0,pos));
+            if(num < 10)
+                if(((JCheckBox)(e.getSource())).isSelected())
+                    dates.add("20180"+num);
+                else
+                    dates.remove("20180"+num);
+            else
+                if(((JCheckBox)(e.getSource())).isSelected())
+                    dates.add("2018"+num);
+                else
+                    dates.remove("2018"+num);
         }
-        else if(CTRL.getHeader().contains(CTRL.parse(str))){
-            cols.add(str);
+        else{
+            for(String string : CTRL.colOpts)
+                if(string == str){
+                    if(((JCheckBox)(e.getSource())).isSelected())
+                        cols.add(str);
+                    else
+                        cols.remove(str);
+                    break;
+                }
+            for (String string : CTRL.locOpts)
+                if(string == str){
+                    if(((JCheckBox)(e.getSource())).isSelected())
+                        locs.add(str);
+                    else
+                        locs.remove(str);
+                    break;
+                }
         }
-        else if(str != "옵션"){
-            locs.add(CTRL.parse(str));
-        }
-
+        
+        System.out.println("cols.size():"+cols.size()+" locs.size():"+locs.size()+" dates.size():"+dates.size());
 
         String[] colStrings = new String[cols.size()];
         String[] locStrings = new String[locs.size()];
         String[] dateStrings = new String[dates.size()];
         for(int i=0;i<colStrings.length;i++){
-            colStrings[i] = cols.get(i);
+            colStrings[i] = CTRL.parse(cols.get(i));
         }
         for(int i=0;i<locStrings.length;i++){
             locStrings[i] = locs.get(i);
@@ -56,8 +80,7 @@ public class opts implements ActionListener{
         }
         String[][] args = {dateStrings, locStrings};
         
-        if(colStrings.length * locStrings.length * dateStrings.length == 0){
-            System.out.println("checkbox Clicked!:"+e.getActionCommand());
+        if((colStrings.length * locStrings.length * dateStrings.length) == 0){
             return;
         }
 
