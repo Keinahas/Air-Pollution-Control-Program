@@ -1,14 +1,19 @@
 package controls.listeners;
 
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+import controls.CTRL;
+import controls.db.dbActions;
 import views.DrawingPanel;
 
 //그래프를 그리는 버튼 ActionListener
 public class DrawAction implements ActionListener {
+	private double[] vars;
+	private int gType;
 	private JTextField txts[];
 	private JComboBox type;
 	private DrawingPanel panel;
@@ -17,25 +22,52 @@ public class DrawAction implements ActionListener {
 
 	}
 
+
+	public DrawAction(DrawingPanel panel, JComboBox type) { 
+		this.panel = panel;
+		this.type = type;
+	}
+	
 	public DrawAction(DrawingPanel panel, JComboBox type, JTextField...txtFields) { 
 		this.type = type;
 		this.txts = txtFields;
 		this.panel = panel;
 	}
+	public void init(DrawingPanel panel, int gType){
+		this.panel = panel;
+		this.gType = gType;
+	}
 
-	public void init(DrawingPanel panel, JComboBox type, JTextField...txtFields){
+	public void init(DrawingPanel panel, JComboBox type, double...vars){
 		this.type = type;
-		this.txts = txtFields;
+		this.vars = vars;
 		this.panel = panel;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		try {
-			int[] vars = new int[txts.length];
+			if(txts != null){
+				vars = new double[txts.length];
 
-			//init vars
-			for (int i = 0; i < txts.length; i++) {
-				vars[i] = Integer.parseInt(txts[i].getText().trim());
+				//init vars
+				for (int i = 0; i < txts.length; i++) {
+					vars[i] = Double.parseDouble(txts[i].getText().trim());
+				}
+			}else{
+
+				List<String> average = CTRL.getAverage();
+				if(average == null){
+					System.out.println("average NULL");
+					return;
+				}
+				vars = new double[average.size()];
+				for(int i=2;i<average.size();i++){
+					vars[i]=Double.parseDouble(average.get(i));
+					if(i<6){
+						vars[i] *= 100;
+					}
+				}
+
 			}
 
 			panel.setScore(vars);
