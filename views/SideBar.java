@@ -24,7 +24,6 @@ public class SideBar extends JPanel {
 
     private JTree tree;
     private DefaultTreeModel model;
-    private Boolean[][] selects;
 
     public SideBar() {
         tree = new JTree();
@@ -61,8 +60,6 @@ public class SideBar extends JPanel {
     }
 
     private void setTree() {
-        int children = 3;
-        int grandChildren = 12;
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(new State("옵션", false));
         DefaultMutableTreeNode node;
 
@@ -72,7 +69,7 @@ public class SideBar extends JPanel {
             CTRL.locOpts,
             {"이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"}
         };
-        for (int j = 0; j < children; j++) {
+        for (int j = 0; j < cat.length; j++) {
             node = new DefaultMutableTreeNode(new State(cat[j], false));
             root.add(node);
             for (int k = 0; k < 옵션[j].length; k++) {
