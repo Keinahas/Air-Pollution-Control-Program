@@ -37,6 +37,7 @@ public class TablePanel extends JScrollPane{
         for(int i=0;i<header.size();i++){
             model.addColumn(header.get(i));
         }
+        
         for (List<String> content : contents) {
             String[] strings = new String[header.size()];
             for(int i=0;i<strings.length;i++){
