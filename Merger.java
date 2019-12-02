@@ -12,7 +12,7 @@ import views.OptsAddable;
 import views.SideBar;
 import views.MyButton;
 import views.MyMenu;
-import views.Graph1;
+import views.GraphPanel;
 
 import controls.CTRL;
 
@@ -22,7 +22,7 @@ public class Merger{
     private MyMenubar mb;
     private MyToolBar tb;
     private OptsAddable p;
-    private Graph1 g;
+    private GraphPanel g;
     private SideBar sb;
     
     // constructor
@@ -31,7 +31,7 @@ public class Merger{
         f = CTRL.getFrame();
         mb = new MyMenubar();
         tb = new MyToolBar();
-        g = new Graph1();
+        g = new GraphPanel();
         sb = new SideBar();
     
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
