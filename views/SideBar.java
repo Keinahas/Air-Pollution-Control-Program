@@ -18,10 +18,13 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellEditor;
 import javax.swing.tree.TreeCellRenderer;
 
+import controls.CTRL;
+
 public class SideBar extends JPanel {
 
     private JTree tree;
     private DefaultTreeModel model;
+    private Boolean[][] selects;
 
     public SideBar() {
         tree = new JTree();
@@ -60,20 +63,20 @@ public class SideBar extends JPanel {
     private void setTree() {
         int children = 3;
         int grandChildren = 12;
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new State("옵션", false));
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new State("옵션", false, 0, 0));
         DefaultMutableTreeNode node;
 
         String[] cat = {"측정 일시(월)","측정 장소","대기 상태"};
         String[][] 옵션 = {
             {"1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"},
-            {"강남구","강남대로","강동구","강북구","강서구","공항대로","관악구","광진구","구로구","금천구","노원구","도봉구","도산대로","동대문구","동작구","동작대로","마포구","서대문구","서초구","성동구","성북구","송파구","신촌로","양천구","영등포구","영등포로","용산구","은평구","정릉로","종로","종로구","중구","중랑구","천호대로","청계천로","청계천로","한강대로","홍릉로","화랑로"},
+            {"강남구","강남대로","강동구","강북구","강서구","공항대로","관악구","광진구","구로구","금천구","노원구","도봉구","도산대로","동대문구","동작구","동작대로","마포구","서대문구","서초구","성동구","성북구","송파구","신촌로","양천구","영등포구","영등포로","용산구","은평구","정릉로","종로","종로구","중구","중랑구","천호대로","청계천로","한강대로","홍릉로","화랑로"},
             {"이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"}
         };
         for (int j = 0; j < children; j++) {
-            node = new DefaultMutableTreeNode(new State(cat[j], false));
+            node = new DefaultMutableTreeNode(new State(cat[j], false, 0, j));
             root.add(node);
             for (int k = 0; k < 옵션[j].length; k++) {
-                node.add(new DefaultMutableTreeNode(new State(옵션[j][k], false)));
+                node.add(new DefaultMutableTreeNode(new State(옵션[j][k], false, j, k)));
             }
         }
         model = new DefaultTreeModel(root);
@@ -83,10 +86,13 @@ public class SideBar extends JPanel {
 
         private String text;
         private boolean selected;
+        private int x, y;
 
-        public State(String text, boolean selected) {
+        public State(String text, boolean selected, int x, int y) {
             this.text = text;
             this.selected = selected;
+            this.x = x;
+            this.y = y;
         }
 
         public String getText() {
@@ -101,6 +107,14 @@ public class SideBar extends JPanel {
             this.selected = selected;
         }
 
+        public int getX(){
+            return x;
+        }
+
+        public int getY(){
+            return y;
+        }
+
     }
 
     public class StateEditor extends AbstractCellEditor implements TreeCellEditor {
@@ -113,6 +127,7 @@ public class SideBar extends JPanel {
         public StateEditor() {
             checkBox = new JCheckBox();
             checkBox.setOpaque(false);
+            checkBox.addActionListener(CTRL.SelectOpts);
         }
 
         @Override
