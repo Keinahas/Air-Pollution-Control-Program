@@ -37,33 +37,9 @@ public class dbActions{
         return out;
     }
 
-    public String parse(String str){
-        String brackets = "()<>{}[]";
-        String specials =  "`~!@#$%^&*-=+ :;'.,/|\\";
-
-        for (int i = 0; i < specials.length(); i++) {
-            int n = -1;
-            char c = specials.charAt(i);
-            while((n = str.indexOf(c)) != -1){
-                str = str.replace(c, '_');
-            }
-        }
-
-        for (int i = 0; i < brackets.length()-1; i+=2) {
-            int t1 = -1, t2 = -1;
-            char c1 = brackets.charAt(i), c2 = brackets.charAt(i+1);
-            // System.out.println(c1+" "+c2+" | "+str);
-            while(((t1 = str.indexOf(c1)) != -1) && ((t2 = str.indexOf(c2)) != -1)){
-                str = str.substring(0, t1) + str.substring(t2+1);
-            }
-        }
-
-        return str;
-    }
-
     // parse n add to info
     public List<info> parseNadd(String str){
-        String tStr = parse(str);
+        String tStr = CTRL.parse(str);
         List<info> list = new ArrayList<info>();
         list.add(new info(str, tStr));
         return list;
@@ -136,9 +112,9 @@ public class dbActions{
             statement = createStatement();
             query = "CREATE TABLE " + name + " (\n";
             for (int i = 0; i < length; i++) {
-                query += parse(header.get(i))+" VARCHAR(20),\n";
+                query += CTRL.parse(header.get(i))+" VARCHAR(20),\n";
             }
-            query +=  parse(header.get(length))+" VARCHAR(20)\n";
+            query +=  CTRL.parse(header.get(length))+" VARCHAR(20)\n";
             query += ");";
             // System.out.println(query);
             if (statement.executeUpdate(query) >= 0) {
@@ -187,8 +163,77 @@ public class dbActions{
         }
     }
 
+    //SELECT cols FROM TABLE name WHERE rows
+    public List<List<String>> SelectColsFromTableRows(String name, String[] cols, String[][] rows) throws SQLException{
+        PreparedStatement pstmt = null;
+        List<List<String>> sList = null;
+        int lenCol = cols.length;
+        String query = "SELECT ";
+        for(int i = 0; i < lenCol-1; i++){
+            query += cols[i] + ", ";
+        }
+        if(rows[0].length == 0 && rows[1].length == 0)
+            return null; 
+
+        query += cols[lenCol-1] + " FROM " + name;
+        if(rows[0].length == 1){
+            query += " WHERE 측정일시 LIKE '" + rows[0][0] + "'";
+        }else if(rows[0].length > 1){
+            query += " WHERE 측정일시 REGEXP('";
+            for(int j = 0; j < rows[0].length-1; j++){
+                query += rows[0][j] + "|";
+            }
+            query += rows[0][rows[0].length-1] + "')";
+        }
+        if(rows[0].length > 0 && rows[1].length > 0){
+            query += " AND";
+        }else if(rows[1].length > 0){
+            query += " WHERE";
+        }
+
+        if(rows[1].length == 1){
+            query += " 측정소명 LIKE '" + rows[1][0] + "'";
+        }else if(rows[1].length > 1){
+            query += " 측정소명 REGEXP('";
+            for(int j = 0; j < rows[1].length-1; j++){
+                query += rows[1][j] + "|";
+            }
+            query += rows[1][rows[1].length-1] + "')";
+        }
+        
+        System.out.println(query);
+        if(isTable(name)){
+            ResultSet rs = null;
+            pstmt = preparedStatement(query);
+            sList = new ArrayList<List<String>>();
+            // System.out.println(query);
+            if (pstmt.execute(query)) {
+                rs = pstmt.getResultSet();
+            }
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while(rs.next()){
+                String arr = "";
+                List<String> tmpList = new ArrayList<String>();
+                for(int i=1;i<columnCount;i++){
+                    String str = rs.getString(i);
+                    System.out.println(str);
+                    if( i == 1 ){
+                        arr += str;
+                    }else{
+                        arr += "," + str;
+                    }
+                }
+                tmpList = Arrays.asList(arr.split(","));
+                sList.add(tmpList);
+            }
+        }else{
+            System.out.println("SelectAllFromTable::table does not exists");
+        }return null;
+    }
+
     // SELECT args FROM TABLE name
-    public List<List<String>> SelectFromTable(String name, String[] args) throws SQLException{
+    public List<List<String>> SelectArgsFromTable(String name, String[] args) throws SQLException{
         PreparedStatement pstmt = null;
         List<List<String>> sList = null;
         int n = args.length;
