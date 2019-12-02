@@ -74,8 +74,13 @@ public class DrawingPanel extends JPanel {
 	}
 
 	// 데이터 대입
-	public void setScore(int...datas) {
-		vars = datas;
+	public void setScore(double...datas) {
+		int i=0;
+		int[] t = new int[datas.length];
+		for (double d : datas) {
+			t[i++] = (int)Math.rint(d);
+		}
+		vars = t;
 	}
 
 	// 그래프 선택
