@@ -25,7 +25,7 @@ public class MainFrame extends JFrame{
     public void addSideBar(SideBar bar){
         this.add(bar,BorderLayout.WEST);
     }
-    public void addGraph(Graph1 bar){
+    public void addGraph(GraphPanel bar){
         this.add(bar,BorderLayout.CENTER);
     }
 }
