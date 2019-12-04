@@ -104,26 +104,40 @@ public class dbActions{
 
     // db Create Table
     public void createTable(String name, List<String> header) throws SQLException{
+        PreparedStatement pstmt = null;
+
         if(!isTable(name)){
-            int length = header.size()-1;
+            int length = header.size();
             String query = null;
-            Statement statement = null;
-            parseNaddAll(name, header);
-            statement = createStatement();
-            query = "CREATE TABLE " + name + " (\n";
-            for (int i = 0; i < length; i++) {
-                query += CTRL.parse(header.get(i))+" VARCHAR(20),\n";
-            }
-            query +=  CTRL.parse(header.get(length))+" VARCHAR(20)\n";
-            query += ");";
+            // Statement statement = null;
+            // parseNaddAll(name, header);
+            // statement = createStatement();
+            // query = "CREATE TABLE " + name + " (\n";
+            // for (int i = 0; i < length; i++) {
+            //     query += CTRL.parse(header.get(i))+" VARCHAR(20),\n";
+            // }
+            // query +=  CTRL.parse(header.get(length))+" VARCHAR(20)\n";
+            // query += ");";
             // System.out.println(query);
-            if (statement.executeUpdate(query) >= 0) {
+            query = "CREATE TABLE "+name+"(";
+            for(int i=0;i<length-1;i++){
+                query += "? VARCHAR(20),";
+            }
+            query += "? VARCHAR(20));";
+            pstmt = conn.prepareStatement(query);
+            for(int i=1;i<length+1;i++){
+                pstmt.setString(i, CTRL.parse(header.get(i-1)));
+                // pstmt.setString(i, header.get(i-1));
+            }
+            System.out.println(pstmt.toString().replace('\'', ' '));
+            if (pstmt.executeUpdate(pstmt.toString().replace('\'', ' ').replace("com.mysql.cj.jdbc.ClientPreparedStatement: ", " ")) >= 0) {
                 System.out.println("CREATED");
             }else{
                 System.out.println("ERROR");
             }
         }else{
-            System.out.println("table already exists");
+            DropTable(name);
+            createTable(name, header);
         }
     }
 
@@ -133,30 +147,25 @@ public class dbActions{
 
         // System.out.println(query);
         if(isTable(name)){
-            for (List<String> list : contents) {
-                String query = "INSERT INTO "+name+" VALUES ( '";
-
-                for (int i = 0; i < size-1; i++) {
-                    if(i >= list.size()){
-                        query += "', '";
-                    }else{
-                        query += list.get(i)+"', '";
-                    }
+            String query = "INSERT INTO "+name+" VALUES (";
+            for(int i=0;i<size-1;i++){
+                query += "?,";
+            }
+            query += "?);";
+            pstmt = preparedStatement(query);
+            for (List<String> content : contents) {
+                String[] arr = (String[])(content.toArray());
+                // System.out.println(content);
+                for(int i=1;i<=arr.length;i++){
+                    pstmt.setString(i, arr[i-1]);
                 }
-                if(size-1 >= list.size()){
-                    query += "');";
-                }else{
-                    query += list.get(size-1)+"');";
-                }
-
-                // System.out.println(query);
-                pstmt = preparedStatement(query);
-                if (pstmt.executeUpdate(query) >= 0) {
-                    // System.out.println("INSERTED");
-                }else{
-                    // System.out.println("ERROR");
-                    throw new SQLException("insertIntoTable::ERROR");
-                }
+            }
+            // System.out.println(query);
+            if (pstmt.executeUpdate() >= 0) {
+                // System.out.println("INSERTED");
+            }else{
+                System.out.println("ERROR");
+                throw new SQLException("insertIntoTable::ERROR");
             }
         }else{
             System.out.println("insertIntoTable::Table does not exist");
