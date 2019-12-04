@@ -7,6 +7,7 @@ import controls.listeners.DrawAction;
 
 //그래프를 그릴 fame을 만들고 DrawingPanel을 불러오는 클래스
 public class GraphPanel extends JPanel {
+	private DrawingPanel drawpanel;
 
 	// 생성자
 	public GraphPanel() {
@@ -19,7 +20,7 @@ public class GraphPanel extends JPanel {
 
 
 		// 그래프를 그릴 패널을 만든다.
-		DrawingPanel drawpanel = new DrawingPanel();
+		drawpanel = new DrawingPanel();
 
 		// 막대 그래프를 표현할 그래프의 위치를 중앙에..
 		this.add(drawpanel, BorderLayout.CENTER);
@@ -49,7 +50,6 @@ public class GraphPanel extends JPanel {
 
 		// 버튼에 이벤트 등록
 		btn.addActionListener(new DrawAction(drawpanel ,typecb));
-		// btn.addActionListener(new DrawAction(drawpanel ,typecb, txt1, txt2, txt3, txt4));
 
 		this.setVisible(true);
 	}
