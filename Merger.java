@@ -26,7 +26,7 @@ public class Merger{
         MyToolBar tb = CTRL.toolBar;
         g = new GraphPanel();
         SideBar sb = CTRL.sideBar;
-        DrawingPanel dp = CTRL.drawPanel;
+        GraphPanel dp = CTRL.gPanel;
     
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);

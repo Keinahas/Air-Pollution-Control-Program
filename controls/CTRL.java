@@ -17,8 +17,7 @@ import controls.listeners.dbUpload;
 import controls.listeners.opts;
 import controls.listeners.tableBelow;
 import controls.listeners.tableNew;
-import javafx.scene.control.ToolBar;
-import views.DrawingPanel;
+import views.GraphPanel;
 import views.MainFrame;
 import views.MyMenuBar;
 import views.MyToolBar;
@@ -44,7 +43,7 @@ public class CTRL{
     public static MyMenuBar menuBar = new MyMenuBar();
     public static MyToolBar toolBar = new MyToolBar();
     public static SideBar sideBar = new SideBar();
-    public static DrawingPanel drawPanel = new DrawingPanel();
+    public static GraphPanel gPanel = new GraphPanel();
     public static int BARGRAPH = 0;
     public static int LINEGRAPH = 1;
         
@@ -52,7 +51,6 @@ public class CTRL{
     ///-------------------------------------------- PUBLIC
 	public static ActionListener CSV_Save = new csvSave(CSV_IO);
     public static ActionListener CSV_Open = new csvOpen(CSV_IO);
-	public static ActionListener DRAW = new DrawAction();
     public static ActionListener DB_Insert = new dbUpload(DB);
     public static ActionListener DB_Show;
     public static ActionListener DB_Drop;
@@ -60,8 +58,8 @@ public class CTRL{
     public static ActionListener T_New_Show = new tableNew();
     public static ActionListener T_Blw_Show = new tableBelow();
     public static ActionListener SelectOpts = new opts(DB);
-    public static ActionListener DrawBarGraph = new DrawAction(CTRL.drawPanel, CTRL.BARGRAPH);
-    public static ActionListener DrawLineGraph = new DrawAction(CTRL.drawPanel, CTRL.LINEGRAPH);
+    public static ActionListener DrawBarGraph = new DrawAction(CTRL.gPanel, CTRL.BARGRAPH);
+    public static ActionListener DrawLineGraph = new DrawAction(CTRL.gPanel, CTRL.LINEGRAPH);
 
     //public static ActionListener BTN_When = ;
     //public static ActionListener BTB_Where = ;
@@ -157,11 +155,6 @@ public class CTRL{
 
     public static void setFileName(String str){
         fileName = str;
-    }
-
-    public static ActionListener getGraphAction(DrawingPanel pane, int gType){
-        ((DrawAction)CTRL.DRAW).init(pane, gType);
-        return CTRL.DRAW;
     }
 
     public static String parse(String str){

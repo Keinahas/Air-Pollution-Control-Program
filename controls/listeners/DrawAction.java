@@ -54,7 +54,7 @@ public class DrawAction implements ActionListener {
 			}
 
 			panel.setGraphType(gType);
-			panel.setData(vars);
+			// panel.setData(vars);
 			panel.reset();
 			panel.repaint();
 

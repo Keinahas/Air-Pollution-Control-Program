@@ -24,7 +24,7 @@ public class GraphPanel extends JPanel {
 		// 그래프를 그릴 패널을 만든다.
 		addGraph();
 		JPanel panel = new JPanel();
-		panel.add()
+		// panel.add()
 		// 막대 그래프를 표현할 그래프의 위치를 중앙에
 		this.add(panel, BorderLayout.CENTER);
 
