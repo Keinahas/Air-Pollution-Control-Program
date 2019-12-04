@@ -1,38 +1,32 @@
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 import java.awt.event.*;
-import views.MyMenubar;
+import views.MyMenuBar;
 import views.MyToolBar;
 import views.MainFrame;
 import views.OptsAddable;
 import views.SideBar;
 import views.MyButton;
 import views.MyMenu;
+import views.DrawingPanel;
 import views.GraphPanel;
 
 import controls.CTRL;
 
 // Main
 public class Merger{
-    private MainFrame f;
-    private MyMenubar mb;
-    private MyToolBar tb;
-    private OptsAddable p;
     private GraphPanel g;
-    private SideBar sb;
     
     // constructor
     public Merger() {
         // f = new MainFrame(1500, 800);
-        f = CTRL.getFrame();
-        mb = new MyMenubar();
-        tb = new MyToolBar();
+        MainFrame frame = CTRL.frame;
+        MyMenuBar mb = CTRL.menuBar;
+        MyToolBar tb = CTRL.toolBar;
         g = new GraphPanel();
-        sb = new SideBar();
+        SideBar sb = CTRL.sideBar;
+        DrawingPanel dp = CTRL.drawPanel;
     
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
@@ -51,10 +45,13 @@ public class Merger{
         m1.addOption("Upload Data", CTRL.DB_Insert);
         m1.addOption("Save CSV File", KeyEvent.VK_S, CTRL.CSV_Save);
         m1.addOption("Save Graph As...");
-        m1.addOption("Exit", e->{f.dispose();System.exit(0);});
+        m1.addOption("Exit", e->{frame.dispose();System.exit(0);});
 
         m2.addOption("Show New DataTable",CTRL.T_New_Show);
         m2.addOption("Show DataTable Below", CTRL.T_Blw_Show);
+
+        m3.addOption("DrawBarGraph", CTRL.DrawBarGraph);
+        m3.addOption("DrawLineGraph", CTRL.DrawLineGraph);
 
         // https://sleepyeyes.tistory.com/29
         /*
@@ -90,12 +87,13 @@ public class Merger{
         //tb.addTool(new JButton("d"));
         //tb.addTool(new JTextField("e"));
         
-        f.setLocation(100,100);
-        f.addMenuBar(mb);
-        f.addToolBar(tb);
-        f.addGraph(g);
-        f.addSideBar(sb);
-        f.setVisible(true);
+        frame.setLocation(100,100);
+        frame.addMenuBar(mb);
+        frame.addToolBar(tb);
+        // f.addGraph(g);
+        frame.addGraph(dp);
+        frame.addSideBar(sb);
+        frame.setVisible(true);
     }
 
     // call addoptions for objs
@@ -106,7 +104,6 @@ public class Merger{
     }
  
     public static void main(String[] args) {
-        CTRL.setFrame(new MainFrame(1500 , 800));
         Merger m = new Merger();
     }
 }
