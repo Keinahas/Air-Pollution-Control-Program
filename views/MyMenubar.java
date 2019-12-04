@@ -4,8 +4,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class MyMenubar extends JMenuBar {//메뉴바 클래스
-    public MyMenubar() {//생성자
+public class MyMenuBar extends JMenuBar {//메뉴바 클래스
+    public MyMenuBar() {//생성자
         
     }
 
