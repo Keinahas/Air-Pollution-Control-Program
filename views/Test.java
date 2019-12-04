@@ -7,13 +7,10 @@ import java.awt.event.ActionListener;
 //그래프가 그려지는 panel클래스
 public class Test extends JPanel {
     private String cols[] = { "이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)", "미세먼지(㎍/㎥)", "초미세먼지(㎍/㎥)" };
-    private String locs[] = {};
+    private String locs[];
     private Color color[] = {Color.RED,Color.GREEN,Color.BLACK,Color.YELLOW,Color.DARK_GRAY,Color.gray};
-    private int vars[];
+    private Integer vars[][];
     private int graphType;
-    private int place;
-    private int time;
-    private int dust;
 
     public Test() {
         //
@@ -37,13 +34,13 @@ public class Test extends JPanel {
 
     // 막대그래프 그리는 메소드
     public void NormPaint(Graphics g) {
-        for(int i = 0;i<vars.length;i++){
+        for(int i = 0;i<vars[0].length;i++){
             g.drawString(cols[i], 300+100*(i+1), 270);
         }
 
         for (int i = 0; i <vars.length; i++) {
-            if (vars[i] > 0) {
-                g.fillRect(410 + 100 * i, 250 - vars[i] * 2, 10, vars[i] * 2);
+            if (vars[0][i] > 0) {
+                g.fillRect(410 + 100 * i, 250 - vars[0][i] * 2, 10, vars[0][i] * 2);
             }
         }
         //왼쪽 지역색깔 부분
@@ -65,8 +62,8 @@ public class Test extends JPanel {
         }
 
         for (int i = 0; i <vars.length-1; i++) {
-            if (vars[i] > 0 && vars[i + 1] > 0) {
-                g.drawLine(415 + 100 * i, 250 - vars[i] * 2, 415 + 100 * (i+1), 250 - vars[i + 1] * 2);
+            if (vars[0][i] > 0 && vars[0][i + 1] > 0) {
+                g.drawLine(415 + 100 * i, 250 - vars[0][i] * 2, 415 + 100 * (i+1), 250 - vars[0][i + 1] * 2);
             }
         }
 
@@ -99,24 +96,15 @@ public class Test extends JPanel {
 //----------------------------------------------------------------------------외부호출
     // 지역이름 배열 선택
     public void setLocation(String...datas){
-        int i = 0;
-        String[] t = new String[datas.length];
-        for (String d : datas) {
-            t[i++] = d;
-        }
-        locs = t;
+        locs = datas;
     }
 
 
     // 데이터 대입
-    public void setScore(double... datas) {
-        int i = 0;
-        int[] t = new int[datas.length];
-        for (double d : datas) {
-            t[i++] = (int) Math.rint(d);
-        }
-        vars = t;
-    }
+	public void setData(String[] locs, Integer[][] conts) {
+		this.locs = locs;
+		this.vars = conts;
+	}
 
     // 그래프 선택
     public void setGraphType(int n) {
@@ -132,9 +120,9 @@ public class Test extends JPanel {
         
         //--------------------------------------------------center
         Test panel = new Test();
-        double[] d = {10.1,60.1,30.1,40.1,70.1,60.1};                      // 외부 입력
-        panel.setScore(d);
         String[] dd = {"성북구","노원구","성동구","강남구","도봉구"};
+        Integer[][] d = {{10,60,30,40,70,60},{10,60,30,40,70,60}};                      // 외부 입력
+        panel.setData(dd, d);
         panel.setLocation(dd);
 
        

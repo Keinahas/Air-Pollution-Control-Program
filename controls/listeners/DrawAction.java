@@ -9,43 +9,21 @@ import javax.swing.JTextField;
 import controls.CTRL;
 import controls.db.dbActions;
 import views.DrawingPanel;
+import views.GraphPanel;
 
 //그래프를 그리는 버튼 ActionListener
 public class DrawAction implements ActionListener {
 	private double[] vars;
 	private int gType;
 	private JTextField txts[];
-	private JComboBox type;
-	private DrawingPanel panel;
+	private GraphPanel panel;
 
-	public DrawAction(){
-
-	}
-
-	public DrawAction(DrawingPanel panel, int gType){
+	public DrawAction(GraphPanel panel, int gType){
 		this.panel = panel;
 		this.gType = gType;
 	}
 
-
-	public DrawAction(DrawingPanel panel, JComboBox type) { 
-		this.panel = panel;
-		this.type = type;
-	}
-	
-	public DrawAction(DrawingPanel panel, JComboBox type, JTextField...txtFields) { 
-		this.type = type;
-		this.txts = txtFields;
-		this.panel = panel;
-	}
-	public void init(DrawingPanel panel, int gType){
-		this.panel = panel;
-		this.gType = gType;
-	}
-
-	public void init(DrawingPanel panel, JComboBox type, double...vars){
-		this.type = type;
-		this.vars = vars;
+	public void init(GraphPanel panel, int gType){
 		this.panel = panel;
 	}
 
@@ -75,14 +53,9 @@ public class DrawAction implements ActionListener {
 
 			}
 
-			panel.setScore(vars);
-
-			// 그래프를 그리는 패널의 paint()를 간접적으로 호출
-			if(type != null){
-				panel.setGraphType(type.getSelectedIndex());
-			}else{
-				panel.setGraphType(gType);
-			}
+			panel.setGraphType(gType);
+			panel.setData(vars);
+			panel.reset();
 			panel.repaint();
 
 		} catch (NumberFormatException n) {

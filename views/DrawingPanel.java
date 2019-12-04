@@ -7,8 +7,8 @@ import javax.swing.*;
 //그래프가 그려지는 panel클래스
 public class DrawingPanel extends JPanel {
 	private String cols[] = {"이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"};
-	private String locs[] = {};
-	private int vars[];
+	private String locs[];
+	private Integer vars[][];
 	private int graphType;
 
 	public DrawingPanel(){
@@ -38,9 +38,9 @@ public class DrawingPanel extends JPanel {
 		g.drawString("c", 300, 270);
 		g.drawString("d", 400, 270);
 
-		for(int i=0;i<vars.length;i++){
-			if(vars[i] > 0){
-				g.fillRect(110+100*i, 250 - vars[i] * 2, 10, vars[i]*2);
+		for(int i=0;i<vars[0].length;i++){
+			if(vars[0][i] > 0){
+				g.fillRect(110+100*i, 250 - vars[0][i] * 2, 10, vars[0][i]*2);
 			}
 		}
 	}
@@ -53,8 +53,8 @@ public class DrawingPanel extends JPanel {
 		g.drawString("d", 400, 270);
 
 		for(int i=0;i<vars.length-1;i++){
-			if(vars[i] > 0 && vars[i+1]>0){
-				g.fillRect(115+100*i, 250 - vars[i] * 2, 215, 250 - vars[i+1] * 2);
+			if(vars[0][i] > 0 && vars[0][i+1]>0){
+				g.fillRect(115+100*i, 250 - vars[0][i] * 2, 215, 250 - vars[0][i+1] * 2);
 			}
 		}
 	}
@@ -76,13 +76,9 @@ public class DrawingPanel extends JPanel {
 	}
 
 	// 데이터 대입
-	public void setScore(double...datas) {
-		int i=0;
-		int[] t = new int[datas.length];
-		for (double d : datas) {
-			t[i++] = (int)Math.rint(d);
-		}
-		vars = t;
+	public void setData(String[] locs, Integer[][] datas) {
+		this.locs = locs;
+		this.vars = datas;
 	}
 
 	// 그래프 선택
