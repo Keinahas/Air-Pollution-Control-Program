@@ -17,13 +17,17 @@ import controls.listeners.dbUpload;
 import controls.listeners.opts;
 import controls.listeners.tableBelow;
 import controls.listeners.tableNew;
+import javafx.scene.control.ToolBar;
 import views.DrawingPanel;
 import views.MainFrame;
+import views.MyMenuBar;
+import views.MyToolBar;
+import views.SideBar;
 
 public class CTRL{
     
     ///-------------------------------------------- PRIVATE
-    private static MainFrame frame;
+    // private static MainFrame frame;
     private static CSVIO CSV_IO = new CSVIO();
     private static dbActions DB = new dbActions();
     // private static List<String> fileNameList = new ArrayList<>();
@@ -32,6 +36,18 @@ public class CTRL{
     private static List<String> header = null;
     private static List<String> average = null;
     private static List<List<String>> contents = null;
+
+    ///-------------------------------------------- Vars
+    public static String[] colOpts = {"측정일시(월)", "측정소명", "이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"};
+    public static String[] locOpts = {"강남구","강남대로","강동구","강북구","강서구","공항대로","관악구","광진구","구로구","금천구","노원구","도봉구","도산대로","동대문구","동작구","동작대로","마포구","서대문구","서초구","성동구","성북구","송파구","신촌로","양천구","영등포구","영등포로","용산구","은평구","정릉로","종로","종로구","중구","중랑구","천호대로","청계천로","한강대로","홍릉로","화랑로"};
+    public static MainFrame frame = new MainFrame(1500, 800);
+    public static MyMenuBar menuBar = new MyMenuBar();
+    public static MyToolBar toolBar = new MyToolBar();
+    public static SideBar sideBar = new SideBar();
+    public static DrawingPanel drawPanel = new DrawingPanel();
+    public static int BARGRAPH = 0;
+    public static int LINEGRAPH = 1;
+        
 
     ///-------------------------------------------- PUBLIC
 	public static ActionListener CSV_Save = new csvSave(CSV_IO);
@@ -44,14 +60,13 @@ public class CTRL{
     public static ActionListener T_New_Show = new tableNew();
     public static ActionListener T_Blw_Show = new tableBelow();
     public static ActionListener SelectOpts = new opts(DB);
+    public static ActionListener DrawBarGraph = new DrawAction(CTRL.drawPanel, CTRL.BARGRAPH);
+    public static ActionListener DrawLineGraph = new DrawAction(CTRL.drawPanel, CTRL.LINEGRAPH);
 
     //public static ActionListener BTN_When = ;
     //public static ActionListener BTB_Where = ;
 
-    ///-------------------------------------------- Vars
-    public static String[] colOpts = {"측정일시(월)", "측정소명", "이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"};
-    public static String[] locOpts = {"강남구","강남대로","강동구","강북구","강서구","공항대로","관악구","광진구","구로구","금천구","노원구","도봉구","도산대로","동대문구","동작구","동작대로","마포구","서대문구","서초구","성동구","성북구","송파구","신촌로","양천구","영등포구","영등포로","용산구","은평구","정릉로","종로","종로구","중구","중랑구","천호대로","청계천로","한강대로","홍릉로","화랑로"};
-    
+
     ///-------------------------------------------- METHODS
 
     // public static List<List<String>> getList(){
@@ -142,14 +157,6 @@ public class CTRL{
 
     public static void setFileName(String str){
         fileName = str;
-    }
-
-    public static MainFrame getFrame(){
-        return frame;
-    }
-
-    public static void setFrame(MainFrame f){
-        frame = f;
     }
 
     public static ActionListener getGraphAction(DrawingPanel pane, int gType){
