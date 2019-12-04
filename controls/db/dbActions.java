@@ -109,16 +109,6 @@ public class dbActions{
         if(!isTable(name)){
             int length = header.size();
             String query = null;
-            // Statement statement = null;
-            // parseNaddAll(name, header);
-            // statement = createStatement();
-            // query = "CREATE TABLE " + name + " (\n";
-            // for (int i = 0; i < length; i++) {
-            //     query += CTRL.parse(header.get(i))+" VARCHAR(20),\n";
-            // }
-            // query +=  CTRL.parse(header.get(length))+" VARCHAR(20)\n";
-            // query += ");";
-            // System.out.println(query);
             query = "CREATE TABLE "+name+"(";
             for(int i=0;i<length-1;i++){
                 query += "? VARCHAR(20),";
