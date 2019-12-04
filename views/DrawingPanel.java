@@ -6,7 +6,9 @@ import javax.swing.*;
 
 //그래프가 그려지는 panel클래스
 public class DrawingPanel extends JPanel {
-	protected int vars[];
+	private String cols[] = {"이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"};
+	private String locs[] = {};
+	private int vars[];
 	private int graphType;
 
 	public DrawingPanel(){
