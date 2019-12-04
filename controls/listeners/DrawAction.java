@@ -22,6 +22,11 @@ public class DrawAction implements ActionListener {
 
 	}
 
+	public DrawAction(DrawingPanel panel, int gType){
+		this.panel = panel;
+		this.gType = gType;
+	}
+
 
 	public DrawAction(DrawingPanel panel, JComboBox type) { 
 		this.panel = panel;
@@ -73,7 +78,11 @@ public class DrawAction implements ActionListener {
 			panel.setScore(vars);
 
 			// 그래프를 그리는 패널의 paint()를 간접적으로 호출
-			panel.setGraphType(type.getSelectedIndex());
+			if(type != null){
+				panel.setGraphType(type.getSelectedIndex());
+			}else{
+				panel.setGraphType(gType);
+			}
 			panel.repaint();
 
 		} catch (NumberFormatException n) {
