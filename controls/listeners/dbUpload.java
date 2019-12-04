@@ -21,7 +21,11 @@ public class dbUpload implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-
+        if(CTRL.getFileName()==null){
+            JOptionPane aa=new JOptionPane(); 
+            aa.showMessageDialog(null, "Open CSV file first plz.");
+            return;
+        }
         try{
             if(db.connect()){
                 if(db.isTable(CTRL.getFileName())){
