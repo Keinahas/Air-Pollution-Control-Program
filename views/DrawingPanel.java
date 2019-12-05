@@ -1,14 +1,14 @@
 package views;
 
 import java.awt.*;
+import java.util.List;
 
 import javax.swing.*;
 
 //그래프가 그려지는 panel클래스
 public class DrawingPanel extends JPanel {
 	private String cols[] = {"이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"};
-	private String locs[];
-	private Integer vars[][];
+	private List<List<Object>> conts;
 	private int graphType;
 
 	public DrawingPanel(){
@@ -33,30 +33,33 @@ public class DrawingPanel extends JPanel {
 
 	//막대그래프 그리는 메소드
 	public void NormPaint(Graphics g){
-		g.drawString("a", 100, 270);
-		g.drawString("b", 200, 270);
-		g.drawString("c", 300, 270);
-		g.drawString("d", 400, 270);
+		// g.drawString("a", 100, 270);
+		// g.drawString("b", 200, 270);
+		// g.drawString("c", 300, 270);
+		// g.drawString("d", 400, 270);
 
-		for(int i=0;i<vars[0].length;i++){
-			if(vars[0][i] > 0){
-				g.fillRect(110+100*i, 250 - vars[0][i] * 2, 10, vars[0][i]*2);
+		for (List<Object> cont : conts) {
+			for(int i=2;i<cont.size();i++){
+				if((int)cont.get(i) > 0){
+					g.fillRect(110+100*i, 250 - (int)cont.get(i) * 2, 10, (int)cont.get(i)*2);
+				}
 			}
 		}
+
 	}
 
 	//꺽은선 그래프 그리는 메소드
 	public void paintLinear(Graphics g){
-		g.drawString("a", 100, 270);
-		g.drawString("b", 200, 270);
-		g.drawString("c", 300, 270);
-		g.drawString("d", 400, 270);
+		// g.drawString("a", 100, 270);
+		// g.drawString("b", 200, 270);
+		// g.drawString("c", 300, 270);
+		// g.drawString("d", 400, 270);
 
-		for(int i=0;i<vars.length-1;i++){
-			if(vars[0][i] > 0 && vars[0][i+1]>0){
-				g.fillRect(115+100*i, 250 - vars[0][i] * 2, 215, 250 - vars[0][i+1] * 2);
-			}
-		}
+		// for(int i=0;i<vars.length-1;i++){
+		// 	if(vars[0][i] > 0 && vars[0][i+1]>0){
+		// 		g.fillRect(115+100*i, 250 - vars[0][i] * 2, 215, 250 - vars[0][i+1] * 2);
+		// 	}
+		// }
 	}
 
 	// 페인트는 그래픽스 객체를 가지고 있는 메소드
@@ -76,9 +79,8 @@ public class DrawingPanel extends JPanel {
 	}
 
 	// 데이터 대입
-	public void setData(String[] locs, Integer[][] datas) {
-		this.locs = locs;
-		this.vars = datas;
+	public void setData(List<List<Object>> conts) {
+		this.conts = conts;
 	}
 
 	// 그래프 선택
