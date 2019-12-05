@@ -250,7 +250,7 @@ public class dbActions{
             pstmt = preparedStatement(query);
             sList = new ArrayList<List<String>>();
             // System.out.println(query);
-            if (pstmt.execute(query)) {
+            if (pstmt.execute()) {
                 rs = pstmt.getResultSet();
             }
             ResultSetMetaData rsmd = rs.getMetaData();
