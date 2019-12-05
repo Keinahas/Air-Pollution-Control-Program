@@ -11,6 +11,7 @@ import views.MyButton;
 import views.MyMenu;
 import views.DrawingPanel;
 import views.GraphPanel;
+import views.BottomBar;
 
 import controls.CTRL;
 
