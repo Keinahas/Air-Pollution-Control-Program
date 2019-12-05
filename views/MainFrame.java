@@ -5,12 +5,14 @@ import java.awt.*;
 import javax.swing.*;
 
 public class MainFrame extends JFrame{
-
+    public JPanel p2=new JPanel(new BorderLayout());
     public MainFrame(int x, int y){
-    	this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    	setLayout(new BorderLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(x, y);
-        // this.setVisible(true); 
+        add(p2);
+        //setVisible(true); 
         // Watch out for placing setVisible().
         
     }
@@ -20,18 +22,18 @@ public class MainFrame extends JFrame{
     }
 
 	public void addToolBar(MyToolBar bar) {
-        this.add(bar,BorderLayout.NORTH);
+        p2.add(bar,BorderLayout.NORTH);
     }
 
     public void addSideBar(SideBar bar){
-        this.add(bar,BorderLayout.WEST);
+        p2.add(bar,BorderLayout.WEST);
     }
 
     public void addGraph(GraphPanel bar){
-        this.add(bar,BorderLayout.CENTER);
+        p2.add(bar,BorderLayout.CENTER);
     }
     
     public void addBottomBar(BottomBar bar){
-        this.add(bar,BorderLayout.SOUTH);
+        p2.add(bar,BorderLayout.SOUTH);
     }
 }

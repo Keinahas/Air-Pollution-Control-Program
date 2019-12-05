@@ -11,8 +11,9 @@ import views.MyButton;
 import views.MyMenu;
 import views.GraphPanel;
 import views.BottomBar;
-
+import views.FirstScreen;
 import controls.CTRL;
+import views.FirstScreen;
 
 // Main
 public class Merger{
@@ -20,6 +21,7 @@ public class Merger{
     // constructor
     public Merger() {
         // f = new MainFrame(1500, 800);
+        FirstScreen fs=new FirstScreen();
         MainFrame frame = CTRL.frame;
         MyMenuBar mb = CTRL.menuBar;
         MyToolBar tb = CTRL.toolBar;
@@ -62,12 +64,16 @@ public class Merger{
         //tb.addTool(new JTextField("e"));
         
         frame.setLocation(100,100);
+
         frame.addGraph(gPanel);
         frame.addMenuBar(mb);
         frame.addToolBar(tb);
         // f.addGraph(g);
         frame.addSideBar(sb);
+        frame.add(frame.p2);
+        frame.add(fs);
         frame.setVisible(true);
+        
     }
 
     // call addoptions for objs
