@@ -24,6 +24,11 @@ public class dbUpload implements ActionListener{
 
         try{
             if(db.connect()){
+                if(!db.isDataBase("aoop")){
+                    int r = JOptionPane.showConfirmDialog(null, "데이터베이스가 없습니다. 새로 만드시겠습니까?", "데이터베이스 생성", JOptionPane.YES_NO_OPTION);
+                    if(r == JOptionPane.NO_OPTION)
+                        return;
+                }
                 if(db.isTable(CTRL.getFileName())){
                     int r = JOptionPane.showConfirmDialog(null, CTRL.getFileName() + "이(가) 이미 있습니다. 새로 만드시겠습니까?", "테이블 생성", JOptionPane.YES_NO_OPTION);
                     if(r == JOptionPane.NO_OPTION){
