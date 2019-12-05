@@ -82,6 +82,50 @@ public class dbActions{
         return pstmt;
     }
 
+    // 디비가 존재하는 지
+    public boolean isDataBase(String name) throws SQLException{
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String query = "SHOW DATABASES;";
+        pstmt = preparedStatement(query);
+
+        if (pstmt.execute()) {
+            rs = pstmt.getResultSet();
+        }
+
+        while (rs.next()) {
+            String str = rs.getNString(1);
+            if(str.equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void useDB(String name) throws SQLException{
+        PreparedStatement pstmt = null;
+        String query = "USE" + name +";";
+        pstmt = preparedStatement(query);
+
+        if (pstmt.execute()) {
+            return;
+        }else{
+            throw new SQLException();
+        }
+    }
+
+    // db Create DB
+    public void createDataBase(String name) throws SQLException{
+        PreparedStatement pstmt = null;
+        String query = "CREATE DATABASE "+name+";";
+        pstmt = preparedStatement(query);
+        if (pstmt.execute()) {
+            return;
+        }else{
+            throw new SQLException();
+        }
+    }
+
     // 테이블이 존재하는 지
     public boolean isTable(String name) throws SQLException{
         PreparedStatement pstmt = null;
@@ -117,7 +161,6 @@ public class dbActions{
             pstmt = conn.prepareStatement(query);
             for(int i=1;i<length+1;i++){
                 pstmt.setString(i, CTRL.parse(header.get(i-1)));
-                // pstmt.setString(i, header.get(i-1));
             }
             System.out.println(pstmt.toString().replace('\'', ' '));
             if (pstmt.executeUpdate(pstmt.toString().replace('\'', ' ').replace("com.mysql.cj.jdbc.ClientPreparedStatement: ", " ")) >= 0) {
@@ -366,39 +409,6 @@ public class dbActions{
             System.out.println("DropTable::table does not exists");
         }
     }
-    // public static void main(String[] args) {
-    //     dbActions db = new dbActions();
-
-    //     try{
-    //         db.connect();
-    //         Statement statement = null;
-    //         ResultSet rs = null;
-            
-    //         // statement = db.createStatement();
-    //         // if (statement.execute("SHOW TABLES;")) {
-    //         // 	rs = statement.getResultSet();
-    //         // }
-
-    
-    //         // executeUpdate 함수는 뷰를 업데이트 한다. (= DDL)
-    //         // if(statement.executeUpdate("SHOW DATABASES"));
-            
-    //         // while (rs.next()) {
-    //         // 	String str = rs.getNString(1);
-    //         //     System.out.println(str);
-    //         // }
-
-    //         // if (statement.executeUpdate("") >= 0) {
-    //         // 	rs = statement.getResultSet();
-    //         // }
-    //         // db.createTable("일별평균대기오염도_2018","측정일시,측정소명,이산화질소농도,오존농도,이산화탄소농도,아황산가스,미세먼지,초미세먼지".split(","));
-
-    //         // System.out.println(db.conn.toString());
-    //         db.conn.close();
-    //     }catch(SQLException e){
-    //         e.printStackTrace();
-    //     }
-    // }
 
     public static void main(String[] args) {
         dbActions db = new dbActions();
