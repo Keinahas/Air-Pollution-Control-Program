@@ -18,10 +18,11 @@ public class GraphPanel extends JPanel {
 
 	// 생성자
 	public GraphPanel() {
+		setPreferredSize(new Dimension(800,650));
 		paneList = new ArrayList<>();
 	
 		// 그래프를 그릴 패널을 만든다.
-		addGraph();
+		// addGraph();
 		// JPanel panel = new JPanel();
 		// panel.add()
 		// 막대 그래프를 표현할 그래프의 위치를 중앙에
@@ -62,7 +63,8 @@ public class GraphPanel extends JPanel {
 
 	@Override
 	public void paint(Graphics g) { //리스트를 리스트크기만큼 반복하여 패널을 그림
-			for (DrawingPanel pane : paneList) {
+		this.setBackground(Color.WHITE);
+		for (DrawingPanel pane : paneList) {
 			pane.repaint();
 		}
 	}
