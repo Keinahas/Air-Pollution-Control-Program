@@ -16,7 +16,6 @@ import controls.CTRL;
 
 // Main
 public class Merger{
-    private GraphPanel g;
     
     // constructor
     public Merger() {
@@ -24,9 +23,8 @@ public class Merger{
         MainFrame frame = CTRL.frame;
         MyMenuBar mb = CTRL.menuBar;
         MyToolBar tb = CTRL.toolBar;
-        g = new GraphPanel();
         SideBar sb = CTRL.sideBar;
-        GraphPanel dp = CTRL.gPanel;
+        GraphPanel gPanel = CTRL.gPanel;
     
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
@@ -64,10 +62,10 @@ public class Merger{
         //tb.addTool(new JTextField("e"));
         
         frame.setLocation(100,100);
+        frame.addGraph(gPanel);
         frame.addMenuBar(mb);
         frame.addToolBar(tb);
         // f.addGraph(g);
-        frame.addGraph(dp);
         frame.addSideBar(sb);
         frame.setVisible(true);
     }
