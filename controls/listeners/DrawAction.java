@@ -1,6 +1,7 @@
 package controls.listeners;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
@@ -29,32 +30,31 @@ public class DrawAction implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		try {
-			if(txts != null){
-				vars = new double[txts.length];
 
-				//init vars
-				for (int i = 0; i < txts.length; i++) {
-					vars[i] = Double.parseDouble(txts[i].getText().trim());
-				}
-			}else{
-
-				List<String> average = CTRL.getAverage();
-				if(average == null){
-					System.out.println("average NULL");
-					return;
-				}
-				vars = new double[average.size()];
-				for(int i=2;i<average.size();i++){
-					vars[i]=Double.parseDouble(average.get(i));
-					if(i<6){
-						vars[i] *= 100;
+			List<List<String>> average = CTRL.getAverage();
+			List<List<Object>> parsedAvg = new ArrayList<>();
+			if(average == null){
+				System.out.println("average NULL");
+				return;
+			}
+			for (List<String> avg : average) {
+				List<Object> parsed = new ArrayList<>();
+				for (String str : avg) {
+					try{
+						Object parse = Math.rint(Double.parseDouble(str));
+						parsed.add(parse);
+					}catch (NumberFormatException exception){
+						parsed.add(str);
+					}catch (NullPointerException exception){
+						parsed.add(0);
 					}
 				}
-
+				System.out.println("DRAWACTION::"+parsed);
+				parsedAvg.add(parsed);
 			}
 
 			panel.setGraphType(gType);
-			panel.setData(vars);
+			panel.setData(parsedAvg);
 			panel.reset();
 			panel.repaint();
 
