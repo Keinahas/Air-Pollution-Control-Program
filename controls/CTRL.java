@@ -17,8 +17,6 @@ import controls.listeners.dbUpload;
 import controls.listeners.opts;
 import controls.listeners.tableBelow;
 import controls.listeners.tableNew;
-import javafx.scene.control.ToolBar;
-import views.DrawingPanel;
 import views.GraphPanel;
 import views.MainFrame;
 import views.MyMenuBar;
@@ -54,7 +52,6 @@ public class CTRL{
     ///-------------------------------------------- PUBLIC
 	public static ActionListener CSV_Save = new csvSave(CSV_IO);
     public static ActionListener CSV_Open = new csvOpen(CSV_IO);
-	// public static ActionListener DRAW = new DrawAction();
     public static ActionListener DB_Insert = new dbUpload(DB);
     public static ActionListener DB_Show;
     public static ActionListener DB_Drop;

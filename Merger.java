@@ -10,6 +10,7 @@ import views.SideBar;
 import views.MyButton;
 import views.MyMenu;
 import views.GraphPanel;
+import views.BottomBar;
 
 import controls.CTRL;
 

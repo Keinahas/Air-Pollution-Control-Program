@@ -6,6 +6,8 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import controls.CTRL;
 import controls.csvio.CSVIO;
 import controls.db.dbActions;
@@ -22,6 +24,13 @@ public class csvSave implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
+
+        if(CTRL.getFileName()==null){
+            JOptionPane aa=new JOptionPane(); 
+            aa.showMessageDialog(null, "Open CSV file first plz.");
+            return;
+        }
+
         CSV.chooseSave();
         String name = null;
         File file = CSV.Open();
