@@ -12,8 +12,7 @@ import controls.listeners.DrawAction;
 public class GraphPanel extends JPanel {
 	private DrawingPanel drawpanel;
 
-    private String locs[];
-    private int vars[][];
+	private List<List<Object>> conts;
 	private int graphType;
 	private List<DrawingPanel> paneList; //쪼개진 패널(쪼개진 배열을 하나 가지고 있는)들을 가지고 있음
 
@@ -23,30 +22,33 @@ public class GraphPanel extends JPanel {
 	
 		// 그래프를 그릴 패널을 만든다.
 		addGraph();
-		JPanel panel = new JPanel();
-		panel.add()
+		// JPanel panel = new JPanel();
+		// panel.add()
 		// 막대 그래프를 표현할 그래프의 위치를 중앙에
-		this.add(panel, BorderLayout.CENTER);
+		// this.add(panel, BorderLayout.CENTER);
 
 		// 패널생성
 
 	}
-	    // 지역이름 배열 선택
-	public void setLocation(String...datas){
-        int i = 0;
-        String[] t = new String[datas.length];
-        for (String d : datas) {
-            t[i++] = d;
-        }
-        locs = t;
-    }
+
+	// 지역이름 배열 선택
+	// public void setLocation(String...datas){
+    //     int i = 0;
+    //     String[] t = new String[datas.length];
+    //     for (String d : datas) {
+    //         t[i++] = d;
+    //     }
+    //     locs = t;
+	// }
+	
     // 데이터 대입
-    public void setData(String[] locs,double[][] datas) {
-		this.locs = locs;
-        for (int i=0;i<datas.length/6;i++) {
-			for(int j = 0;j<6;i++)
-            	vars[i][j] = (int) Math.rint(datas[i][j]);
-        }
+    public void setData(List<List<Object>> conts) {
+		this.conts = conts;
+		// this.locs = locs;
+        // for (int i=0;i<datas.length/6;i++) {
+		// 	for(int j = 0;j<6;i++)
+        //     	vars[i][j] = (int) Math.rint(datas[i][j]);
+        // }
     }
     // 그래프 선택
     public void setGraphType(int n) {
@@ -66,33 +68,79 @@ public class GraphPanel extends JPanel {
 	}
 
 	public void reset(){
-		for (int i = 0; i < locs.length/5; i++) {
+		for (int i = 0; i < conts.size()/5; i++) {
+			List<List<Object>> tempList = new ArrayList<>();
+			tempList.add(conts.get(i));
+			tempList.add(conts.get(i+1));
+			tempList.add(conts.get(i+2));
+			tempList.add(conts.get(i+3));
+			tempList.add(conts.get(i+4));
 			addGraph();
-			List<String> strings = new ArrayList<>();
-			List<List<Integer>> datas = new ArrayList<>();
-			for(int j=0;j<5;j++)
-				strings.add(locs[j]);
-			for(int j=0;j<5;j++){
-				List<Integer> tList = new ArrayList<>();
-				for (int k = 0; k < 6; k++) {
-					tList.add(vars[j][k]);
-				}
-				datas.add(tList);
-			}
-			paneList.get(i).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
+			paneList.get(i).setData(tempList);
 		}
 		addGraph();
-		List<String> strings = new ArrayList<>();
-		List<List<Integer>> datas = new ArrayList<>();
-		for(int j=0;j<locs.length%5;j++)
-			strings.add(locs[j]);
-		for(int j=0;j<locs.length%5;j++){
-			List<Integer> tList = new ArrayList<>();
-			for (int k = 0; k < 6; k++) {
-				tList.add(vars[j][k]);
-			}
-			datas.add(tList);
+		List<List<Object>> tempList = new ArrayList<>();
+		for (int i=0;i<conts.size()%5;i++){
+			tempList.add(conts.get(i));
 		}
-		paneList.get(locs.length/5).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
+		paneList.get(conts.size()/5).setData(tempList);
+		// 		List<String> strings = new ArrayList<>();
+		// 		List<List<Integer>> datas = new ArrayList<>();
+		// 		for(int j=0;j<5;j++)
+		// 			strings.add(locs[j]);
+		// 		for(int j=0;j<5;j++){
+		// 			List<Integer> tList = new ArrayList<>();
+		// 			for (int k = 0; k < 6; k++) {
+		// 				tList.add(vars[j][k]);
+		// 			}
+		// 			datas.add(tList);
+		// 		}
+		// 		paneList.get(i).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
+		// 	}
+		// 	addGraph();
+		// 	List<String> strings = new ArrayList<>();
+		// 	List<List<Integer>> datas = new ArrayList<>();
+		// 	for(int j=0;j<locs.length%5;j++)
+		// 		strings.add(locs[j]);
+		// 	for(int j=0;j<locs.length%5;j++){
+		// 		List<Integer> tList = new ArrayList<>();
+		// 		for (int k = 0; k < 6; k++) {
+		// 			tList.add(vars[j][k]);
+		// 		}
+		// 		datas.add(tList);
+		// 	}
+		// 	paneList.get(locs.length/5).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
+		// }
 	}
+
+	// public void reset(){
+	// 	for (int i = 0; i < locs.length/5; i++) {
+	// 		addGraph();
+	// 		List<String> strings = new ArrayList<>();
+	// 		List<List<Integer>> datas = new ArrayList<>();
+	// 		for(int j=0;j<5;j++)
+	// 			strings.add(locs[j]);
+	// 		for(int j=0;j<5;j++){
+	// 			List<Integer> tList = new ArrayList<>();
+	// 			for (int k = 0; k < 6; k++) {
+	// 				tList.add(vars[j][k]);
+	// 			}
+	// 			datas.add(tList);
+	// 		}
+	// 		paneList.get(i).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
+	// 	}
+	// 	addGraph();
+	// 	List<String> strings = new ArrayList<>();
+	// 	List<List<Integer>> datas = new ArrayList<>();
+	// 	for(int j=0;j<locs.length%5;j++)
+	// 		strings.add(locs[j]);
+	// 	for(int j=0;j<locs.length%5;j++){
+	// 		List<Integer> tList = new ArrayList<>();
+	// 		for (int k = 0; k < 6; k++) {
+	// 			tList.add(vars[j][k]);
+	// 		}
+	// 		datas.add(tList);
+	// 	}
+	// 	paneList.get(locs.length/5).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
+	// }
 }
