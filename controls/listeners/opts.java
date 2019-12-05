@@ -46,7 +46,7 @@ public class opts implements ActionListener{
                     dates.remove("2018"+num);
         }
         else{
-            for(String string : CTRL.colOpts)
+            for(String string : CTRL.getHeader())
                 if(string == str){
                     if(((JCheckBox)(e.getSource())).isSelected())
                         cols.add(str);
