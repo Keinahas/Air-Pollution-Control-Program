@@ -10,26 +10,19 @@ import controls.listeners.DrawAction;
 
 //그래프를 그릴 fame을 만들고 DrawingPanel을 불러오는 클래스
 public class GraphPanel extends JPanel {
-	private DrawingPanel drawpanel;
+	// private DrawingPanel drawpanel;
 
+	private JScrollPane scrollPane;
 	private List<List<Object>> conts;
 	private int graphType;
 	private List<DrawingPanel> paneList; //쪼개진 패널(쪼개진 배열을 하나 가지고 있는)들을 가지고 있음
 
 	// 생성자
 	public GraphPanel() {
-		setPreferredSize(new Dimension(800,650));
 		paneList = new ArrayList<>();
-	
-		// 그래프를 그릴 패널을 만든다.
-		// addGraph();
-		// JPanel panel = new JPanel();
-		// panel.add()
-		// 막대 그래프를 표현할 그래프의 위치를 중앙에
-		// this.add(panel, BorderLayout.CENTER);
-
-		// 패널생성
-
+		scrollPane = new JScrollPane();
+		this.add(scrollPane);
+		
 	}
 
 	// 지역이름 배열 선택
@@ -58,12 +51,11 @@ public class GraphPanel extends JPanel {
 	
 	public void addGraph(){ //리스트에 쪼개진 배열을 가지고 있는 쪼개진 패널을 넣고 add하는 함수
 		paneList.add(new DrawingPanel());
-		this.add(paneList.get(paneList.size()-1));
+		scrollPane.add(paneList.get(paneList.size()-1));
 	}
 
 	@Override
 	public void paint(Graphics g) { //리스트를 리스트크기만큼 반복하여 패널을 그림
-		this.setBackground(Color.WHITE);
 		for (DrawingPanel pane : paneList) {
 			pane.repaint();
 		}
