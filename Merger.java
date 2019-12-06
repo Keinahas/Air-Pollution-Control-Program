@@ -2,6 +2,9 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import views.MyMenuBar;
 import views.MyToolBar;
 import views.MainFrame;
@@ -10,10 +13,8 @@ import views.SideBar;
 import views.MyButton;
 import views.MyMenu;
 import views.GraphPanel;
-import views.BottomBar;
 import views.FirstScreen;
 import controls.CTRL;
-import views.FirstScreen;
 
 // Main
 public class Merger{
@@ -27,6 +28,9 @@ public class Merger{
         MyToolBar tb = CTRL.toolBar;
         SideBar sb = CTRL.sideBar;
         GraphPanel gPanel = CTRL.gPanel;
+        Timer t = new Timer();
+        TimerTask task;
+
     
         OptsAddable m1 = new MyMenu("File", KeyEvent.VK_F);
         OptsAddable m2 = new MyMenu("Edit", KeyEvent.VK_E);
@@ -65,15 +69,37 @@ public class Merger{
         
         frame.setLocation(100,100);
 
+
         frame.addGraph(gPanel);
         frame.addMenuBar(mb);
         frame.addToolBar(tb);
         // f.addGraph(g);
         frame.addSideBar(sb);
-        frame.add(frame.p2);
         frame.add(fs);
-        frame.setVisible(true);
+        gPanel.setVisible(false);
+        mb.setVisible(false);
+        tb.setVisible(false);
+        sb.setVisible(false);
+        fs.setVisible(true);
+        task = new TimerTask(){
         
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                gPanel.setVisible(true);
+                mb.setVisible(true);
+                tb.setVisible(true);
+                sb.setVisible(true);
+                fs.setVisible(false);
+                frame.remove(fs);
+                frame.repaint();
+            }
+        };
+
+        t.schedule(task, 1000);
+
+        
+        // frame.add(frame.p2);
     }
 
     // call addoptions for objs
