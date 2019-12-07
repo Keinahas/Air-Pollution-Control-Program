@@ -14,13 +14,11 @@ import controls.db.dbActions;
 
 // class for saving data to csv file || yet coding
 public class opts implements ActionListener{
-    private dbActions db;
     private List<String> dates;
     private List<String> locs;
     private List<String> cols;
 
-    public opts(dbActions db){
-        this.db = db;
+    public opts(){
         dates = new ArrayList<String>();
         locs = new ArrayList<String>();
         cols = new ArrayList<String>();
@@ -30,7 +28,9 @@ public class opts implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
 
-        String str = e.getActionCommand();
+        String str = CTRL.parse(e.getActionCommand());
+        System.out.println(str);
+        System.out.println(CTRL.getHeader());
         if(str.endsWith("월")){
             int pos = str.lastIndexOf("월");
             int num = Integer.parseInt(str.substring(0,pos));
@@ -47,7 +47,7 @@ public class opts implements ActionListener{
         }
         else{
             for(String string : CTRL.getHeader())
-                if(string == str){
+                if(CTRL.parse(string).equals(str)){
                     if(((JCheckBox)(e.getSource())).isSelected())
                         cols.add(str);
                     else
@@ -85,10 +85,11 @@ public class opts implements ActionListener{
         }
 
         try{
-            if(db.connect()){
-                if(db.isTable(CTRL.getFileName())){
-                    List<List<String>> temp = db.SelectColsFromTableRows(CTRL.getFileName(), colStrings, args);
-                    if(temp != null){
+            if(CTRL.DB.connect()){
+                if(CTRL.DB.isTable(CTRL.getFileName())){
+                    List<List<String>> temp = CTRL.DB.SelectColsFromTableRows(CTRL.getFileName(), colStrings, args);
+                    System.out.println(temp);
+                    if(temp != null && !temp.isEmpty()){
                         CTRL.setHeader(temp.remove(0));
                         CTRL.setContents(temp);
                         CTRL.setAverageNTotal();
