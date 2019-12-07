@@ -81,6 +81,7 @@ public class DrawingPanel extends JPanel {
 	// 데이터 대입
 	public void setData(List<List<Object>> conts) {
 		this.conts = conts;
+		System.out.println(conts);
 	}
 
 	// 그래프 선택
