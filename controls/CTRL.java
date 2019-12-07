@@ -28,10 +28,9 @@ public class CTRL{
     ///-------------------------------------------- PRIVATE
     // private static MainFrame frame;
     private static CSVIO CSV_IO = new CSVIO();
-    private static dbActions DB = new dbActions();
     // private static List<String> fileNameList = new ArrayList<>();
     private static String fileName = null;
-    private static List<String> total = null;
+    private static List<List<String>> total = null;
     private static List<String> header = null;
     private static List<String> locs = null;
     private static List<List<String>> average = null;
@@ -47,18 +46,19 @@ public class CTRL{
     public static GraphPanel gPanel = new GraphPanel();
     public static int BARGRAPH = 0;
     public static int LINEGRAPH = 1;
+    public static dbActions DB = new dbActions();
         
 
     ///-------------------------------------------- PUBLIC
 	public static ActionListener CSV_Save = new csvSave(CSV_IO);
     public static ActionListener CSV_Open = new csvOpen(CSV_IO);
-    public static ActionListener DB_Insert = new dbUpload(DB);
+    public static ActionListener DB_Insert = new dbUpload();
     public static ActionListener DB_Show;
     public static ActionListener DB_Drop;
     public static ActionListener DB_;
     public static ActionListener T_New_Show = new tableNew();
     public static ActionListener T_Blw_Show = new tableBelow();
-    public static ActionListener SelectOpts = new opts(DB);
+    public static ActionListener SelectOpts = new opts();
     public static ActionListener DrawBarGraph = new DrawAction(CTRL.gPanel, CTRL.BARGRAPH);
     public static ActionListener DrawLineGraph = new DrawAction(CTRL.gPanel, CTRL.LINEGRAPH);
 
@@ -80,48 +80,65 @@ public class CTRL{
         return average;
     }
 
-    public static List<String> getTotal(){
+    public static List<List<String>> getTotal(){
         return total;
     }
 
 
     ////////
     public static void setAverageNTotal(){
-        int contentsNum = 0;
         int lenHeader = header.size();
-        double[] total = new double[lenHeader];
-        total[0] = 0.0;
+        List<List<String>> avgLists = new ArrayList<>();
+        List<List<String>> tempLists = new ArrayList<>();
         for(List<String> content : contents){
+            List<String> tempList = null;
             int lenContent = content.size();
-            for(int i=2;i<lenHeader;i++){
-                if(lenContent < lenHeader){
+            if(lenContent < lenHeader)
+                continue;
+            for (List<String> list : tempLists)
+                if(content.get(1).equals(list.get(1))){
+                    tempList = list;
                     break;
                 }
-                String temp = content.get(i);
-                if(temp.isEmpty()){
+            if(tempList == null){
+                List<String> temp = new ArrayList<>();
+                temp.add("1");
+                temp.addAll(content.subList(1, content.size()));
+                tempLists.add(temp);
+                continue;
+            }
+
+
+            tempList.add(0,Integer.toString(Integer.parseInt(tempList.remove(0))+1));
+            for (int i = 2; i < tempList.size(); i++) {
+                try{
+                    double d1 = Double.parseDouble(tempList.remove(i));
+                    double d2 = Double.parseDouble(content.get(i));
+                    tempList.add(i,Double.toString(d1+d2));
+                }catch(NumberFormatException exception){
                     continue;
                 }
-                contentsNum++;
-                total[i] += Double.parseDouble(temp);
             }
         }
-        String str = ",,";
-        for(int i=2;i<total.length-1;i++){
-            str += total[i] + ",";
-        }
-        str += total[total.length-1];
-        List<String> list = Arrays.asList(str.split(","));
-        System.out.println(list);
-        CTRL.total = list;
+        System.out.println(tempLists);
+        CTRL.total = tempLists;
 
-        str = ",,";
-        for(int i=2;i<total.length-1;i++){
-            str += total[i]/contentsNum + ",";
+        for (List<String> tempList : tempLists) {
+            int cnt = Integer.parseInt(tempList.get(0));
+            List<String> temp = new ArrayList<>();
+            temp.addAll(tempList.subList(0, 2));
+            for (int i = 2; i < tempList.size(); i++) {
+                try{
+                    double d1 = Double.parseDouble(tempList.get(i));
+                    temp.add(Double.toString(d1/cnt));
+                }catch(NumberFormatException exception){
+                    continue;
+                }
+            }
+            avgLists.add(temp);
         }
-        str += total[total.length-1]/contentsNum;
-        list = Arrays.asList(str.split(","));
-        System.out.println(list);
-        // CTRL.average = list;
+        CTRL.average = avgLists;
+        System.out.println(avgLists);
     }
 
     public static void setAverage(List<List<String>> list){
