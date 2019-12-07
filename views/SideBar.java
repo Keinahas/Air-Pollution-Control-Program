@@ -36,9 +36,9 @@ public class SideBar extends JPanel {
 
         // DefaultMutableTreeNode root = (DefaultMutableTreeNode)tree.getModel().getRoot();
 
-        // ((StateEditor)tree.getCellEditor()).checkBox.addActionListener( e -> {
-        //     System.out.println(e.getActionCommand());
-        // });
+        ((StateEditor)tree.getCellEditor()).checkBox.addActionListener( e -> {
+            CTRL.SelectOpts.actionPerformed(e);
+        });
 
         JScrollPane scrollPane = new JScrollPane(tree);
         scrollPane.setSize(new Dimension(180, 680));
