@@ -20,34 +20,14 @@ public class GraphPanel extends JPanel {
 
 	// 생성자
 	public GraphPanel() {
-		setBackground(Color.RED);
 		paneList = new ArrayList<>();
-		scrollPane = new JScrollPane();
-		this.add(scrollPane);
 		this.setSize(new Dimension(500, 500));
 		this.setPreferredSize(new Dimension(500, 500));
-		this.setBackground(Color.red);
-		this.setForeground(Color.red);
 	}
-
-	// 지역이름 배열 선택
-	// public void setLocation(String...datas){
-    //     int i = 0;
-    //     String[] t = new String[datas.length];
-    //     for (String d : datas) {
-    //         t[i++] = d;
-    //     }
-    //     locs = t;
-	// }
 	
     // 데이터 대입
     public void setData(List<List<Object>> conts) {
 		this.conts = conts;
-		// this.locs = locs;
-        // for (int i=0;i<datas.length/6;i++) {
-		// 	for(int j = 0;j<6;i++)
-        //     	vars[i][j] = (int) Math.rint(datas[i][j]);
-        // }
     }
     // 그래프 선택
     public void setGraphType(int n) {
@@ -57,7 +37,7 @@ public class GraphPanel extends JPanel {
 	public void addGraph(List<List<Object>> conts){ //리스트에 쪼개진 배열을 가지고 있는 쪼개진 패널을 넣고 add하는 함수
 		paneList.add(new DrawingPanel(graphType));
 		paneList.get(paneList.size()-1).setData(conts);
-		scrollPane.add(paneList.get(paneList.size()-1));
+		this.add(paneList.get(paneList.size()-1));
 	}
 
 	@Override
