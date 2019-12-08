@@ -21,8 +21,6 @@ public class GraphPanel extends JPanel {
 	// 생성자
 	public GraphPanel() {
 		paneList = new ArrayList<>();
-		this.setSize(new Dimension(500, 500));
-		this.setPreferredSize(new Dimension(500, 500));
 	}
 	
     // 데이터 대입
