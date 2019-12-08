@@ -21,7 +21,6 @@ public class Merger{
     
     // constructor
     public Merger() {
-        // f = new MainFrame(1500, 800);
         FirstScreen fs=new FirstScreen();
         MainFrame frame = CTRL.frame;
         MyMenuBar mb = CTRL.menuBar;
@@ -63,9 +62,6 @@ public class Merger{
 
         tb.addTool(new MyButton(new ImageIcon("./views/resource/open.png"), KeyEvent.VK_O, CTRL.CSV_Open));
         tb.addTool(new MyButton(new ImageIcon("./views/resource/save.png"), KeyEvent.VK_S, CTRL.CSV_Save));
-        //tb.addTool(new JButton("c"));
-        //tb.addTool(new JButton("d"));
-        //tb.addTool(new JTextField("e"));
         
         frame.setLocation(100,100);
 
@@ -74,12 +70,10 @@ public class Merger{
         frame.addToolBar(tb);
         frame.addSideBar(sb);
         frame.addGraph(gPanel);
-        // frame.add(fs);
         mb.setVisible(false);
         tb.setVisible(false);
         sb.setVisible(false);
         gPanel.setVisible(true);
-        // fs.setVisible(true);
         task = new TimerTask(){
         
             @Override
@@ -89,8 +83,6 @@ public class Merger{
                 tb.setVisible(true);
                 sb.setVisible(true);
                 gPanel.setVisible(true);
-                // fs.setVisible(false);
-                // frame.remove(fs);
                 frame.repaint();
             }
         };

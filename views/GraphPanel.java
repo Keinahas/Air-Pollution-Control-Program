@@ -11,7 +11,6 @@ import controls.listeners.DrawAction;
 
 //그래프를 그릴 fame을 만들고 DrawingPanel을 불러오는 클래스
 public class GraphPanel extends JPanel {
-	// private DrawingPanel drawpanel;
 
 	private List<List<Object>> conts;// 안쪼개진거
 	private int graphType;
@@ -21,8 +20,6 @@ public class GraphPanel extends JPanel {
 	public GraphPanel() {
 		paneList = new ArrayList<>();
 		setLayout(new GridLayout(0,1));
-		// this.setSize(new Dimension(500, 500));
-		// this.setPreferredSize(new Dimension(500, 500));
 	}
 	
     // 데이터 대입
@@ -56,7 +53,6 @@ public class GraphPanel extends JPanel {
 			tempList.add(conts.get(i*5+2));
 			tempList.add(conts.get(i*5+3));
 			tempList.add(conts.get(i*5+4));
-			// paneList.get(i/5).setData(tempList);
 			addGraph(tempList);
 			paneList.get(i/5).setGraphType(graphType);
 		}
@@ -64,7 +60,6 @@ public class GraphPanel extends JPanel {
 		for (int i=0;i<conts.size()%5;i++){
 			tempList.add(conts.get((conts.size()/5 * 5 )+ i));
 		}
-		// paneList.get(conts.size()/5).setData(tempList);
 		addGraph(tempList);
 		paneList.get(conts.size()/5).setGraphType(graphType);
 	}
