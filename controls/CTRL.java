@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import controls.csvio.CSVIO;
 import controls.db.dbActions;
@@ -44,6 +45,7 @@ public class CTRL{
     public static MyToolBar toolBar = new MyToolBar();
     public static SideBar sideBar = new SideBar();
     public static GraphPanel gPanel = new GraphPanel();
+    public static JScrollPane gScollPanel = new JScrollPane(gPanel);
     public static int BARGRAPH = 0;
     public static int LINEGRAPH = 1;
     public static dbActions DB = new dbActions();

@@ -13,7 +13,6 @@ import controls.listeners.DrawAction;
 public class GraphPanel extends JPanel {
 	// private DrawingPanel drawpanel;
 
-	private JScrollPane scrollPane;
 	private List<List<Object>> conts;// 안쪼개진거
 	private int graphType;
 	private List<DrawingPanel> paneList; //쪼개진 패널(쪼개진 배열을 하나 가지고 있는)들을 가지고 있음
@@ -21,6 +20,9 @@ public class GraphPanel extends JPanel {
 	// 생성자
 	public GraphPanel() {
 		paneList = new ArrayList<>();
+		setLayout(new GridLayout(0,1));
+		// this.setSize(new Dimension(500, 500));
+		// this.setPreferredSize(new Dimension(500, 500));
 	}
 	
     // 데이터 대입
@@ -42,6 +44,7 @@ public class GraphPanel extends JPanel {
 	public void paint(Graphics g) { //리스트를 리스트크기만큼 반복하여 패널을 그림
 		for (DrawingPanel pane : paneList) {
 			pane.repaint();
+			pane.revalidate();
 		}
 	}
 

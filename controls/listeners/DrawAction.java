@@ -6,6 +6,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import controls.CTRL;
 import controls.db.dbActions;
@@ -54,7 +55,6 @@ public class DrawAction implements ActionListener {
 				System.out.println("DRAWACTION::"+avg+" : "+parsed);
 				parsedAvg.add(parsed);
 			}
-
 			panel.setGraphType(gType);
 			panel.setData(parsedAvg);
 			panel.reset();
