@@ -14,7 +14,16 @@ public class DrawingPanel extends JPanel {
 
 	public DrawingPanel(){
 		//
-		this.graphType = -1;
+		this.setSize(new Dimension(300, 500));
+		this.setPreferredSize(new Dimension(300, 500));
+		// this.graphType = -1;
+	}
+
+	public DrawingPanel(int n){
+		//
+		this.setSize(new Dimension(300, 500));
+		this.setPreferredSize(new Dimension(300, 500));
+		this.graphType = n;
 	}
 
 	//처음 배경 그리는 메소드
@@ -70,7 +79,7 @@ public class DrawingPanel extends JPanel {
 
 	// 페인트는 그래픽스 객체를 가지고 있는 메소드
 	public void paint(Graphics g) {
-			switch(graphType){
+		switch(graphType){
 			case 0:
 				initPaint(g);
 				NormPaint(g);
