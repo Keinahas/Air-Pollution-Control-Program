@@ -58,11 +58,6 @@ public class DrawingPanel extends JPanel {
 	//꺽은선 그래프 그리는 메소드
 	public void paintLinear(Graphics g){
 		
-		// for(int i=0;i<vars.length-1;i++){
-		// 	if(vars[0][i] > 0 && vars[0][i+1]>0){
-		// 		g.fillRect(115+100*i, 250 - vars[0][i] * 2, 215, 250 - vars[0][i+1] * 2);
-		// 	}
-		// }
 	}
 
 	// 페인트는 그래픽스 객체를 가지고 있는 메소드
