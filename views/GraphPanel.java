@@ -19,6 +19,7 @@ public class GraphPanel extends JPanel {
 
 	// 생성자
 	public GraphPanel() {
+		setBackground(Color.RED);
 		paneList = new ArrayList<>();
 		scrollPane = new JScrollPane();
 		this.add(scrollPane);
@@ -71,6 +72,7 @@ public class GraphPanel extends JPanel {
 			tempList.add(conts.get(i+4));
 			addGraph();
 			paneList.get(i).setData(tempList);
+			paneList.get(i).setGraphType(graphType);
 		}
 		addGraph();
 		List<List<Object>> tempList = new ArrayList<>();
@@ -78,7 +80,8 @@ public class GraphPanel extends JPanel {
 			tempList.add(conts.get(i));
 		}
 		paneList.get(conts.size()/5).setData(tempList);
-		// 		List<String> strings = new ArrayList<>();
+		paneList.get(conts.size()/5).setGraphType(graphType);
+			// 		List<String> strings = new ArrayList<>();
 		// 		List<List<Integer>> datas = new ArrayList<>();
 		// 		for(int j=0;j<5;j++)
 		// 			strings.add(locs[j]);
