@@ -41,11 +41,14 @@ public class DrawAction implements ActionListener {
 						case 0: case 1:
 							parsed.add(avg.get(i));
 							break;
-						case 2: case 3: case 5:
+						case 2: case 3:
 							parsed.add((int)Math.round(Double.parseDouble(avg.get(i))*1000));
 							break;
 						case 4: 
 							parsed.add((int)Math.round(Double.parseDouble(avg.get(i))*100));
+							break;
+						case 5:
+							parsed.add((int)Math.round(Double.parseDouble(avg.get(i))*10000));
 							break;
 						default:
 							parsed.add((int)Math.round(Double.parseDouble(avg.get(i))));

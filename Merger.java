@@ -48,7 +48,7 @@ public class Merger{
         m1.addOption("Open CSV File", KeyEvent.VK_O, CTRL.CSV_Open);
         m1.addOption("Upload Data", CTRL.DB_Insert);
         m1.addOption("Save CSV File", KeyEvent.VK_S, CTRL.CSV_Save);
-        m1.addOption("Save Graph As...");
+        m1.addOption("Save Graph As...", CTRL.Image);
         m1.addOption("Exit", e->{frame.dispose();System.exit(0);});
 
         m2.addOption("Show New DataTable",CTRL.T_New_Show);

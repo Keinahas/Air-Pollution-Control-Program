@@ -18,6 +18,8 @@ import controls.listeners.dbUpload;
 import controls.listeners.opts;
 import controls.listeners.tableBelow;
 import controls.listeners.tableNew;
+import controls.listeners.getImage;
+
 import views.GraphPanel;
 import views.MainFrame;
 import views.MyMenuBar;
@@ -49,6 +51,9 @@ public class CTRL{
     public static int BARGRAPH = 0;
     public static int LINEGRAPH = 1;
     public static dbActions DB = new dbActions();
+
+    
+
         
 
     ///-------------------------------------------- PUBLIC
@@ -63,7 +68,7 @@ public class CTRL{
     public static ActionListener SelectOpts = new opts();
     public static ActionListener DrawBarGraph = new DrawAction(CTRL.gPanel, CTRL.BARGRAPH);
     public static ActionListener DrawLineGraph = new DrawAction(CTRL.gPanel, CTRL.LINEGRAPH);
-
+    public static ActionListener Image = new getImage(CTRL.gPanel);
     //public static ActionListener BTN_When = ;
     //public static ActionListener BTB_Where = ;
 
