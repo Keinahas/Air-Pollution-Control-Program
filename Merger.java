@@ -73,14 +73,13 @@ public class Merger{
         frame.addGraph(gPanel);
         frame.addMenuBar(mb);
         frame.addToolBar(tb);
-        // f.addGraph(g);
         frame.addSideBar(sb);
-        // frame.add(fs);
+        frame.add(fs);
         mb.setVisible(false);
         tb.setVisible(false);
         sb.setVisible(false);
         gPanel.setVisible(true);
-        // fs.setVisible(true);
+        fs.setVisible(true);
         task = new TimerTask(){
         
             @Override
@@ -90,9 +89,9 @@ public class Merger{
                 tb.setVisible(true);
                 sb.setVisible(true);
                 gPanel.setVisible(true);
-                // fs.setVisible(false);
-                // frame.remove(fs);
-                // frame.repaint();
+                fs.setVisible(false);
+                frame.remove(fs);
+                frame.repaint();
             }
         };
 
