@@ -93,13 +93,14 @@ public class CTRL{
         for(List<String> content : contents){
             List<String> tempList = null;
             int lenContent = content.size();
-            if(lenContent < lenHeader)
-                continue;
             for (List<String> list : tempLists)
                 if(content.get(1).equals(list.get(1))){
                     tempList = list;
                     break;
                 }
+            if(lenContent <= 2){
+                continue;
+            }
             if(tempList == null){
                 List<String> temp = new ArrayList<>();
                 temp.add("1");
@@ -109,36 +110,60 @@ public class CTRL{
             }
 
 
+            if(tempList.size()<=2 || lenContent <= 2){
+                continue;
+            }
+            if(lenContent == 5){
+                System.out.println(content);
+            }
             tempList.add(0,Integer.toString(Integer.parseInt(tempList.remove(0))+1));
-            for (int i = 2; i < tempList.size(); i++) {
+            for (int i = 2; i < lenHeader; i++) {
                 try{
-                    double d1 = Double.parseDouble(tempList.remove(i));
-                    double d2 = Double.parseDouble(content.get(i));
+                    String line1, line2;
+                    if(i >= tempList.size()){
+                        line1 = "0";
+                    }else{
+                        line1 = tempList.remove(i);
+                    }
+                    if(i >= content.size()){
+                        line2 = "0";
+                    }else{
+                        line2 = content.get(i);
+                    }
+                    if(line1.equals("")){
+                        line1 = "0";
+                    }
+                    if(line2.equals("")){
+                        line2 = "0";
+                    }
+                    double d1 = Double.parseDouble(line1);
+                    double d2 = Double.parseDouble(line2);
                     tempList.add(i,Double.toString(d1+d2));
                 }catch(NumberFormatException exception){
                     continue;
                 }
             }
         }
-        System.out.println(tempLists);
         CTRL.total = tempLists;
 
         for (List<String> tempList : tempLists) {
             int cnt = Integer.parseInt(tempList.get(0));
             List<String> temp = new ArrayList<>();
             temp.addAll(tempList.subList(0, 2));
+            //
             for (int i = 2; i < tempList.size(); i++) {
-                try{
-                    double d1 = Double.parseDouble(tempList.get(i));
-                    temp.add(Double.toString(d1/cnt));
-                }catch(NumberFormatException exception){
-                    continue;
-                }
+                double d1 = Double.parseDouble(tempList.get(i));
+                temp.add(Double.toString(d1/cnt));
             }
             avgLists.add(temp);
         }
         CTRL.average = avgLists;
-        System.out.println(avgLists);
+        for (List<String> list : tempLists) {
+            System.out.println("tempList"+list);
+        }
+        for (List<String> list : avgLists) {
+            System.out.println("avgList"+list);
+        }
     }
 
     public static void setAverage(List<List<String>> list){
