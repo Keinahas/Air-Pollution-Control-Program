@@ -44,7 +44,8 @@ public class MainFrame extends JFrame{
     }
 
     public void addGraph(GraphPanel bar){
-        this.add(bar,BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(bar);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
     
     public void addBottomBar(BottomBar bar){
