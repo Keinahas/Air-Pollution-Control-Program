@@ -39,17 +39,23 @@ public class DrawAction implements ActionListener {
 			}
 			for (List<String> avg : average) {
 				List<Object> parsed = new ArrayList<>();
-				for (String str : avg) {
-					try{
-						Object parse = Math.rint(Double.parseDouble(str));
-						parsed.add(parse);
-					}catch (NumberFormatException exception){
-						parsed.add(str);
-					}catch (NullPointerException exception){
-						parsed.add(0);
+				for (int i =0 ;i < avg.size();i++){
+					switch(i){
+						case 0: case 1:
+							parsed.add(avg.get(i));
+							break;
+						case 2: case 3: case 5:
+							parsed.add(Math.round(Double.parseDouble(avg.get(i))*1000));
+							break;
+						case 4: 
+							parsed.add(Math.round(Double.parseDouble(avg.get(i))*100));
+							break;
+						default:
+							parsed.add(Math.round(Double.parseDouble(avg.get(i))));
+							break;
 					}
 				}
-				System.out.println("DRAWACTION::"+parsed);
+				System.out.println("DRAWACTION::"+avg+" : "+parsed);
 				parsedAvg.add(parsed);
 			}
 

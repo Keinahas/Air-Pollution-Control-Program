@@ -44,28 +44,13 @@ public class csvOpen implements ActionListener{
         CTRL.setHeader(lists.remove(0));
         CTRL.setContents(lists);
         CTRL.setAverageNTotal();
-
-        // System.out.println(sList.get(0));
-
-        // try{
-        //     if(db.connect()){
-        //         String fileName = file.getName().substring(0, file.getName().lastIndexOf("."));
-        //         System.out.println("opened file : " + fileName);
-        //         // if(db.isTable(fileName)){
-        //         //     db.DropTable(fileName);
-        //         // }
-        //         // db.createTable(fileName, br.get(0).size());
-        //         // int size = br.size();
-        //         // for (int i = 0; i < size; i++) {
-        //         //     db.insertIntoTable(fileName, String.join(",", br.get(i)).split(","), br.get(0).size());
-        //         // }
-        //         System.out.println("csvOpen Clicked!");
-        //     }else{
-        //         System.out.println("Failed");
-        //     }
-        // }
-        // catch(SQLException exception){
-        //     exception.printStackTrace();
-        // }
+        try{
+            if(CTRL.DB.connect()){
+                if(CTRL.DB.isDataBase("aoop"))
+                    CTRL.DB.useDB("aoop");
+            }
+        }catch(SQLException exception){
+            exception.printStackTrace();
+        }
     }
 }

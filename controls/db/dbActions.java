@@ -58,10 +58,16 @@ public class dbActions{
     // 연결하는 함수 true: connected, false: not connected
     public boolean connect() throws SQLException{
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(connectionProps.getServerInfo() ,connectionProps);
-            if(conn != null)
+            if(conn == null){
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection(connectionProps.getServerInfo("") ,connectionProps);
+                if(conn != null){
+                    System.out.println("connected");
+                    return true;
+                }
+            }else{
                 return true;
+            }
         }catch(ClassNotFoundException e){
             e.printStackTrace();
         }
@@ -84,14 +90,15 @@ public class dbActions{
 
     // 디비가 존재하는 지
     public boolean isDataBase(String name) throws SQLException{
-        PreparedStatement pstmt = null;
+        Statement stmt = null;
         ResultSet rs = null;
         String query = "SHOW DATABASES;";
-        pstmt = preparedStatement(query);
+        stmt = createStatement();
 
-        if (pstmt.execute()) {
-            rs = pstmt.getResultSet();
+        if (stmt.execute(query)) {
+            rs = stmt.getResultSet();
         }
+
 
         while (rs.next()) {
             String str = rs.getNString(1);
@@ -103,14 +110,10 @@ public class dbActions{
     }
 
     public void useDB(String name) throws SQLException{
-        PreparedStatement pstmt = null;
-        String query = "USE" + name +";";
-        pstmt = preparedStatement(query);
-
-        if (pstmt.execute()) {
-            return;
-        }else{
-            throw new SQLException();
+        conn.close();
+        conn = DriverManager.getConnection(connectionProps.getServerInfo(name) ,connectionProps);
+        if(conn != null){
+            System.out.println("connected to "+name);
         }
     }
 
@@ -128,17 +131,17 @@ public class dbActions{
 
     // 테이블이 존재하는 지
     public boolean isTable(String name) throws SQLException{
-        PreparedStatement pstmt = null;
+        Statement stmt = null;
         ResultSet rs = null;
-        String query = "SHOW TABLES";
-        pstmt = preparedStatement(query);
+        String query = "SHOW TABLES;";
+        stmt = createStatement();
 
-        if (pstmt.execute(query)) {
-            rs = pstmt.getResultSet();
+        if (stmt.execute(query)) {
+            rs = stmt.getResultSet();
         }
 
         while (rs.next()) {
-        	String str = rs.getNString(1);
+            String str = rs.getNString(1);
             if(str.equals(name)){
                 return true;
             }
@@ -187,19 +190,17 @@ public class dbActions{
             query += "?);";
             pstmt = preparedStatement(query);
             for (List<String> content : contents) {
-                String[] arr = (String[])(content.toArray());
-                // System.out.println(content);
-                for(int i=1;i<=arr.length;i++){
-                    pstmt.setString(i, arr[i-1]);
+                for(int i=1;i<=content.size();i++){
+                    pstmt.setString(i, content.get(i-1));
+                }
+                if (pstmt.executeUpdate() >= 0) {
+                    // System.out.println("INSERTED");
+                }else{
+                    System.out.println("ERROR");
+                    throw new SQLException("insertIntoTable::ERROR");
                 }
             }
-            // System.out.println(query);
-            if (pstmt.executeUpdate() >= 0) {
-                // System.out.println("INSERTED");
-            }else{
-                System.out.println("ERROR");
-                throw new SQLException("insertIntoTable::ERROR");
-            }
+            System.out.println("DONE INSERT");
         }else{
             System.out.println("insertIntoTable::Table does not exist");
         }

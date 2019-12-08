@@ -7,12 +7,28 @@ import javax.swing.*;
 public class MainFrame extends JFrame{
 
     public MainFrame(int x, int y){
-    	this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	setLayout(new BorderLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(x, y);
-        // this.setVisible(true); 
+        setVisible(true); 
+        setLocation(100,100);
         // Watch out for placing setVisible().
         
+    }
+
+    @Override
+    public void repaint() {
+        // TODO Auto-generated method stub
+        for (Component Comp : this.getComponents()) {
+            Comp.repaint();
+        }
+    }
+
+    public void change() {
+        // TODO Auto-generated method stub
+        for (Component Comp : this.getComponents()) {
+            Comp.setVisible(!Comp.isVisible());
+        }
     }
 
 	public void addMenuBar(MyMenuBar bar) {
