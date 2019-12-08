@@ -12,7 +12,6 @@ public class MainFrame extends JFrame{
         setSize(x, y);
         setVisible(true); 
         setLocation(100,100);
-        // Watch out for placing setVisible().
         
     }
 
