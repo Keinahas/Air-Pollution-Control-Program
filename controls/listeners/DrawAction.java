@@ -24,10 +24,6 @@ public class DrawAction implements ActionListener {
 		this.gType = gType;
 	}
 
-	public void init(GraphPanel panel, int gType){
-		this.panel = panel;
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		try {
 
@@ -45,13 +41,13 @@ public class DrawAction implements ActionListener {
 							parsed.add(avg.get(i));
 							break;
 						case 2: case 3: case 5:
-							parsed.add(Math.round(Double.parseDouble(avg.get(i))*1000));
+							parsed.add((int)Math.round(Double.parseDouble(avg.get(i))*1000));
 							break;
 						case 4: 
-							parsed.add(Math.round(Double.parseDouble(avg.get(i))*100));
+							parsed.add((int)Math.round(Double.parseDouble(avg.get(i))*100));
 							break;
 						default:
-							parsed.add(Math.round(Double.parseDouble(avg.get(i))));
+							parsed.add((int)Math.round(Double.parseDouble(avg.get(i))));
 							break;
 					}
 				}
