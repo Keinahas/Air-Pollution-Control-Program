@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.*;
 import views.DrawingPanel;
+import controls.CTRL;
 import controls.listeners.DrawAction;
 
 //그래프를 그릴 fame을 만들고 DrawingPanel을 불러오는 클래스
@@ -23,7 +24,10 @@ public class GraphPanel extends JPanel {
 		paneList = new ArrayList<>();
 		scrollPane = new JScrollPane();
 		this.add(scrollPane);
-		
+		this.setSize(new Dimension(500, 500));
+		this.setPreferredSize(new Dimension(500, 500));
+		this.setBackground(Color.red);
+		this.setForeground(Color.red);
 	}
 
 	// 지역이름 배열 선택
@@ -50,8 +54,9 @@ public class GraphPanel extends JPanel {
         this.graphType = n;
 	}
 	
-	public void addGraph(){ //리스트에 쪼개진 배열을 가지고 있는 쪼개진 패널을 넣고 add하는 함수
-		paneList.add(new DrawingPanel());
+	public void addGraph(List<List<Object>> conts){ //리스트에 쪼개진 배열을 가지고 있는 쪼개진 패널을 넣고 add하는 함수
+		paneList.add(new DrawingPanel(graphType));
+		paneList.get(paneList.size()-1).setData(conts);
 		scrollPane.add(paneList.get(paneList.size()-1));
 	}
 
@@ -65,79 +70,21 @@ public class GraphPanel extends JPanel {
 	public void reset(){
 		for (int i = 0; i < conts.size()/5; i++) {
 			List<List<Object>> tempList = new ArrayList<>();
-			tempList.add(conts.get(i));
-			tempList.add(conts.get(i+1));
-			tempList.add(conts.get(i+2));
-			tempList.add(conts.get(i+3));
-			tempList.add(conts.get(i+4));
-			addGraph();
-			paneList.get(i).setData(tempList);
-			paneList.get(i).setGraphType(graphType);
+			tempList.add(conts.get(i*5));
+			tempList.add(conts.get(i*5+1));
+			tempList.add(conts.get(i*5+2));
+			tempList.add(conts.get(i*5+3));
+			tempList.add(conts.get(i*5+4));
+			// paneList.get(i/5).setData(tempList);
+			addGraph(tempList);
+			paneList.get(i/5).setGraphType(graphType);
 		}
-		addGraph();
 		List<List<Object>> tempList = new ArrayList<>();
 		for (int i=0;i<conts.size()%5;i++){
-			tempList.add(conts.get(i));
+			tempList.add(conts.get((conts.size()/5 * 5 )+ i));
 		}
-		paneList.get(conts.size()/5).setData(tempList);
+		// paneList.get(conts.size()/5).setData(tempList);
+		addGraph(tempList);
 		paneList.get(conts.size()/5).setGraphType(graphType);
-			// 		List<String> strings = new ArrayList<>();
-		// 		List<List<Integer>> datas = new ArrayList<>();
-		// 		for(int j=0;j<5;j++)
-		// 			strings.add(locs[j]);
-		// 		for(int j=0;j<5;j++){
-		// 			List<Integer> tList = new ArrayList<>();
-		// 			for (int k = 0; k < 6; k++) {
-		// 				tList.add(vars[j][k]);
-		// 			}
-		// 			datas.add(tList);
-		// 		}
-		// 		paneList.get(i).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
-		// 	}
-		// 	addGraph();
-		// 	List<String> strings = new ArrayList<>();
-		// 	List<List<Integer>> datas = new ArrayList<>();
-		// 	for(int j=0;j<locs.length%5;j++)
-		// 		strings.add(locs[j]);
-		// 	for(int j=0;j<locs.length%5;j++){
-		// 		List<Integer> tList = new ArrayList<>();
-		// 		for (int k = 0; k < 6; k++) {
-		// 			tList.add(vars[j][k]);
-		// 		}
-		// 		datas.add(tList);
-		// 	}
-		// 	paneList.get(locs.length/5).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
-		// }
 	}
-
-	// public void reset(){
-	// 	for (int i = 0; i < locs.length/5; i++) {
-	// 		addGraph();
-	// 		List<String> strings = new ArrayList<>();
-	// 		List<List<Integer>> datas = new ArrayList<>();
-	// 		for(int j=0;j<5;j++)
-	// 			strings.add(locs[j]);
-	// 		for(int j=0;j<5;j++){
-	// 			List<Integer> tList = new ArrayList<>();
-	// 			for (int k = 0; k < 6; k++) {
-	// 				tList.add(vars[j][k]);
-	// 			}
-	// 			datas.add(tList);
-	// 		}
-	// 		paneList.get(i).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
-	// 	}
-	// 	addGraph();
-	// 	List<String> strings = new ArrayList<>();
-	// 	List<List<Integer>> datas = new ArrayList<>();
-	// 	for(int j=0;j<locs.length%5;j++)
-	// 		strings.add(locs[j]);
-	// 	for(int j=0;j<locs.length%5;j++){
-	// 		List<Integer> tList = new ArrayList<>();
-	// 		for (int k = 0; k < 6; k++) {
-	// 			tList.add(vars[j][k]);
-	// 		}
-	// 		datas.add(tList);
-	// 	}
-	// 	paneList.get(locs.length/5).setData((String[])strings.toArray(), (Integer[][])datas.toArray());
-	// }
 }
