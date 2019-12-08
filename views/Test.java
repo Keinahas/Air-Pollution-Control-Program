@@ -3,13 +3,17 @@ package views;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 //그래프가 그려지는 panel클래스
 public class Test extends JPanel {
     private String cols[] = { "이산화질소농도(ppm)", "오존농도(ppm)", "이산화탄소농도(ppm)", "아황산가스(ppm)", "미세먼지(㎍/㎥)", "초미세먼지(㎍/㎥)" };
     private String locs[];
     private Color color[] = {Color.RED,Color.GREEN,Color.BLACK,Color.YELLOW,Color.DARK_GRAY,Color.gray};
-    private Integer vars[][];
+    private List<List<Object>> conts;
     private int graphType;
 
     public Test() {
@@ -95,15 +99,12 @@ public class Test extends JPanel {
     }
 //----------------------------------------------------------------------------외부호출
     // 지역이름 배열 선택
-    public void setLocation(String...datas){
-        locs = datas;
-    }
+    
 
 
     // 데이터 대입
-	public void setData(String[] locs, Integer[][] conts) {
-		this.locs = locs;
-		this.vars = conts;
+	public void setData(List<List<Object>> conts) {
+		this.conts = conts;
 	}
 
     // 그래프 선택
@@ -111,52 +112,4 @@ public class Test extends JPanel {
         this.graphType = n;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setLayout(new BorderLayout());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
-
-        
-        //--------------------------------------------------center
-        Test panel = new Test();
-        String[] dd = {"성북구","노원구","성동구","강남구","도봉구"};
-        Integer[][] d = {{10,60,30,40,70,60},{10,60,30,40,70,60}};                      // 외부 입력
-        panel.setData(dd, d);
-        panel.setLocation(dd);
-
-       
-        //--------------------------------------------------north
-        JPanel north = new JPanel();
-        JButton b1 = new JButton("bar");
-        JButton b2 = new JButton("lin");
-
-        ActionListener listener1 = e1 -> {
-            if (e1.getSource() == b1) {
-                panel.setGraphType(0);
-                panel.repaint();
-            }
-        };
-        ActionListener listener2 = e2 -> {
-            panel.setGraphType(1);
-            panel.repaint();
-        };
-        b1.addActionListener(listener1);
-        b2.addActionListener(listener2);
-
-        north.add(b1);
-        north.add(b2);
-        //-------------------------------------------------------------south
-        JPanel south = new JPanel();
-        
-
-        //----------------------------------------------------------------do
-        frame.add(north, BorderLayout.NORTH);
-        frame.add(panel, BorderLayout.CENTER);
-        frame.add(south, BorderLayout.SOUTH);
-
-        frame.setLocation(100,100);
-        frame.setVisible(true);
-
-    }
 }

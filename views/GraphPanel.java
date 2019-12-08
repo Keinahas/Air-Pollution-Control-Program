@@ -13,7 +13,7 @@ public class GraphPanel extends JPanel {
 	// private DrawingPanel drawpanel;
 
 	private JScrollPane scrollPane;
-	private List<List<Object>> conts;
+	private List<List<Object>> conts;// 안쪼개진거
 	private int graphType;
 	private List<DrawingPanel> paneList; //쪼개진 패널(쪼개진 배열을 하나 가지고 있는)들을 가지고 있음
 
