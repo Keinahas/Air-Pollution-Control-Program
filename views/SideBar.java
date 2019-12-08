@@ -31,7 +31,7 @@ public class SideBar extends JPanel {
         this.setLayout(new BorderLayout());
         final JCheckBoxTree cbt = new JCheckBoxTree();
         
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("사용자 정보 선택");
         DefaultMutableTreeNode node;
         
         String[] cat = {"측정일시","측정소명","대기상태"};
