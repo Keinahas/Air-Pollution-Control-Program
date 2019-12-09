@@ -45,7 +45,7 @@ public class csvOpen implements ActionListener{
         CTRL.setContents(lists);
         CTRL.setAverageNTotal();
         try{
-            if(CTRL.DB.connect()){
+            if(CTRL.isConnected()){
                 if(CTRL.DB.isDataBase("aoop"))
                     CTRL.DB.useDB("aoop");
             }
