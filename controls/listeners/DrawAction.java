@@ -58,6 +58,7 @@ public class DrawAction implements ActionListener {
 				System.out.println("DRAWACTION::"+avg+" : "+parsed);
 				parsedAvg.add(parsed);
 			}
+			panel.removeAll();
 			panel.setGraphType(gType);
 			panel.setData(parsedAvg);
 			panel.reset();
