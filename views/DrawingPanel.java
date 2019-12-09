@@ -84,10 +84,14 @@ public class DrawingPanel extends JPanel {
 			case 0:
 				initPaint(g);
 				NormPaint(g);
+				System.out.println("i called");
+				graphType = -1;
 				break;
 			case 1:
 				initPaint(g);
 				paintLinear(g);
+				System.out.println("i called2");
+
 				break;
 			default:
 				break;

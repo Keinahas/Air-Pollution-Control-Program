@@ -73,7 +73,7 @@ public class Merger{
         mb.setVisible(false);
         tb.setVisible(false);
         sb.setVisible(false);
-        gPanel.setVisible(true);
+        gPanel.setVisible(false);
         task = new TimerTask(){
         
             @Override
@@ -83,7 +83,6 @@ public class Merger{
                 tb.setVisible(true);
                 sb.setVisible(true);
                 gPanel.setVisible(true);
-                frame.repaint();
             }
         };
 

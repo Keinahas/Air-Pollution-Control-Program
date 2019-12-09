@@ -20,8 +20,6 @@ public class getImage implements ActionListener {
 
     public BufferedImage saveImage(JPanel panel) {
         BufferedImage image = new BufferedImage(panel.getWidth(),panel.getHeight(), BufferedImage.TYPE_INT_RGB);
-        panel.repaint();
-        panel.setVisible(true);
         panel.printAll(image.getGraphics());
         
         

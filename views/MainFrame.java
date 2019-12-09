@@ -15,13 +15,6 @@ public class MainFrame extends JFrame{
         
     }
 
-    @Override
-    public void repaint() {
-        // TODO Auto-generated method stub
-        for (Component Comp : this.getComponents()) {
-            Comp.repaint();
-        }
-    }
 
     public void change() {
         // TODO Auto-generated method stub
