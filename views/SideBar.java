@@ -53,16 +53,20 @@ public class SideBar extends JPanel {
         cbt.setModel(model);
         cbt.addCheckChangeEventListener(new JCheckBoxTree.CheckChangeEventListener() {
             public void checkStateChanged(JCheckBoxTree.CheckChangeEvent event) {
-                System.out.println("event");
-                TreePath[] paths = cbt.getCheckedPaths();
-                for (TreePath tp : paths) {
-                    for (Object pathPart : tp.getPath()) {
-                        System.out.print(pathPart + ",");
-                    }                   
-                    System.out.println();
-                }
+                // System.out.println("event");
+                // TreePath[] paths = cbt.getCheckedPaths();
+                // for (TreePath tp : paths) {
+                //     for (Object pathPart : tp.getPath()) {
+                //         System.out.print(pathPart + ",");
+                //     }                   
+                //     System.out.println();
+                // }
             }           
         });
+
+        Object temp = cbt.getModel().getChild(root, 0);
+        // cbt.getModel().getChild(root, index)
+
         JScrollPane scrollPane = new JScrollPane(cbt);
         scrollPane.setSize(new Dimension(180, 680));
         scrollPane.setPreferredSize(new Dimension(180, 680));
@@ -187,33 +191,8 @@ class JCheckBoxTree extends JTree {
         }
     }
 
-    public class State {
-
-        private String text;
-        private boolean selected;
-
-        public State(String text, boolean selected) {
-            this.text = text;
-            this.selected = selected;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public boolean isSelected() {
-            return selected;
-        }
-
-        public void setSelected(boolean selected) {
-            this.selected = selected;
-        }
-    }
-
     public JCheckBoxTree() {
         super();
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode(new State("옵션", false));
-        DefaultMutableTreeNode node;
 
         // Disabling toggling by double-click
         this.setToggleClickCount(0);

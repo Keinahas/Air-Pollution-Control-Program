@@ -85,7 +85,7 @@ public class opts implements ActionListener{
         }
 
         try{
-            if(CTRL.DB.connect()){
+            if(CTRL.isConnected()){
                 if(CTRL.DB.isTable(CTRL.getFileName())){
                     List<List<String>> temp = CTRL.DB.SelectColsFromTableRows(CTRL.getFileName(), colStrings, args);
                     System.out.println(temp);

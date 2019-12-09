@@ -40,6 +40,7 @@ public class TablePanel extends JScrollPane {
     public TablePanel() {
 
         table = new JTable();
+        table.setAutoCreateRowSorter(true);
         this.setViewportView(table);
         
     }
@@ -75,86 +76,15 @@ public class TablePanel extends JScrollPane {
             }
             model.addRow(strings);
         }
-        // table.getTableHeader().addMouseListener(new MouseListener(){
-        //     public void mouseClicked(MouseEvent arg0) {
-
-        //     }           
-        //     public void mouseEntered(MouseEvent arg0) {         
-        //     }           
-        //     public void mouseExited(MouseEvent arg0) {              
-        //     }
-        //     public void mousePressed(MouseEvent arg0) {             
-        //     }
-        //     public void mouseReleased(MouseEvent arg0) {
-        //     }           
-        // });
 
         // table.getTableHeader().addMouseListener(new MouseAdapter() {
         //     @Override
-        //     public void mouseClicked(MouseEvent mouseEvent) {
-        //       int index = convertColumnIndexToModel(columnAtPoint(mouseEvent.getPoint()));
-        //       if (index >= 0) {
-        //         System.out.println("Clicked on column " + index);
-        //       }
-        //     };
-        //   });
-        table.getTableHeader().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                
-                TableColumnModel colModel = table.getColumnModel();
-                int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
-                int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
+        //     public void mouseClicked(MouseEvent e) {
+        //         int col = table.columnAtPoint(e.getPoint());
+        //         String name = table.getColumnName(col);
+        //         System.out.println("Column index selected " + col + " " + name);
 
-                if (modelIndex < 0)
-                    return;
-                if (sortCol == modelIndex)
-                    isSortAsc = !isSortAsc;
-                else
-                    sortCol = modelIndex;
-
-                 for (int i = 0; i < columnsCount; i++) { 
-                    TableColumn column = colModel.getColumn(i);
-                    column.setHeaderValue(table.getColumnName(column.getModelIndex()));
-                }
-                table.getTableHeader().repaint();
-
-                Collections.sort(vector,new MyComparator(isSortAsc));
-                table.tableChanged(new TableModelEvent(table.getModel()));
-                table.repaint();
-            }
-        });
-    }
-    class MyComparator implements Comparator {
-        protected boolean isSortAsc;
-      
-        public MyComparator( boolean sortAsc) {
-          isSortAsc = sortAsc;
-        }
-      
-        public int compare(Object o1, Object o2) {
-          if (!(o1 instanceof Integer) || !(o2 instanceof Integer))
-            return 0;
-          Integer s1 = (Integer) o1;
-          Integer s2 = (Integer) o2;
-          int result = 0;
-          result = s1.compareTo(s2);
-          if (!isSortAsc)
-            result = -result;
-          return result;
-        }
-      
-        public boolean equals(Object obj) {
-          if (obj instanceof MyComparator) {
-            MyComparator compObj = (MyComparator) obj;
-            return compObj.isSortAsc == isSortAsc;
-          }
-          return false;
-        }
-    }
-    public List<List<String>> getData(){
-        List<List<String>> stringLists = new ArrayList<List<String>>();
-
-        return stringLists;
+        //     }
+        // });
     }
 }

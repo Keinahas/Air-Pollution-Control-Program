@@ -21,7 +21,7 @@ public class dbUpload implements ActionListener{
             return;
         }
         try{
-            if(CTRL.DB.connect()){
+            if(CTRL.isConnected()){
                 if(!CTRL.DB.isDataBase("aoop")){
                     int r = JOptionPane.showConfirmDialog(null, "데이터베이스가 없습니다. 새로 만드시겠습니까?", "데이터베이스 생성", JOptionPane.YES_NO_OPTION);
                     if(r == JOptionPane.NO_OPTION)
@@ -39,6 +39,8 @@ public class dbUpload implements ActionListener{
                 CTRL.DB.insertIntoTable(CTRL.getFileName(), CTRL.getContents(), CTRL.getHeader().size());
                 System.out.println("dbUpload Clicked!");
             }else{
+                //NO DB
+                JOptionPane.showMessageDialog(null, "Database Server not Connected");
                 System.out.println("Failed");
             }
         }

@@ -2,6 +2,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -98,8 +99,25 @@ public class Merger{
             obj.addOption(str, l);
         }
     }
+
+    class Init extends Thread {
+        public void run(){
+            try{
+                CTRL.setConnected(CTRL.DB.connect());
+                if(CTRL.isConnected()){
+                    System.out.println("CONNECTED");
+                }else{
+                    System.out.println("NOT CONNECTED");
+                }
+            }catch(SQLException exception){
+                exception.printStackTrace();
+            }
+        } 
+    }
  
     public static void main(String[] args) {
         Merger m = new Merger();
+        Merger.Init init = m.new Init();
+        init.start();
     }
 }
