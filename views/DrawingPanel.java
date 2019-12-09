@@ -24,9 +24,11 @@ public class DrawingPanel extends JPanel {
 	public void initPaint(Graphics g){
 		// 패널 전체를 하얀색으로 표현
 		g.clearRect(0, 0, getWidth(), getHeight());
+		g.setColor(Color.white);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		g.setColor(Color.black);
 		g.drawLine(150, 250, 900, 250); // 그래프의 가로 길이
 		g.drawLine(150, 20, 150, 250); // 그래프의 세로 길이
-
 	}
 
 	//막대그래프 그리는 메소드
@@ -35,7 +37,6 @@ public class DrawingPanel extends JPanel {
 		for(int i = 0;i<cols.length;i++){
 			g.drawString(CTRL.parse(cols[i]), 100+100*(1 + i), 270);
 			g.drawString(cols2[i], 100+100*(1 + i), 282);
-
 		}
 		int k=0;
 		int j=0;
@@ -84,13 +85,10 @@ public class DrawingPanel extends JPanel {
 			case 0:
 				initPaint(g);
 				NormPaint(g);
-				System.out.println("i called");
 				break;
 			case 1:
 				initPaint(g);
 				paintLinear(g);
-				System.out.println("i called2");
-
 				break;
 			default:
 				break;
