@@ -169,12 +169,12 @@ public class CTRL{
             avgLists.add(temp);
         }
         CTRL.average = avgLists;
-        for (List<String> list : tempLists) {
-            System.out.println("tempList"+list);
-        }
-        for (List<String> list : avgLists) {
-            System.out.println("avgList"+list);
-        }
+        // for (List<String> list : tempLists) {
+        //     System.out.println("tempList"+list);
+        // }
+        // for (List<String> list : avgLists) {
+        //     System.out.println("avgList"+list);
+        // }
     }
 
     public static void setAverage(List<List<String>> list){
@@ -244,7 +244,9 @@ public class CTRL{
                 if(string.isEmpty())
                     continue;
                 if(contenList.contains(string)){
-                    tempList = contenList.subList(0, contenList.size());
+                    for (String temp : contenList) {
+                        tempList.add(temp);
+                    }
                     break;
                 }
             }
@@ -255,13 +257,15 @@ public class CTRL{
                 if(cols[i]){
                     continue;
                 }
+                if(tempList.size() <= i)
+                    continue;
                 tempList.set(i,"0");
             }
             tempLists.add(tempList);
         }
         
         //
-        System.out.println(tempLists);
+        // System.out.println(tempLists);
         CTRL.contents = tempLists;
         setAverageNTotal();
     }
