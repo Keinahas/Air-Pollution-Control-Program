@@ -261,6 +261,17 @@ public class CTRL{
                     continue;
                 tempList.set(i,"0");
             }
+            boolean isDate = false;
+            for (String time : timeStrings) {
+                if(tempList.get(0).contains(time)){
+                    isDate = true;
+                    break;
+                }
+            }
+            if(!isDate){
+                tempList = null;
+                continue;
+            }
             tempLists.add(tempList);
         }
         
