@@ -37,8 +37,8 @@ public class GraphPanel extends JPanel {
 		this.add(paneList.get(paneList.size()-1));
 	}
 
-	@Override
-	public void paint(Graphics g) { //리스트를 리스트크기만큼 반복하여 패널을 그림
+	
+	public void mypaint() { //리스트를 리스트크기만큼 반복하여 패널을 그림
 		for (DrawingPanel pane : paneList) {
 			pane.repaint();
 			pane.revalidate();

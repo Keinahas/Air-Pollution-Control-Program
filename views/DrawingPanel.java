@@ -85,7 +85,6 @@ public class DrawingPanel extends JPanel {
 				initPaint(g);
 				NormPaint(g);
 				System.out.println("i called");
-				graphType = -1;
 				break;
 			case 1:
 				initPaint(g);

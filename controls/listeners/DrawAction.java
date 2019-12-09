@@ -62,7 +62,7 @@ public class DrawAction implements ActionListener {
 			panel.setGraphType(gType);
 			panel.setData(parsedAvg);
 			panel.reset();
-			panel.repaint();
+			panel.mypaint();
 
 		} catch (NumberFormatException n) {
 			System.out.println("잘못된 숫자 포멧입니다.");
