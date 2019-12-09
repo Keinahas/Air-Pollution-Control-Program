@@ -428,7 +428,7 @@ public class dbActions{
             if(db.connect()){
                 // db.DropTable("일별평균대기오염도_2018");
                 db.createTable("일별평균대기오염도_2018", header);
-                db.insertIntoTable(CTRL.getFileName(), CTRL.getContents(), CTRL.getHeader().size());
+                db.insertIntoTable(CTRL.getFileName(), CTRL.getContents(), CTRL.colOpts.length);
             }
         }catch (Exception e){
             e.printStackTrace();

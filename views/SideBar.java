@@ -5,10 +5,12 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -54,14 +56,56 @@ public class SideBar extends JPanel {
         cbt.addCheckChangeEventListener(new JCheckBoxTree.CheckChangeEventListener() {
             public void checkStateChanged(JCheckBoxTree.CheckChangeEvent event) {
                 // System.out.println("event");
-                // TreePath[] paths = cbt.getCheckedPaths();
-                // for (TreePath tp : paths) {
-                //     for (Object pathPart : tp.getPath()) {
-                //         System.out.print(pathPart + ",");
-                //     }                   
-                //     System.out.println();
-                // }
-            }           
+                TreePath[] paths = cbt.getCheckedPaths();
+                List<String> dates = new ArrayList<>();
+                List<String> locs = new ArrayList<>();
+                List<String> cols = new ArrayList<>();
+                for (TreePath tp : paths) {
+                    for (Object pathPart : tp.getPath()) {
+                        String str = pathPart.toString();
+                        if(str.endsWith("월")){
+                            int pos = str.lastIndexOf("월");
+                            int num = Integer.parseInt(str.substring(0,pos));
+                            if(num < 10)
+                                dates.add("20180"+num);
+                            else
+                                dates.add("2018"+num);
+                        }else{
+                            for(String string : CTRL.colOpts){
+                                if(string.equals(str)){
+                                    if(cols.contains(CTRL.parse(str)))
+                                        break;
+                                    cols.add(CTRL.parse(str));
+                                }
+                            }
+                            for (String string : CTRL.locOpts)
+                                if(string == str){
+                                    locs.add(str);
+                                }
+                        }
+                    }                   
+                    // System.out.println();
+                }
+                // System.out.println(cols);
+                // System.out.println(locs);
+                // System.out.println(dates);
+                String[] colsStrings = new String[cols.size()];
+                String[] locsStrings = new String[locs.size()];
+                String[] datesStrings = new String[dates.size()];
+                Object[] tempObjects = cols.toArray();
+                for (int i = 0; i < tempObjects.length; i++) {
+                    colsStrings[i] = tempObjects[i].toString();
+                }
+                tempObjects = locs.toArray();
+                for (int i = 0; i < tempObjects.length; i++) {
+                    locsStrings[i] = tempObjects[i].toString();
+                }
+                tempObjects = dates.toArray();
+                for (int i = 0; i < tempObjects.length; i++) {
+                    datesStrings[i] = tempObjects[i].toString();
+                }
+                CTRL.filterContents(colsStrings, locsStrings, datesStrings);
+            }
         });
 
         Object temp = cbt.getModel().getChild(root, 0);

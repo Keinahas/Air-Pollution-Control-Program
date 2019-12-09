@@ -35,10 +35,12 @@ public class CTRL{
     private static List<String> header = null;
     private static List<String> locs = null;
     private static List<List<String>> average = null;
+    private static List<List<String>> realContents = null;
     private static List<List<String>> contents = null;
     private static boolean isConnected = false;
 
     ///-------------------------------------------- Vars
+    public static String[] colOpts = {"측정일시","측정소명","이산화질소농도(ppm)","오존농도(ppm)","이산화탄소농도(ppm)","아황산가스(ppm)","미세먼지(㎍/㎥)","초미세먼지(㎍/㎥)"};
     public static String[] locOpts = {"강남구","강남대로","강동구","강북구","강서구","공항대로","관악구","광진구","구로구","금천구","노원구","도봉구","도산대로","동대문구","동작구","동작대로","마포구","서대문구","서초구","성동구","성북구","송파구","신촌로","양천구","영등포구","영등포로","용산구","은평구","정릉로","종로","종로구","중구","중랑구","천호대로","청계천로","한강대로","홍릉로","화랑로"};
     public static MainFrame frame = new MainFrame(1500, 800);
     public static MyMenuBar menuBar = new MyMenuBar();
@@ -73,6 +75,10 @@ public class CTRL{
 
     ///-------------------------------------------- METHODS
 
+    // public static List<String> getHeader(){
+    //     return new ArrayList<String>(Arrays.asList(CTRL.colOpts));
+    // }
+
     public static List<String> getHeader(){
         return header;
     }
@@ -92,7 +98,7 @@ public class CTRL{
 
     ////////
     public static void setAverageNTotal(){
-        int lenHeader = header.size();
+        int lenHeader = colOpts.length;
         List<List<String>> avgLists = new ArrayList<>();
         List<List<String>> tempLists = new ArrayList<>();
         for(List<String> content : contents){
@@ -180,7 +186,7 @@ public class CTRL{
     }
 
     public static void setContents(List<List<String>> list){
-        contents = list;
+        realContents = list;
     }
 
     public static String getFileName(){
@@ -220,5 +226,43 @@ public class CTRL{
 
     public static void setConnected(boolean isConnected) {
         CTRL.isConnected = isConnected;
+    }
+
+    public static void filterContents(String[] colStrings, String[] locStrings, String[] timeStrings){
+        boolean[] cols = {false, false, false, false, false, false, false, false};
+        ArrayList<String> colList = new ArrayList<>(Arrays.asList(colStrings));
+        for (String str : colStrings) {
+            if(colList.contains(str)){
+                cols[colList.indexOf(str)] = true;
+            }
+        }
+
+        List<List<String>> tempLists = new ArrayList<>();
+        for (List<String> contenList : CTRL.realContents) {
+            List<String> tempList = new ArrayList<>();
+            for (String string : locStrings) {
+                if(string.isEmpty())
+                    continue;
+                if(contenList.contains(string)){
+                    tempList = contenList.subList(0, contenList.size());
+                    break;
+                }
+            }
+            if(tempList == null||tempList.isEmpty()){
+                continue;
+            }
+            for (int i = cols.length-1; i >= 0; i--) {
+                if(cols[i]){
+                    continue;
+                }
+                tempList.set(i,"0");
+            }
+            tempLists.add(tempList);
+        }
+        
+        //
+        System.out.println(tempLists);
+        CTRL.contents = tempLists;
+        setAverageNTotal();
     }
 }
