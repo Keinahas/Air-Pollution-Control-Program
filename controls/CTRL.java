@@ -230,7 +230,10 @@ public class CTRL{
 
     public static void filterContents(String[] colStrings, String[] locStrings, String[] timeStrings){
         boolean[] cols = {false, false, false, false, false, false, false, false};
-        ArrayList<String> colList = new ArrayList<>(Arrays.asList(colStrings));
+        ArrayList<String> colList = new ArrayList<>(Arrays.asList(CTRL.colOpts));
+        for (int i = 0; i < colList.size(); i++) {
+            colList.set(i, CTRL.parse(colList.get(i)));
+        }
         for (String str : colStrings) {
             if(colList.contains(str)){
                 cols[colList.indexOf(str)] = true;
@@ -241,8 +244,9 @@ public class CTRL{
         for (List<String> contenList : CTRL.realContents) {
             List<String> tempList = new ArrayList<>();
             for (String string : locStrings) {
-                if(string.isEmpty())
+                if(string.isEmpty()){
                     continue;
+                }
                 if(contenList.contains(string)){
                     for (String temp : contenList) {
                         tempList.add(temp);
