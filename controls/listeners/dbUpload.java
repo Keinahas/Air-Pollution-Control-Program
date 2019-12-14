@@ -31,12 +31,12 @@ public class dbUpload implements ActionListener{
                 if(CTRL.DB.isTable(CTRL.getFileName())){
                     int r = JOptionPane.showConfirmDialog(null, CTRL.getFileName() + "이(가) 이미 있습니다. 새로 만드시겠습니까?", "테이블 생성", JOptionPane.YES_NO_OPTION);
                     if(r == JOptionPane.NO_OPTION){
-                        CTRL.DB.insertIntoTable(CTRL.getFileName(), CTRL.getContents(), CTRL.colOpts.length);
+                        CTRL.DB.insertIntoTable(CTRL.getFileName(), CTRL.realContents, CTRL.colOpts.length);
                         return;
                     }
                 }
                 CTRL.DB.createTable(CTRL.getFileName(), CTRL.getHeader());
-                CTRL.DB.insertIntoTable(CTRL.getFileName(), CTRL.getContents(), CTRL.getHeader().size());
+                CTRL.DB.insertIntoTable(CTRL.getFileName(), CTRL.realContents, CTRL.getHeader().size());
                 System.out.println("dbUpload Clicked!");
             }else{
                 //NO DB

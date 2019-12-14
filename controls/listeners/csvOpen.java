@@ -43,6 +43,7 @@ public class csvOpen implements ActionListener{
         CTRL.setFileName(fileName);
         CTRL.setHeader(lists.remove(0));
         CTRL.setContents(lists);
+        CTRL.filterContents(null, null, null);
         // CTRL.setAverageNTotal();
         try{
             if(CTRL.isConnected()){

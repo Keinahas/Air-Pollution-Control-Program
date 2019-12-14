@@ -48,17 +48,17 @@ public class csvSave implements ActionListener{
         System.out.println(name);
         System.out.println("csvSave Clicked!");
         // System.out.println(CTRL.getList());
-        // CSV.Write(CTRL.getList());
+        CSV.Write(CTRL.getContents());
 
         // try{
-        //     if(db.connect()){
+        //     if(CTRL.isConnected()){
         //         int ext = file.getName().lastIndexOf(".");
-                    // if(ext <= 0){
-                    //     System.out.println("EXT ERROR!");
-                    //     return;
-                    // }
-                    // String name = file.getName().substring(0, file.getName().lastIndexOf("."));
-                    // System.out.println(name);
+        //             if(ext <= 0){
+        //                 System.out.println("EXT ERROR!");
+        //                 return;
+        //             }
+        //             String name = file.getName().substring(0, file.getName().lastIndexOf("."));
+        //             System.out.println(name);
         //         // db.createTable(file.getName().substring(0, file.getName().lastIndexOf(".")), br.get(0).size());
         //         br = db.SelectAllFromTable(name);
         //         // db.getNRowFromTable(file.getName().substring(0, file.getName().lastIndexOf(".")), 1);

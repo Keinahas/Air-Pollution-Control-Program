@@ -55,7 +55,7 @@ public class Merger{
         // m2.addOption("Show DataTable Below", CTRL.T_Blw_Show);
 
         m3.addOption("DrawBarGraph", CTRL.DrawBarGraph);
-        m3.addOption("DrawLineGraph", CTRL.DrawLineGraph);
+        // m3.addOption("DrawLineGraph", CTRL.DrawLineGraph);
     
         // m5.addOption("Welcome");
         // m5.addOption("View License");
